@@ -13,13 +13,13 @@ export function Unterstuetzer() {
               <div className="kicker">Danke an unsere Unterstützer</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
-              <h2 className="h-serif mt-3 text-[34px] font-bold leading-[1.1] tracking-tight text-ink md:text-[44px]">
+              <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
                 Ohne Sie kein Kältedorf.
               </h2>
             </Reveal>
           </div>
           <Reveal variant="up" delay={200} duration={800}>
-            <p className="max-w-md text-[15px] leading-relaxed text-ink-500">
+            <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
               Schulen, Firmen, Vereine, Kirchengemeinden und Motorradclubs
               tragen jeden Winter unsere Arbeit mit. Ein paar Momente aus der
               aktuellen Saison, stellvertretend für viele weitere.
@@ -27,7 +27,7 @@ export function Unterstuetzer() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 md:mt-16">
+        <div className="mt-10 grid gap-4 sm:mt-14 sm:gap-6 md:mt-16 md:grid-cols-2">
           {UNTERSTUETZER.map((u, i) => (
             <Reveal
               key={u.name}
@@ -41,21 +41,21 @@ export function Unterstuetzer() {
                   <img
                     src={u.image}
                     alt={`Spendenübergabe ${u.name} an den Kältebus Saarbrücken`}
-                    className="h-[320px] w-full object-cover md:h-[380px]"
+                    className="h-[240px] w-full object-cover sm:h-[320px] md:h-[380px]"
                   />
-                  <div className="absolute right-4 top-4 bg-rot px-3 py-1.5 text-[13px] font-semibold text-white shadow-card">
+                  <div className="absolute right-3 top-3 bg-rot px-3 py-1.5 text-[12.5px] font-semibold text-white shadow-card sm:right-4 sm:top-4 sm:text-[13px]">
                     {u.amount}
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col p-7 md:p-8">
-                  <div className="flex items-center justify-between text-[12px] font-semibold uppercase tracking-kicker">
+                <div className="flex flex-1 flex-col p-6 sm:p-7 md:p-8">
+                  <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[11.5px] font-semibold uppercase tracking-kicker sm:text-[12px]">
                     <span className="text-rot">{u.kicker}</span>
                     <span className="text-ink-400">{u.date}</span>
                   </div>
-                  <h3 className="h-serif mt-4 text-[22px] font-bold leading-tight text-ink md:text-[24px]">
+                  <h3 className="h-serif mt-3 text-[20px] font-bold leading-tight text-ink sm:mt-4 sm:text-[22px] md:text-[24px]">
                     {u.name}
                   </h3>
-                  <p className="mt-3 text-[14.5px] leading-relaxed text-ink-500">
+                  <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
                     {u.body}
                   </p>
                 </div>
@@ -65,7 +65,7 @@ export function Unterstuetzer() {
         </div>
 
         <Reveal variant="up" delay={300} duration={800}>
-          <div className="infobox mt-10 text-[14px] leading-relaxed text-ink-600">
+          <div className="infobox mt-8 text-[13.5px] leading-relaxed text-ink-600 sm:mt-10 sm:text-[14px]">
             <strong>Sie oder Ihr Unternehmen möchten helfen?</strong> Wir
             freuen uns über jede Spende, ob Geld, Sachwerte oder eine gekochte
             Mahlzeit im Kältedorf. Melden Sie sich bei Phil Sahner oder unserem

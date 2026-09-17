@@ -62,12 +62,12 @@ function Stat({
 
   return (
     <Reveal variant="up" delay={delay} duration={800} distance={22}>
-      <div ref={ref} className="border border-line bg-white p-6 md:p-7">
-        <div className="h-serif text-[44px] font-bold leading-none text-rot md:text-[54px]">
+      <div ref={ref} className="h-full border border-line bg-white p-5 sm:p-6 md:p-7">
+        <div className="h-serif text-[36px] font-bold leading-none text-rot sm:text-[44px] md:text-[54px]">
           {display}
           <span className="text-rot">{suffix}</span>
         </div>
-        <div className="mt-4 text-[13.5px] leading-snug text-ink-500">
+        <div className="mt-3 text-[13px] leading-snug text-ink-500 sm:mt-4 sm:text-[13.5px]">
           {label}
         </div>
       </div>
@@ -85,13 +85,13 @@ export function Impact() {
               <div className="kicker">Wirkung</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
-              <h2 className="h-serif mt-3 text-[34px] font-bold leading-[1.1] tracking-tight text-ink md:text-[44px]">
+              <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
                 Was zwölf Winter bewegt haben.
               </h2>
             </Reveal>
           </div>
           <Reveal variant="up" delay={200} duration={800}>
-            <p className="max-w-md text-[15px] leading-relaxed text-ink-500">
+            <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
               Detaillierte Gäste- und Übernachtungszahlen erfassen wir intern
               und berichten sie einmal jährlich auf der
               Mitgliederversammlung.
@@ -99,7 +99,7 @@ export function Impact() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-4 md:grid-cols-5">
           {NUMBERS.map((n, i) => (
             <Stat
               key={n.label}

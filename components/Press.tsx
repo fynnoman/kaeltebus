@@ -13,7 +13,7 @@ export function Press() {
             <div className="kicker">Getragen von</div>
           </div>
         </Reveal>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-[13.5px] font-semibold uppercase tracking-kicker text-ink-400">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[11.5px] font-semibold uppercase tracking-kicker text-ink-400 sm:gap-x-8 sm:gap-y-4 sm:text-[13.5px]">
           {PARTNERS.map((p, i) => (
             <Reveal
               key={p}
@@ -21,7 +21,7 @@ export function Press() {
               delay={i * 60}
               duration={600}
             >
-              <span className="flex items-center gap-8">
+              <span className="flex items-center gap-6 sm:gap-8">
                 {p}
                 {i < PARTNERS.length - 1 && (
                   <span className="h-1 w-1 rounded-full bg-rot" />
@@ -38,13 +38,13 @@ export function Press() {
               <div className="kicker">Presse und Berichterstattung</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
-              <h2 className="h-serif mt-3 text-[34px] font-bold leading-[1.1] tracking-tight text-ink md:text-[44px]">
+              <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
                 Was andere über uns schreiben.
               </h2>
             </Reveal>
           </div>
           <Reveal variant="up" delay={200} duration={800}>
-            <p className="max-w-md text-[15px] leading-relaxed text-ink-500">
+            <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
               Für Presseanfragen, Bild- und Filmmaterial: bitte kurz per E-Mail
               an die Öffentlichkeitsarbeit. Wir melden uns in der Regel innerhalb
               eines Tages zurück.
@@ -64,16 +64,17 @@ export function Press() {
             >
               <a
                 href="#kontakt"
-                className="grid grid-cols-[110px_1fr_auto] items-center gap-5 border-b border-line py-6 transition-colors hover:text-rot md:grid-cols-[140px_1fr_auto] md:py-7"
+                className="flex flex-col gap-1.5 border-b border-line py-5 transition-colors hover:text-rot sm:grid sm:grid-cols-[110px_1fr_auto] sm:items-center sm:gap-5 sm:py-6 md:grid-cols-[140px_1fr_auto] md:py-7"
               >
-                <div className="text-[12px] font-semibold uppercase tracking-kicker text-ink-400">
-                  {p.date}
+                <div className="flex items-center justify-between text-[11.5px] font-semibold uppercase tracking-kicker text-ink-400 sm:text-[12px]">
+                  <span>{p.date}</span>
+                  <span className="text-rot sm:hidden">{p.outlet}</span>
                 </div>
                 <div>
-                  <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot">
+                  <div className="hidden text-[12px] font-semibold uppercase tracking-kicker text-rot sm:block">
                     {p.outlet}
                   </div>
-                  <h3 className="h-serif mt-1 text-[17px] font-bold leading-snug text-ink md:text-[19px]">
+                  <h3 className="h-serif text-[16px] font-bold leading-snug text-ink sm:mt-1 sm:text-[17px] md:text-[19px]">
                     {p.headline}
                   </h3>
                 </div>
@@ -82,7 +83,7 @@ export function Press() {
                   height="18"
                   viewBox="0 0 18 18"
                   fill="none"
-                  className="text-ink-300 transition-transform duration-200 group-hover:translate-x-1"
+                  className="hidden text-ink-300 transition-transform duration-200 group-hover:translate-x-1 sm:block"
                 >
                   <path
                     d="M4 9h10m0 0-4-4m4 4-4 4"

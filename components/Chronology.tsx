@@ -13,20 +13,20 @@ export function Chronology() {
               <div className="kicker">Chronik</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
-              <h2 className="h-serif mt-3 text-[34px] font-bold leading-[1.1] tracking-tight text-ink md:text-[44px]">
+              <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
                 Elf Winter, die zählen.
               </h2>
             </Reveal>
           </div>
           <Reveal variant="up" delay={200} duration={800}>
-            <p className="max-w-md text-[15.5px] leading-relaxed text-ink-500">
+            <p className="max-w-md text-[15px] leading-relaxed text-ink-500 sm:text-[15.5px]">
               Von einem ausrangierten Gliederbus zu einem beheizten Kältedorf
               mit 40 Schlafplätzen. Eine Chronik.
             </p>
           </Reveal>
         </div>
 
-        <ol className="mt-14 border-t border-line">
+        <ol className="mt-10 border-t border-line sm:mt-14">
           {CHRONO.map((c, i) => (
             <Reveal
               key={c.year}
@@ -36,15 +36,15 @@ export function Chronology() {
               duration={800}
               delay={40}
             >
-              <div className="grid gap-4 border-b border-line py-8 md:grid-cols-[160px_1fr] md:gap-10 md:py-10">
-                <div className="text-[14px] font-semibold uppercase tracking-kicker text-rot">
+              <div className="grid gap-3 border-b border-line py-7 sm:gap-4 sm:py-8 md:grid-cols-[160px_1fr] md:gap-10 md:py-10">
+                <div className="text-[13px] font-semibold uppercase tracking-kicker text-rot sm:text-[14px]">
                   {c.year}
                 </div>
                 <div>
-                  <h3 className="h-serif text-[20px] font-bold leading-snug text-ink md:text-[22px]">
+                  <h3 className="h-serif text-[18px] font-bold leading-snug text-ink sm:text-[20px] md:text-[22px]">
                     {c.title}
                   </h3>
-                  <p className="mt-2 max-w-2xl text-[15.5px] leading-relaxed text-ink-500">
+                  <p className="mt-2 max-w-2xl text-[14.5px] leading-relaxed text-ink-500 sm:text-[15.5px]">
                     {c.body}
                   </p>
                 </div>

@@ -1,5 +1,4 @@
 import { Nav } from "@/components/Nav";
-import { ScrollProgress } from "@/components/ScrollProgress";
 import { Hero } from "@/components/Hero";
 import { Pillars } from "@/components/Pillars";
 import { Chronology } from "@/components/Chronology";
@@ -18,7 +17,6 @@ import { Footer } from "@/components/Footer";
 export default function Page() {
   return (
     <main>
-      <ScrollProgress />
       <Nav />
       <Hero />
       <Pillars />

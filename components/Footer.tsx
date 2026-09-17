@@ -5,9 +5,9 @@ import { SITE } from "@/lib/data";
 export function Footer() {
   return (
     <footer className="bg-ink-800 text-paper-100">
-      <div className="container-x pt-16 pb-10 md:pt-20">
-        <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
-          <div>
+      <div className="container-x pt-12 pb-10 sm:pt-16 md:pt-20">
+        <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
+          <div className="sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-rot text-white">
                 <svg
@@ -39,7 +39,7 @@ export function Footer() {
             <div className="mt-6 border-l-4 border-rot bg-white/5 p-4 text-[13.5px] text-paper-100/90">
               <div className="font-semibold text-white">Spendenkonto</div>
               <div className="mt-1">{SITE.bank.holder}</div>
-              <div className="mt-1 font-mono tracking-wider">
+              <div className="mt-1 break-all font-mono tracking-wider">
                 {SITE.bank.iban}
               </div>
               <div className="mt-1 text-paper-100/70">
@@ -143,14 +143,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 h-px bg-white/10" />
+        <div className="mt-10 h-px bg-white/10 sm:mt-14" />
 
-        <div className="mt-6 flex flex-col justify-between gap-3 text-[12.5px] text-paper-100/70 md:flex-row">
+        <div className="mt-6 flex flex-col justify-between gap-4 text-[12px] text-paper-100/70 sm:text-[12.5px] md:flex-row md:items-center">
           <div>
-            © {new Date().getFullYear()} {SITE.name} · Alle Rechte vorbehalten
-            · Amtsgericht Saarbrücken VR 5477
+            © {new Date().getFullYear()} {SITE.name} · Amtsgericht Saarbrücken
+            VR 5477
           </div>
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-4 sm:gap-6">
             <a href="#impressum" className="hover:text-white">
               Impressum
             </a>
