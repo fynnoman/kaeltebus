@@ -8,32 +8,16 @@ export function Footer() {
       <div className="container-x pt-12 pb-10 sm:pt-16 md:pt-20">
         <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           <div className="sm:col-span-2 md:col-span-1">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-sm bg-rot text-white">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M12 2 L20 12 L18 12 L18 21 L14 21 L14 15 L10 15 L10 21 L6 21 L6 12 L4 12 Z" />
-                </svg>
-              </span>
-              <div className="flex flex-col leading-tight">
-                <span className="h-serif text-[18px] font-bold text-white">
-                  Kältebus Saarbrücken
-                </span>
-                <span className="text-[12.5px] text-paper-100/70">
-                  Hilfe für Obdachlose und Menschen in Not e.V.
-                </span>
-              </div>
+            <div className="inline-flex items-center rounded bg-white p-3">
+              <img
+                src="/images/logo.jpg"
+                alt="Kältebus Saarbrücken e.V."
+                className="h-16 w-auto md:h-20"
+              />
             </div>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-paper-100/80">
-              Gemeinnütziger Verein. Seit 2014. Betrieben von ehrenamtlich
-              Aktiven im Netzwerk der AWO Saarland. Ohne Bedürftigkeitsprüfung.
-              Für ein Saarbrücken, in dem niemand erfriert.
+              Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell.
+              Ohne Bedürftigkeitsprüfung.
             </p>
 
             <div className="mt-6 border-l-4 border-rot bg-white/5 p-4 text-[13.5px] text-paper-100/90">
@@ -50,45 +34,22 @@ export function Footer() {
 
           <div>
             <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot-300">
-              Der Verein
+              Bereiche
             </div>
             <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
                 <a href="#verein" className="hover:text-white">
-                  Über uns
+                  Unser Auftrag
                 </a>
               </li>
-              <li>
-                <a href="#kaeltedorf" className="hover:text-white">
-                  Das Kältedorf
-                </a>
-              </li>
-              <li>
-                <a href="#wirkung" className="hover:text-white">
-                  Wirkung
-                </a>
-              </li>
-              <li>
-                <a href="#presse" className="hover:text-white">
-                  Presse
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot-300">
-              Mithelfen
-            </div>
-            <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
                 <a href="#spenden" className="hover:text-white">
-                  Geld spenden
+                  Spenden
                 </a>
               </li>
               <li>
                 <a href="#bedarf" className="hover:text-white">
-                  Sachspenden
+                  Bedarfsliste
                 </a>
               </li>
               <li>
@@ -96,10 +57,26 @@ export function Footer() {
                   Ehrenamt
                 </a>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot-300">
+              Kontakt
+            </div>
+            <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
-                <a href="#kontakt" className="hover:text-white">
-                  Kontakt
+                <a
+                  href={`mailto:${SITE.contact.email}`}
+                  className="break-all hover:text-white"
+                >
+                  {SITE.contact.email}
                 </a>
+              </li>
+              <li className="text-paper-100/80">
+                {SITE.address.street}
+                <br />
+                {SITE.address.zip} {SITE.address.city}
               </li>
             </ul>
           </div>
@@ -156,9 +133,6 @@ export function Footer() {
             </a>
             <a href="#datenschutz" className="hover:text-white">
               Datenschutz
-            </a>
-            <a href="#satzung" className="hover:text-white">
-              Satzung
             </a>
           </div>
         </div>

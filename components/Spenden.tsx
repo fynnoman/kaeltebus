@@ -47,9 +47,8 @@ export function Spenden() {
           </div>
           <Reveal variant="up" delay={200} duration={800}>
             <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
-              Wir sind zu 100 % ehrenamtlich. Es gibt keine Personalkosten,
-              keine Geschäftsführung. Was Sie geben, kommt an, noch in der
-              gleichen Saison.
+              Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die
+              Versorgung im Kältedorf.
             </p>
           </Reveal>
         </div>
@@ -63,11 +62,11 @@ export function Spenden() {
                 01 · Geldspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Wärme über den Winter tragen.
+                Geld spenden.
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Der zuverlässigste Weg. Ihre Spende zahlt Zeltmiete, Lebensmittel,
-                Sanitär und passgenau gekaufte Kleidung. Steuerlich absetzbar.
+                Der zuverlässigste Weg. Jede Spende hilft im laufenden Betrieb
+                des Kältedorfs. Steuerlich absetzbar.
               </p>
 
               <div className="mt-6 border-t border-line pt-5 text-[13.5px] text-ink-600">
@@ -97,12 +96,11 @@ export function Spenden() {
                 02 · Sachspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Was gerade fehlt, wo es gebraucht wird.
+                Sachen spenden.
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Aktuelle Bedarfsliste weiter unten. Bitte keine Kleidung. Die
-                kaufen wir gezielt in passender Größe. Annahme am
-                Spendenwochenende oder nach Rücksprache.
+                Bitte vorher kurz per E-Mail abstimmen, was aktuell gebraucht
+                wird. Wir unterhalten keine Kleiderkammer.
               </p>
               <a href="#bedarf" className="btn-secondary mt-8 w-full sm:w-fit">
                 Zur Bedarfsliste
@@ -118,12 +116,11 @@ export function Spenden() {
                 03 · Zeitspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Eine Schicht. Ein Winter. Ein Leben.
+                Zeit spenden.
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Rund 700 Ehrenamtseinsätze pro Saison. Drei Schichten pro Nacht,
-                keine feste Verpflichtung. Erst zur Infoveranstaltung, dann in
-                die Nacht.
+                Der Verein arbeitet ehrenamtlich. Wer sich einbringen möchte,
+                schreibt uns eine kurze E-Mail.
               </p>
               <a href="#helfen" className="btn-secondary mt-8 w-full sm:w-fit">
                 Ehrenamtlich helfen
@@ -131,44 +128,6 @@ export function Spenden() {
             </article>
           </Reveal>
         </div>
-
-        {/* Impact amounts */}
-        <Reveal variant="up" delay={100} duration={800}>
-          <div className="mt-10 border border-line bg-paper-100 sm:mt-12">
-            <div className="grid gap-0 md:grid-cols-3">
-              {[
-                {
-                  amount: "20 €",
-                  text: "ein Nachtplatz mit warmer Mahlzeit im Kältedorf.",
-                },
-                {
-                  amount: "60 €",
-                  text: "eine passgenau gekaufte Winterjacke für einen Gast.",
-                },
-                {
-                  amount: "220 €",
-                  text: "eine komplette Iglu-Nacht: Miete, Heizung, Sanitär, Essen.",
-                },
-              ].map((w, i) => (
-                <div
-                  key={w.amount}
-                  className={`p-6 sm:p-8 md:p-10 ${
-                    i < 2
-                      ? "border-b border-line md:border-b-0 md:border-r"
-                      : ""
-                  }`}
-                >
-                  <div className="h-serif text-[30px] font-bold leading-none text-rot sm:text-[36px] md:text-[42px]">
-                    {w.amount}
-                  </div>
-                  <div className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                    {w.text}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

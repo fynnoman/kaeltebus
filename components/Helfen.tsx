@@ -1,30 +1,7 @@
 "use client";
 
-import { IMAGES } from "@/lib/data";
+import { IMAGES, SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
-
-const roles = [
-  {
-    title: "Zeltschicht",
-    body: "Empfang, Essensausgabe, Iglu-Zuweisung. 20:45 bis 00:00, 23:45 bis 03:00 oder 02:45 bis 06:00 Uhr.",
-    tag: "3 bis 5 h · nachts",
-  },
-  {
-    title: "Bollerwagen-Tour",
-    body: "Zweimal wöchentlich zu bekannten Schlafplätzen in der Stadt. Warme Getränke, Suppe, Decken.",
-    tag: "3 h · 22:30 bis 01:30",
-  },
-  {
-    title: "Küche",
-    body: "Freiwillige Köchinnen und Köche versorgen die Gäste, häufig Dippelabbes, Eintopf, Nudeln Bolognese.",
-    tag: "flexibel · tagsüber",
-  },
-  {
-    title: "Aufbau und Abbau",
-    body: "Ab November: Gelände säubern, Bauzaun stellen, Zelt aufbauen. Ab Ende März: Abbau.",
-    tag: "Samstage im Herbst",
-  },
-];
 
 export function Helfen() {
   return (
@@ -37,17 +14,14 @@ export function Helfen() {
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
-                Eine Schicht,
-                <br />
-                nicht dein Leben.
+                Ehrenamtlich helfen.
               </h2>
             </Reveal>
             <Reveal variant="up" delay={220} duration={800}>
               <p className="mt-4 text-[15px] leading-relaxed text-ink-500 sm:mt-5 sm:text-[15.5px]">
-                Keine feste Verpflichtung. Kein Vertrag. Zur Infoveranstaltung
-                im Waldhaus (Meerwiesertalweg 84, 66121 Saarbrücken) kommen,
-                den Ablauf hören, Fragen stellen. Und wenn es passt, in die
-                nächste Schicht.
+                Der Verein arbeitet ausschließlich ehrenamtlich. Wer sich
+                einbringen möchte, meldet sich per E-Mail und bekommt alle
+                Informationen zum Ablauf.
               </p>
             </Reveal>
 
@@ -55,28 +29,41 @@ export function Helfen() {
               <div className="mt-8 overflow-hidden rounded-md border border-line">
                 <img
                   src={IMAGES.hands}
-                  alt="Küchenteam von Vidor's übergibt Essenscontainer für das Kältedorf"
+                  alt="Warmes Essen wird für das Kältedorf angeliefert"
                   className="h-64 w-full object-cover md:h-72"
                 />
-                <div className="border-t border-line bg-paper-100 px-5 py-4 text-[13px] text-ink-500">
-                  Das Küchenteam von Vidor's kocht für eine Nacht im Kältedorf.
-                  Beispielhaft für viele Partner aus der Saarbrücker Gastronomie.
-                </div>
               </div>
             </Reveal>
 
             <Reveal variant="up" delay={420} duration={800}>
               <a
-                href="mailto:info@kaeltebussaarbruecken.de?subject=Ich%20m%C3%B6chte%20helfen"
+                href={`mailto:${SITE.contact.email}?subject=Ich%20m%C3%B6chte%20helfen`}
                 className="btn-primary mt-8 w-full sm:w-auto"
               >
-                Zur Infoveranstaltung anmelden
+                Per E-Mail melden
               </a>
             </Reveal>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-            {roles.map((r, i) => (
+            {[
+              {
+                title: "Im Kältedorf mitarbeiten",
+                body: "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen.",
+              },
+              {
+                title: "In der Küche unterstützen",
+                body: "Freiwillige kochen für eine Nacht im Kältedorf.",
+              },
+              {
+                title: "Aufbau und Abbau",
+                body: "Zu Saisonbeginn und Saisonende packen alle Hände mit an.",
+              },
+              {
+                title: "Materiell unterstützen",
+                body: "Aktuelle Bedarfsliste ansehen und direkt beitragen.",
+              },
+            ].map((r, i) => (
               <Reveal
                 key={r.title}
                 variant="up"
@@ -85,11 +72,8 @@ export function Helfen() {
                 distance={22}
               >
                 <div className="card h-full p-6 sm:p-7 md:p-8">
-                  <div className="flex items-baseline justify-between text-[10.5px] font-semibold uppercase tracking-kicker sm:text-[11px]">
-                    <span className="text-rot">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-ink-400">{r.tag}</span>
+                  <div className="text-[10.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[11px]">
+                    {String(i + 1).padStart(2, "0")}
                   </div>
                   <h3 className="h-serif mt-4 text-[18px] font-bold leading-tight text-ink sm:mt-5 sm:text-[20px] md:text-[22px]">
                     {r.title}

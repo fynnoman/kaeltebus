@@ -3,12 +3,10 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#verein", label: "Der Verein" },
-  { href: "#kaeltedorf", label: "Kältedorf" },
-  { href: "#wirkung", label: "Wirkung" },
+  { href: "#verein", label: "Unser Auftrag" },
   { href: "#spenden", label: "Spenden" },
+  { href: "#bedarf", label: "Bedarfsliste" },
   { href: "#helfen", label: "Ehrenamt" },
-  { href: "#presse", label: "Presse" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
@@ -46,9 +44,6 @@ export function Nav() {
             </span>
           </div>
           <div className="flex items-center gap-5">
-            <a href="tel:+4915156348029" className="hover:text-white">
-              Öffentlichkeitsarbeit · 0151 5634 8029
-            </a>
             <a
               href="mailto:info@kaeltebussaarbruecken.de"
               className="hover:text-white"
@@ -68,31 +63,15 @@ export function Nav() {
           <a
             href="#top"
             onClick={() => setOpen(false)}
-            className="flex min-w-0 items-center gap-2.5 md:gap-3"
+            className="flex min-w-0 items-center gap-3"
+            aria-label="Kältebus Saarbrücken e.V. · Startseite"
           >
-            <span
-              aria-hidden="true"
-              className="flex h-9 w-9 flex-none items-center justify-center rounded-sm bg-rot text-white md:h-10 md:w-10"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 2 L20 12 L18 12 L18 21 L14 21 L14 15 L10 15 L10 21 L6 21 L6 12 L4 12 Z" />
-              </svg>
-            </span>
-            <div className="flex min-w-0 flex-col leading-tight">
-              <span className="h-serif truncate text-[16px] font-bold text-ink md:text-[19px]">
-                Kältebus Saarbrücken
-              </span>
-              <span className="hidden truncate text-[12px] text-muted sm:block">
-                Hilfe für Obdachlose und Menschen in Not e.V.
-              </span>
-            </div>
+            <img
+              src="/images/logo.jpg"
+              alt="Kältebus Saarbrücken e.V."
+              className="h-11 w-auto flex-none md:h-14"
+            />
+            <span className="sr-only">Kältebus Saarbrücken e.V.</span>
           </a>
 
           <nav className="hidden items-center gap-1 lg:flex">
@@ -185,10 +164,11 @@ export function Nav() {
                   Jetzt spenden
                 </a>
                 <a
-                  href="tel:+4915156348029"
+                  href="mailto:info@kaeltebussaarbruecken.de"
+                  onClick={() => setOpen(false)}
                   className="btn-secondary w-full"
                 >
-                  0151 5634 8029 anrufen
+                  Per E-Mail schreiben
                 </a>
               </div>
             </div>

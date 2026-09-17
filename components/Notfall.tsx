@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal } from "@/components/Reveal";
+import { SITE } from "@/lib/data";
 
 export function Notfall() {
   return (
@@ -20,7 +21,7 @@ export function Notfall() {
                   Vor allem in extrem kalten Nächten. Fragen Sie, ob Hilfe
                   gewünscht ist. Bei Bewusstlosigkeit, Unterkühlung oder wenn
                   eine Person nicht mehr ansprechbar ist, sofort den
-                  Rettungsdienst rufen. Das rettet Leben, nicht ein Anruf hier.
+                  Rettungsdienst rufen.
                 </p>
               </div>
               <div className="flex flex-col gap-2.5 sm:gap-3">
@@ -31,10 +32,10 @@ export function Notfall() {
                   Notruf 112 anrufen
                 </a>
                 <a
-                  href="tel:+4915156348029"
+                  href={`mailto:${SITE.contact.email}`}
                   className="btn-secondary w-full justify-center"
                 >
-                  Kältebus · 0151 5634 8029
+                  Hinweis per E-Mail
                 </a>
               </div>
             </div>

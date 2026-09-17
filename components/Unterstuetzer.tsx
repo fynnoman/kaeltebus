@@ -48,9 +48,8 @@ export function Unterstuetzer() {
                   </div>
                 </div>
                 <div className="flex flex-1 flex-col p-6 sm:p-7 md:p-8">
-                  <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[11.5px] font-semibold uppercase tracking-kicker sm:text-[12px]">
-                    <span className="text-rot">{u.kicker}</span>
-                    <span className="text-ink-400">{u.date}</span>
+                  <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
+                    {u.kicker}
                   </div>
                   <h3 className="h-serif mt-3 text-[20px] font-bold leading-tight text-ink sm:mt-4 sm:text-[22px] md:text-[24px]">
                     {u.name}
@@ -66,11 +65,8 @@ export function Unterstuetzer() {
 
         <Reveal variant="up" delay={300} duration={800}>
           <div className="infobox mt-8 text-[13.5px] leading-relaxed text-ink-600 sm:mt-10 sm:text-[14px]">
-            <strong>Sie oder Ihr Unternehmen möchten helfen?</strong> Wir
-            freuen uns über jede Spende, ob Geld, Sachwerte oder eine gekochte
-            Mahlzeit im Kältedorf. Melden Sie sich bei Phil Sahner oder unserem
-            Team unter <a href="tel:+4915156349143" className="text-rot hover:underline">0151 5634 9143</a>{" "}
-            oder{" "}
+            <strong>Sie oder Ihr Unternehmen möchten helfen?</strong> Melden
+            Sie sich per E-Mail an{" "}
             <a
               href="mailto:info@kaeltebussaarbruecken.de"
               className="text-rot hover:underline"

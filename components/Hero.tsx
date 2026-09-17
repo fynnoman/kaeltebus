@@ -14,12 +14,12 @@ export function Hero() {
                 <span className="absolute inset-0 animate-ping rounded-full bg-rot/60" />
                 <span className="relative h-2 w-2 rounded-full bg-rot" />
               </span>
-              Kältedorf 2025 / 26 geöffnet
+              {SITE.name}
             </div>
           </Reveal>
 
           <Reveal variant="up" delay={80} duration={800}>
-            <h1 className="h-serif text-[34px] font-bold leading-[1.08] tracking-tight text-ink xs:text-[38px] sm:text-[44px] md:text-[56px]">
+            <h1 className="h-serif text-[34px] font-bold leading-[1.08] tracking-tight text-ink sm:text-[44px] md:text-[56px]">
               Ein warmer Schlafplatz
               <br />
               <span className="text-rot">rettet Leben.</span>
@@ -28,10 +28,9 @@ export function Hero() {
 
           <Reveal variant="up" delay={200} duration={800}>
             <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed text-ink-500 sm:text-[17px]">
-              Seit 2014 betreibt der {SITE.name} jeden Winter am Römerkastell
-              ein beheiztes Kältedorf mit Schlaf-Iglus, warmer Mahlzeit und
-              aufsuchender Hilfe. Ohne Bedürftigkeitsprüfung, unabhängig von
-              Herkunft, Aufenthaltsstatus oder Vorgeschichte.
+              Jeden Winter am Römerkastell. Ein beheiztes Kältedorf für
+              obdachlose und bedürftige Menschen. Ohne Bedürftigkeitsprüfung,
+              unabhängig von Herkunft, Aufenthaltsstatus oder Vorgeschichte.
             </p>
           </Reveal>
 
@@ -55,66 +54,35 @@ export function Hero() {
             </div>
           </Reveal>
 
-          <div className="mt-9 grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                label: "Standort",
-                body: "Am Römerkastell\n66121 Saarbrücken",
-              },
-              {
-                label: "Saison",
-                body: "Mitte Dezember bis\nEnde März",
-              },
-              {
-                label: "Öffnung",
-                body: "Täglich\n21:00 bis 06:00 Uhr",
-              },
-            ].map((k, i) => (
-              <Reveal
-                key={k.label}
-                variant="up"
-                delay={440 + i * 80}
-                duration={700}
-              >
-                <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                  {k.label}
-                </div>
-                <div className="mt-1 whitespace-pre-line text-[13.5px] leading-snug text-ink-600 sm:text-[14px]">
-                  {k.body}
-                </div>
-              </Reveal>
-            ))}
+          <div className="mt-9 grid gap-4 sm:grid-cols-2">
+            <Reveal variant="up" delay={440} duration={700}>
+              <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
+                Standort
+              </div>
+              <div className="mt-1 whitespace-pre-line text-[13.5px] leading-snug text-ink-600 sm:text-[14px]">
+                Am Römerkastell{"\n"}66121 Saarbrücken
+              </div>
+            </Reveal>
+            <Reveal variant="up" delay={520} duration={700}>
+              <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
+                Rechtsform
+              </div>
+              <div className="mt-1 whitespace-pre-line text-[13.5px] leading-snug text-ink-600 sm:text-[14px]">
+                Gemeinnütziger Verein{"\n"}VR 5477, Amtsgericht Saarbrücken
+              </div>
+            </Reveal>
           </div>
         </div>
 
         <Reveal variant="left" duration={900} distance={40}>
-          <div className="relative pb-14 sm:pb-16 md:pb-0">
+          <div className="relative pb-4 md:pb-0">
             <div className="overflow-hidden rounded-md border border-line bg-white shadow-card">
               <img
                 src={IMAGES.hero}
-                alt="Ehrenamtliches Team im Kältedorf am Römerkastell"
+                alt="Am Kältedorf am Römerkastell in Saarbrücken"
                 className="h-[260px] w-full object-cover sm:h-[380px] md:h-[520px]"
               />
             </div>
-            <Reveal variant="up" delay={400} duration={700}>
-              <div className="absolute bottom-0 left-4 right-4 bg-white p-4 shadow-card sm:p-5 md:-bottom-8 md:left-10 md:right-16 md:p-6">
-                <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                  Notruf & Meldung
-                </div>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-ink-600 sm:text-[14px]">
-                  Wenn Sie einen Menschen in der Kälte antreffen: bitte
-                  ansprechen. Im Notfall sofort die <strong>112</strong>{" "}
-                  anrufen. Für Hinweise:{" "}
-                  <a
-                    href="tel:+4915156348029"
-                    className="font-semibold text-rot hover:underline"
-                  >
-                    0151 5634 8029
-                  </a>
-                  .
-                </p>
-              </div>
-            </Reveal>
           </div>
         </Reveal>
       </div>
