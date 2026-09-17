@@ -247,14 +247,26 @@ export const BEDARF = {
 };
 
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1487147264018-f937fba0c817?auto=format&fit=crop&w=2400&q=80",
-  night:
-    "https://images.unsplash.com/photo-1454372182658-c712e4c5a1db?auto=format&fit=crop&w=2400&q=80",
-  hands:
-    "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=2400&q=80",
-  tent: "https://images.unsplash.com/photo-1517057350745-9c3f7bfffd45?auto=format&fit=crop&w=2400&q=80",
-  city: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=2400&q=80",
-  fire: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2400&q=80",
-  people:
-    "https://images.unsplash.com/photo-1516131206008-dd041a9764fd?auto=format&fit=crop&w=2400&q=80",
+  hero: "/images/first3-mc-team.jpg",
+  tent: "/images/kueche-suppe.jpg",
+  hands: "/images/vidors-team.jpg",
 };
+
+export const UNTERSTUETZER = [
+  {
+    image: "/images/spende-kws-schule.jpg",
+    kicker: "Schulspende",
+    amount: "1.500 €",
+    name: "Katharina-Weißgerber-Schule",
+    body: "Schülerinnen und Schüler haben in ihrer Schule Spenden gesammelt und den Erlös persönlich am Kältedorf übergeben. Danke für ein Zeichen, das über den Geldbetrag hinaus wirkt.",
+    date: "26. Februar 2026",
+  },
+  {
+    image: "/images/spende-paratec.jpg",
+    kicker: "Firmenspende",
+    amount: "3.000 €",
+    name: "PARATEC Group",
+    body: "Ein starker Beitrag aus der regionalen Wirtschaft. Aus dem Spendenscheck werden Zeltmiete, Sanitär und Lebensmittel für viele Nächte im Kältedorf.",
+    date: "Saison 2025 / 26",
+  },
+];

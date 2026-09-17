@@ -55,9 +55,13 @@ export function Helfen() {
               <div className="mt-8 overflow-hidden rounded-md border border-line">
                 <img
                   src={IMAGES.hands}
-                  alt="Ehrenamtliche Hände"
-                  className="h-56 w-full object-cover"
+                  alt="Küchenteam von Vidor's übergibt Essenscontainer für das Kältedorf"
+                  className="h-64 w-full object-cover md:h-72"
                 />
+                <div className="border-t border-line bg-paper-100 px-5 py-4 text-[13px] text-ink-500">
+                  Das Küchenteam von Vidor's kocht für eine Nacht im Kältedorf.
+                  Beispielhaft für viele Partner aus der Saarbrücker Gastronomie.
+                </div>
               </div>
             </Reveal>
 

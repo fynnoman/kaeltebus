@@ -32,12 +32,13 @@ export function Ablauf() {
               <div className="mt-8 overflow-hidden rounded-md border border-line">
                 <img
                   src={IMAGES.tent}
-                  alt="Beheiztes Zelt am Römerkastell"
-                  className="h-64 w-full object-cover"
+                  alt="Warme Küche im Kältedorf am Römerkastell"
+                  className="h-72 w-full object-cover md:h-80"
                 />
                 <div className="border-t border-line bg-paper-100 px-5 py-4 text-[13px] text-ink-500">
-                  Standort: Am Römerkastell (Mainzer Straße / Ecke
-                  Halbergstraße), Saarbahn-Haltestelle Römerkastell.
+                  Warme Küche im Container. Standort: Am Römerkastell (Mainzer
+                  Straße / Ecke Halbergstraße), Saarbahn-Haltestelle
+                  Römerkastell.
                 </div>
               </div>
             </Reveal>

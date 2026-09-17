@@ -10,6 +10,7 @@ import { Bedarf } from "@/components/Bedarf";
 import { Helfen } from "@/components/Helfen";
 import { Press } from "@/components/Press";
 import { Netz } from "@/components/Netz";
+import { Unterstuetzer } from "@/components/Unterstuetzer";
 import { Notfall } from "@/components/Notfall";
 import { Kontakt } from "@/components/Kontakt";
 import { Footer } from "@/components/Footer";
@@ -28,6 +29,7 @@ export default function Page() {
       <Spenden />
       <Bedarf />
       <Helfen />
+      <Unterstuetzer />
       <Press />
       <Netz />
       <Kontakt />

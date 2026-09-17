@@ -92,9 +92,12 @@ export function Hero() {
             <div className="overflow-hidden rounded-md border border-line bg-white shadow-card">
               <img
                 src={IMAGES.hero}
-                alt="Winternacht in Saarbrücken"
+                alt="Ehrenamtliches Team im Kältedorf am Römerkastell"
                 className="h-[380px] w-full object-cover md:h-[520px]"
               />
+              <div className="border-t border-line bg-white px-5 py-3 text-[12.5px] text-ink-500">
+                Ehrenamtliches Team im Kältedorf am Römerkastell. Foto: Kältebus Saarbrücken.
+              </div>
             </div>
             <Reveal variant="up" delay={400} duration={700}>
               <div className="absolute -bottom-6 left-6 right-6 bg-white p-5 shadow-card md:-bottom-8 md:left-10 md:right-16 md:p-6">
