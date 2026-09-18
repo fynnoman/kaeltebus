@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { SITE } from "@/lib/data";
 
 export function Footer() {
@@ -8,13 +9,17 @@ export function Footer() {
       <div className="container-x pt-12 pb-10 sm:pt-16 md:pt-20">
         <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           <div className="sm:col-span-2 md:col-span-1">
-            <div className="inline-flex items-center rounded bg-white p-3">
+            <Link
+              href="/"
+              className="inline-flex items-center rounded bg-white p-3"
+              aria-label="Kältebus Saarbrücken e.V. · Startseite"
+            >
               <img
                 src="/images/logo.jpg"
                 alt="Kältebus Saarbrücken e.V."
                 className="h-16 w-auto md:h-20"
               />
-            </div>
+            </Link>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-paper-100/80">
               Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell.
               Ohne Bedürftigkeitsprüfung.
@@ -38,24 +43,24 @@ export function Footer() {
             </div>
             <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
-                <a href="#verein" className="hover:text-white">
+                <Link href="/verein" className="hover:text-white">
                   Unser Auftrag
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#spenden" className="hover:text-white">
+                <Link href="/spenden" className="hover:text-white">
                   Spenden
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#bedarf" className="hover:text-white">
+                <Link href="/bedarf" className="hover:text-white">
                   Bedarfsliste
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#helfen" className="hover:text-white">
+                <Link href="/helfen" className="hover:text-white">
                   Ehrenamt
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

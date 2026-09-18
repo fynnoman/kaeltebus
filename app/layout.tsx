@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Merriweather } from "next/font/google";
 import "./globals.css";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 
 const sans = Source_Sans_3({
   subsets: ["latin"],
@@ -25,16 +27,7 @@ export const metadata: Metadata = {
     template: "%s · Kältebus Saarbrücken e.V.",
   },
   description:
-    "Seit 2014 betreibt der Kältebus Saarbrücken jeden Winter am Römerkastell ein beheiztes Kältedorf mit Schlaf-Iglus, warmer Mahlzeit und aufsuchender Hilfe. Ohne Bedürftigkeitsprüfung. Rein ehrenamtlich.",
-  keywords: [
-    "Kältebus Saarbrücken",
-    "Obdachlosenhilfe Saarland",
-    "Kältedorf",
-    "Wärmestube",
-    "Notschlafstelle",
-    "Ehrenamt Saarbrücken",
-    "Spenden Obdachlose",
-  ],
+    "Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell für obdachlose und bedürftige Menschen. Ohne Bedürftigkeitsprüfung.",
   openGraph: {
     type: "website",
     locale: "de_DE",
@@ -42,7 +35,7 @@ export const metadata: Metadata = {
     title:
       "Kältebus Saarbrücken e.V. · Hilfe für Obdachlose und Menschen in Not",
     description:
-      "Jeden Winter am Römerkastell: beheiztes Kältedorf, Schlaf-Iglus, warme Mahlzeit. Ehrenamtlich. Ohne Bedürftigkeitsprüfung.",
+      "Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell. Ohne Bedürftigkeitsprüfung.",
   },
 };
 
@@ -54,7 +47,9 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${sans.variable} ${serif.variable}`}>
       <body className="bg-white text-ink font-sans antialiased">
+        <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );

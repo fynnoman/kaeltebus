@@ -1,18 +1,21 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#verein", label: "Unser Auftrag" },
-  { href: "#spenden", label: "Spenden" },
-  { href: "#bedarf", label: "Bedarfsliste" },
-  { href: "#helfen", label: "Ehrenamt" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/verein", label: "Unser Auftrag" },
+  { href: "/spenden", label: "Spenden" },
+  { href: "/bedarf", label: "Bedarfsliste" },
+  { href: "/helfen", label: "Ehrenamt" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -31,6 +34,13 @@ export function Nav() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  const isActive = (href: string) =>
+    pathname === href || pathname?.startsWith(href + "/");
 
   return (
     <>
@@ -60,8 +70,8 @@ export function Nav() {
         } border-b border-line`}
       >
         <div className="container-x flex items-center justify-between py-3 md:py-5">
-          <a
-            href="#top"
+          <Link
+            href="/"
             onClick={() => setOpen(false)}
             className="flex min-w-0 items-center gap-3"
             aria-label="Kältebus Saarbrücken e.V. · Startseite"
@@ -72,27 +82,31 @@ export function Nav() {
               className="h-11 w-auto flex-none md:h-14"
             />
             <span className="sr-only">Kältebus Saarbrücken e.V.</span>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
-              <a
+              <Link
                 key={l.href}
                 href={l.href}
-                className="rounded px-3 py-2 text-[14.5px] text-ink-500 hover:text-rot"
+                className={`rounded px-3 py-2 text-[14.5px] transition-colors ${
+                  isActive(l.href)
+                    ? "text-rot"
+                    : "text-ink-500 hover:text-rot"
+                }`}
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
           <div className="flex flex-none items-center gap-2">
-            <a
-              href="#spenden"
+            <Link
+              href="/spenden"
               className="btn-primary hidden !min-h-[42px] !px-4 !py-2 text-[13.5px] sm:inline-flex md:!min-h-[46px] md:!px-5 md:!py-2.5 md:text-[14px]"
             >
               Spenden
-            </a>
+            </Link>
             <button
               onClick={() => setOpen((o) => !o)}
               className="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink hover:border-rot hover:text-rot lg:hidden"
@@ -131,11 +145,13 @@ export function Nav() {
           >
             <div className="container-x flex flex-col py-2">
               {links.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between border-b border-line py-4 text-[16px] font-medium text-ink last:border-b-0 hover:text-rot"
+                  className={`flex items-center justify-between border-b border-line py-4 text-[16px] font-medium last:border-b-0 ${
+                    isActive(l.href) ? "text-rot" : "text-ink hover:text-rot"
+                  }`}
                 >
                   {l.label}
                   <svg
@@ -153,16 +169,16 @@ export function Nav() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </Link>
               ))}
               <div className="mt-4 flex flex-col gap-2 pb-4">
-                <a
-                  href="#spenden"
+                <Link
+                  href="/spenden"
                   onClick={() => setOpen(false)}
                   className="btn-primary w-full"
                 >
                   Jetzt spenden
-                </a>
+                </Link>
                 <a
                   href="mailto:info@kaeltebussaarbruecken.de"
                   onClick={() => setOpen(false)}

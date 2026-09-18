@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { SITE, IMAGES } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
 
@@ -36,7 +37,7 @@ export function Hero() {
 
           <Reveal variant="up" delay={320} duration={800}>
             <div className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
-              <a href="#spenden" className="btn-primary w-full sm:w-auto">
+              <Link href="/spenden" className="btn-primary w-full sm:w-auto">
                 Jetzt spenden
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
@@ -47,10 +48,10 @@ export function Hero() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </a>
-              <a href="#helfen" className="btn-secondary w-full sm:w-auto">
+              </Link>
+              <Link href="/helfen" className="btn-secondary w-full sm:w-auto">
                 Ehrenamtlich helfen
-              </a>
+              </Link>
             </div>
           </Reveal>
 

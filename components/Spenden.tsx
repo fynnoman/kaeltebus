@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
@@ -102,9 +103,9 @@ export function Spenden() {
                 Bitte vorher kurz per E-Mail abstimmen, was aktuell gebraucht
                 wird. Wir unterhalten keine Kleiderkammer.
               </p>
-              <a href="#bedarf" className="btn-secondary mt-8 w-full sm:w-fit">
+              <Link href="/bedarf" className="btn-secondary mt-8 w-full sm:w-fit">
                 Zur Bedarfsliste
-              </a>
+              </Link>
             </article>
           </Reveal>
 
@@ -122,9 +123,9 @@ export function Spenden() {
                 Der Verein arbeitet ehrenamtlich. Wer sich einbringen möchte,
                 schreibt uns eine kurze E-Mail.
               </p>
-              <a href="#helfen" className="btn-secondary mt-8 w-full sm:w-fit">
+              <Link href="/helfen" className="btn-secondary mt-8 w-full sm:w-fit">
                 Ehrenamtlich helfen
-              </a>
+              </Link>
             </article>
           </Reveal>
         </div>

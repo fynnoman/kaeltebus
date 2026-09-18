@@ -29,12 +29,12 @@ export function Kontakt() {
             <Reveal variant="up" duration={800} distance={22}>
               <a
                 href={`mailto:${SITE.contact.email}`}
-                className="card flex h-full flex-col p-6 sm:p-7 md:p-8"
+                className="card flex h-full min-w-0 flex-col p-6 sm:p-7 md:p-8"
               >
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
                   E-Mail
                 </div>
-                <div className="h-serif mt-4 text-[18px] font-bold leading-tight tracking-tight text-ink sm:mt-5 sm:text-[20px] md:text-[22px]">
+                <div className="mt-4 break-all font-sans text-[15px] font-semibold leading-snug tracking-tight text-ink sm:mt-5 sm:text-[16px] md:text-[17px]">
                   {SITE.contact.email}
                 </div>
                 <div className="mt-5 inline-flex items-center gap-2 text-[13px] text-ink-500 sm:mt-6">
@@ -44,11 +44,11 @@ export function Kontakt() {
             </Reveal>
 
             <Reveal variant="up" delay={120} duration={800} distance={22}>
-              <div className="card flex h-full flex-col p-6 sm:p-7 md:p-8">
+              <div className="card flex h-full min-w-0 flex-col p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
                   Vereinssitz
                 </div>
-                <div className="h-serif mt-4 text-[18px] font-bold leading-snug text-ink sm:mt-5 sm:text-[20px]">
+                <div className="h-serif mt-4 break-words text-[17px] font-bold leading-snug text-ink sm:mt-5 sm:text-[19px]">
                   {SITE.address.street}
                   <br />
                   {SITE.address.zip} {SITE.address.city}
@@ -66,11 +66,11 @@ export function Kontakt() {
               distance={22}
               className="sm:col-span-2"
             >
-              <div className="card p-6 sm:p-7 md:p-8">
+              <div className="card min-w-0 p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
                   Kältedorf
                 </div>
-                <div className="h-serif mt-3 text-[18px] font-bold leading-snug text-ink sm:text-[20px] md:text-[22px]">
+                <div className="h-serif mt-3 break-words text-[18px] font-bold leading-snug text-ink sm:text-[20px] md:text-[22px]">
                   {SITE.kaeltedorf.location}
                   <br />
                   <span className="font-normal text-[14.5px] text-ink-500 sm:text-[16px]">
