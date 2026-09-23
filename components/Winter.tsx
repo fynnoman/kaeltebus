@@ -43,7 +43,7 @@ export function Winter() {
             <div className="mt-8 grid gap-5 sm:grid-cols-2 sm:gap-6">
               <Reveal variant="up" delay={340} duration={700}>
                 <div>
-                  <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
+                  <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-winter sm:text-[12px]">
                     Standort
                   </div>
                   <div className="mt-2 text-[14px] leading-snug text-ink-600 sm:text-[14.5px]">
@@ -55,7 +55,7 @@ export function Winter() {
               </Reveal>
               <Reveal variant="up" delay={420} duration={700}>
                 <div>
-                  <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
+                  <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-winter sm:text-[12px]">
                     Anreise
                   </div>
                   <div className="mt-2 text-[14px] leading-snug text-ink-600 sm:text-[14.5px]">

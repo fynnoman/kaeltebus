@@ -86,7 +86,7 @@ export function SpendenDetail() {
                       <span className="numeral">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
+                      <span className="text-[11.5px] font-semibold uppercase tracking-kicker text-spende sm:text-[12px]">
                         {w.kicker}
                       </span>
                     </div>
@@ -130,9 +130,9 @@ export function SpendenDetail() {
                 distance={18}
               >
                 <details className="group">
-                  <summary className="flex cursor-pointer items-start justify-between gap-6 py-5 text-[15.5px] font-semibold text-ink transition-colors hover:text-rot sm:py-6 sm:text-[16.5px]">
+                  <summary className="flex cursor-pointer items-start justify-between gap-6 py-5 text-[15.5px] font-semibold text-ink transition-colors hover:text-spende sm:py-6 sm:text-[16.5px]">
                     <span className="h-serif tracking-tight">{f.q}</span>
-                    <span className="mt-1 flex-none text-rot transition-transform group-open:rotate-45">
+                    <span className="mt-1 flex-none text-spende transition-transform group-open:rotate-45">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path
                           d="M8 3v10M3 8h10"
@@ -156,12 +156,12 @@ export function SpendenDetail() {
               <strong>Noch eine Frage offen?</strong> Schreiben Sie kurz an{" "}
               <a
                 href={`mailto:${SITE.contact.email}`}
-                className="text-rot hover:underline"
+                className="text-spende hover:underline"
               >
                 {SITE.contact.email}
               </a>
               . Sie bekommen zeitnah Antwort.{" "}
-              <Link href="/bedarf" className="text-rot hover:underline">
+              <Link href="/bedarf" className="text-spende hover:underline">
                 Bedarfsliste ansehen →
               </Link>
             </div>

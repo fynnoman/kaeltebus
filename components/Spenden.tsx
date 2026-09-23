@@ -21,10 +21,10 @@ function CopyableIban() {
   return (
     <button
       onClick={handle}
-      className="mt-2 inline-flex w-full items-center justify-between gap-2 rounded border border-line bg-white px-3 py-2 text-left font-mono text-[12.5px] tracking-wider text-ink hover:border-rot sm:w-auto sm:text-[13.5px]"
+      className="mt-2 inline-flex w-full items-center justify-between gap-2 rounded border border-line bg-white px-3 py-2 text-left font-mono text-[12.5px] tracking-wider text-ink hover:border-spende sm:w-auto sm:text-[13.5px]"
     >
       <span className="break-all">{SITE.bank.iban}</span>
-      <span className="flex-none text-[11px] uppercase tracking-kicker text-rot">
+      <span className="flex-none text-[11px] uppercase tracking-kicker text-spende">
         {copied ? "Kopiert" : "Kopieren"}
       </span>
     </button>
@@ -58,8 +58,8 @@ export function Spenden() {
           {/* Geldspende */}
           <Reveal variant="up" delay={0} duration={800} distance={26}>
             <article className="card relative flex h-full flex-col p-6 sm:p-8" id="spende-geld">
-              <span className="absolute inset-x-0 top-0 h-[3px] bg-rot" />
-              <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot">
+              <span className="absolute inset-x-0 top-0 h-[3px] bg-spende" />
+              <div className="text-[12px] font-semibold uppercase tracking-kicker text-spende">
                 01 · Geldspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
@@ -92,8 +92,8 @@ export function Spenden() {
           {/* Sachspende */}
           <Reveal variant="up" delay={130} duration={800} distance={26}>
             <article className="card relative flex h-full flex-col p-6 sm:p-8" id="spende-sach">
-              <span className="absolute inset-x-0 top-0 h-[3px] bg-rot/50" />
-              <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot">
+              <span className="absolute inset-x-0 top-0 h-[3px] bg-spende/50" />
+              <div className="text-[12px] font-semibold uppercase tracking-kicker text-spende">
                 02 · Sachspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
@@ -114,8 +114,8 @@ export function Spenden() {
           {/* Zeitspende */}
           <Reveal variant="up" delay={260} duration={800} distance={26}>
             <article className="card relative flex h-full flex-col p-6 sm:p-8" id="spende-zeit">
-              <span className="absolute inset-x-0 top-0 h-[3px] bg-rot/50" />
-              <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot">
+              <span className="absolute inset-x-0 top-0 h-[3px] bg-spende/50" />
+              <div className="text-[12px] font-semibold uppercase tracking-kicker text-spende">
                 03 · Zeitspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
