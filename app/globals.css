@@ -4,12 +4,24 @@
 
 :root {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --header-h: 68px;
+  --header-h: 92px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 108px;
+  }
 }
 
 @media (min-width: 768px) {
   :root {
-    --header-h: 116px;
+    --header-h: 156px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 172px;
   }
 }
 

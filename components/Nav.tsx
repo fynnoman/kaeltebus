@@ -69,44 +69,23 @@ export function Nav() {
           scrolled ? "shadow-header" : ""
         } border-b border-line`}
       >
-        <div className="container-x flex items-center justify-between py-3 md:py-5">
-          <Link
-            href="/"
-            onClick={() => setOpen(false)}
-            className="flex min-w-0 items-center gap-3"
-            aria-label="Kältebus Saarbrücken e.V. · Startseite"
-          >
-            <img
-              src="/images/logo.jpg"
-              alt="Kältebus Saarbrücken e.V."
-              className="h-11 w-auto flex-none md:h-14"
-            />
-            <span className="sr-only">Kältebus Saarbrücken e.V.</span>
-          </Link>
-
-          <nav className="hidden items-center gap-1 lg:flex">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`rounded px-3 py-2 text-[14.5px] transition-colors ${
-                  isActive(l.href)
-                    ? "text-rot"
-                    : "text-ink-500 hover:text-rot"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex flex-none items-center gap-2">
-            <Link
-              href="/spenden"
-              className="btn-primary hidden !min-h-[42px] !px-4 !py-2 text-[13.5px] sm:inline-flex md:!min-h-[46px] md:!px-5 md:!py-2.5 md:text-[14px]"
-            >
-              Spenden
-            </Link>
+        <div className="container-x grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-3 md:py-5">
+          <div className="flex items-center justify-self-start">
+            <nav className="hidden items-center gap-1 lg:flex">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`rounded px-3 py-2 text-[14.5px] transition-colors ${
+                    isActive(l.href)
+                      ? "text-rot"
+                      : "text-ink-500 hover:text-rot"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
             <button
               onClick={() => setOpen((o) => !o)}
               className="inline-flex h-11 w-11 items-center justify-center rounded border border-line text-ink hover:border-rot hover:text-rot lg:hidden"
@@ -134,6 +113,29 @@ export function Nav() {
                 </svg>
               )}
             </button>
+          </div>
+
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="flex min-w-0 items-center justify-self-center"
+            aria-label="Kältebus Saarbrücken e.V. · Startseite"
+          >
+            <img
+              src="/images/logo.jpg"
+              alt="Kältebus Saarbrücken e.V."
+              className="h-16 w-auto flex-none sm:h-20 md:h-24 lg:h-28"
+            />
+            <span className="sr-only">Kältebus Saarbrücken e.V.</span>
+          </Link>
+
+          <div className="flex items-center justify-self-end">
+            <Link
+              href="/spenden"
+              className="btn-primary hidden !min-h-[42px] !px-4 !py-2 text-[13.5px] sm:inline-flex md:!min-h-[46px] md:!px-5 md:!py-2.5 md:text-[14px]"
+            >
+              Spenden
+            </Link>
           </div>
         </div>
 
