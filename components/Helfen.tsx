@@ -29,7 +29,7 @@ export function Helfen() {
               <div className="mt-8 overflow-hidden rounded-md border border-line">
                 <img
                   src={IMAGES.hands}
-                  alt="Warmes Essen wird für das Kältedorf angeliefert"
+                  alt="Warmes Essen wird für den Kältebus angeliefert"
                   className="h-64 w-full object-cover md:h-72"
                 />
               </div>
@@ -48,12 +48,12 @@ export function Helfen() {
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
             {[
               {
-                title: "Im Kältedorf mitarbeiten",
+                title: "Am Kältebus mitarbeiten",
                 body: "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen.",
               },
               {
                 title: "In der Küche unterstützen",
-                body: "Freiwillige kochen für eine Nacht im Kältedorf.",
+                body: "Freiwillige kochen für eine Nacht am Kältebus.",
               },
               {
                 title: "Aufbau und Abbau",

@@ -20,18 +20,20 @@ export function Hero() {
           </Reveal>
 
           <Reveal variant="up" delay={80} duration={800}>
-            <h1 className="h-serif text-[34px] font-bold leading-[1.08] tracking-tight text-ink sm:text-[44px] md:text-[56px]">
-              Ein warmer Schlafplatz
+            <h1 className="display-serif text-[40px] text-ink sm:text-[56px] md:text-[76px] lg:text-[88px]">
+              Ein warmer
               <br />
-              <span className="text-rot">rettet Leben.</span>
+              Schlafplatz
+              <br />
+              <span className="italic text-rot">rettet Leben.</span>
             </h1>
           </Reveal>
 
           <Reveal variant="up" delay={200} duration={800}>
             <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed text-ink-500 sm:text-[17px]">
-              Jeden Winter am Römerkastell. Ein beheiztes Kältedorf für
-              obdachlose und bedürftige Menschen. Ohne Bedürftigkeitsprüfung,
-              unabhängig von Herkunft, Aufenthaltsstatus oder Vorgeschichte.
+              Jeden Winter am Römerkastell. Ein beheizter Ort für obdachlose
+              und bedürftige Menschen. Ohne Bedürftigkeitsprüfung, unabhängig
+              von Herkunft, Aufenthaltsstatus oder Vorgeschichte.
             </p>
           </Reveal>
 
@@ -76,12 +78,12 @@ export function Hero() {
         </div>
 
         <Reveal variant="left" duration={900} distance={40}>
-          <div className="relative pb-4 md:pb-0">
-            <div className="overflow-hidden rounded-md border border-line bg-white shadow-card">
+          <div className="frame-offset pb-8 md:pb-0 md:pr-8">
+            <div className="frame-inner overflow-hidden rounded-md border border-line bg-white shadow-card">
               <img
                 src={IMAGES.hero}
-                alt="Am Kältedorf am Römerkastell in Saarbrücken"
-                className="h-[260px] w-full object-cover sm:h-[380px] md:h-[520px]"
+                alt="Am Kältebus am Römerkastell in Saarbrücken"
+                className="h-[260px] w-full object-cover sm:h-[380px] md:h-[540px]"
               />
             </div>
           </div>

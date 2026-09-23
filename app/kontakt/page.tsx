@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { Kontakt } from "@/components/Kontakt";
+import { KontaktDetail } from "@/components/KontaktDetail";
 
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Kontakt zum Kältebus Saarbrücken e.V.: E-Mail, Vereinssitz und Standort des Kältedorfs am Römerkastell in Saarbrücken.",
+    "Kontakt zum Kältebus Saarbrücken e.V.: E-Mail, Vereinssitz und Standort am Römerkastell in Saarbrücken.",
 };
 
 export default function Page() {
@@ -18,6 +19,7 @@ export default function Page() {
         crumbs={[{ label: "Start", href: "/" }, { label: "Kontakt" }]}
       />
       <Kontakt />
+      <KontaktDetail />
     </main>
   );
 }

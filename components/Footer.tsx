@@ -21,8 +21,8 @@ export function Footer() {
               />
             </Link>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-paper-100/80">
-              Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell.
-              Ohne Bedürftigkeitsprüfung.
+              Gemeinnütziger Verein aus Saarbrücken. Winterbetrieb am
+              Kältebus am Römerkastell. Ohne Bedürftigkeitsprüfung.
             </p>
 
             <div className="mt-6 border-l-4 border-rot bg-white/5 p-4 text-[13.5px] text-paper-100/90">

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s · Kältebus Saarbrücken e.V.",
   },
   description:
-    "Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell für obdachlose und bedürftige Menschen. Ohne Bedürftigkeitsprüfung.",
+    "Gemeinnütziger Verein aus Saarbrücken. Kältebus am Römerkastell für obdachlose und bedürftige Menschen. Ohne Bedürftigkeitsprüfung.",
   openGraph: {
     type: "website",
     locale: "de_DE",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title:
       "Kältebus Saarbrücken e.V. · Hilfe für Obdachlose und Menschen in Not",
     description:
-      "Gemeinnütziger Verein aus Saarbrücken. Kältedorf am Römerkastell. Ohne Bedürftigkeitsprüfung.",
+      "Gemeinnütziger Verein aus Saarbrücken. Kältebus am Römerkastell. Ohne Bedürftigkeitsprüfung.",
   },
 };
 

@@ -14,7 +14,7 @@ export function Unterstuetzer() {
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
-                Ohne Sie kein Kältedorf.
+                Ohne Sie kein Kältebus.
               </h2>
             </Reveal>
           </div>

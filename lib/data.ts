@@ -7,7 +7,7 @@ export const SITE = {
     zip: "66111",
     city: "Saarbrücken",
   },
-  kaeltedorf: {
+  standort: {
     location: "Am Römerkastell",
     detail: "66121 Saarbrücken",
     tram: "Saarbahn-Haltestelle Römerkastell",
@@ -42,12 +42,12 @@ export const PILLARS = [
   {
     kicker: "Wärme",
     title: "Ein sicherer Ort in der kältesten Nacht.",
-    body: "Ein beheiztes Kältedorf am Römerkastell, eine warme Mahlzeit und Ansprechpartner, wenn es sonst niemanden gibt.",
+    body: "Ein beheizter Ort am Römerkastell, eine warme Mahlzeit und Ansprechpartner, wenn es sonst niemanden gibt.",
   },
   {
     kicker: "Ehrenamt",
     title: "Getragen von Freiwilligen.",
-    body: "Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung im Kältedorf.",
+    body: "Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung vor Ort.",
   },
 ];
 
@@ -81,13 +81,13 @@ export const UNTERSTUETZER = [
     kicker: "Schulspende",
     amount: "1.500 €",
     name: "Katharina-Weißgerber-Schule",
-    body: "Schülerinnen und Schüler haben in ihrer Schule Spenden gesammelt und den Erlös persönlich am Kältedorf übergeben.",
+    body: "Schülerinnen und Schüler haben in ihrer Schule Spenden gesammelt und den Erlös persönlich am Kältebus am Römerkastell übergeben.",
   },
   {
     image: "/images/spende-paratec.jpg",
     kicker: "Firmenspende",
     amount: "3.000 €",
     name: "PARATEC Group",
-    body: "Ein starker Beitrag aus der regionalen Wirtschaft für die Versorgung im Kältedorf.",
+    body: "Ein starker Beitrag aus der regionalen Wirtschaft für die Versorgung am Kältebus.",
   },
 ];

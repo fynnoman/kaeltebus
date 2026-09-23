@@ -68,17 +68,17 @@ export function Kontakt() {
             >
               <div className="card min-w-0 p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                  Kältedorf
+                  Standort
                 </div>
                 <div className="h-serif mt-3 break-words text-[18px] font-bold leading-snug text-ink sm:text-[20px] md:text-[22px]">
-                  {SITE.kaeltedorf.location}
+                  {SITE.standort.location}
                   <br />
                   <span className="font-normal text-[14.5px] text-ink-500 sm:text-[16px]">
-                    {SITE.kaeltedorf.detail}
+                    {SITE.standort.detail}
                   </span>
                 </div>
                 <div className="mt-4 text-[13px] text-ink-500 sm:text-[13.5px]">
-                  {SITE.kaeltedorf.tram} · {SITE.kaeltedorf.season}
+                  {SITE.standort.tram} · {SITE.standort.season}
                 </div>
               </div>
             </Reveal>

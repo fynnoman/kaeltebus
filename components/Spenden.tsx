@@ -49,7 +49,7 @@ export function Spenden() {
           <Reveal variant="up" delay={200} duration={800}>
             <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
               Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die
-              Versorgung im Kältedorf.
+              Versorgung vor Ort.
             </p>
           </Reveal>
         </div>
@@ -67,7 +67,7 @@ export function Spenden() {
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
                 Der zuverlässigste Weg. Jede Spende hilft im laufenden Betrieb
-                des Kältedorfs. Steuerlich absetzbar.
+                am Kältebus.
               </p>
 
               <div className="mt-6 border-t border-line pt-5 text-[13.5px] text-ink-600">
@@ -100,11 +100,13 @@ export function Spenden() {
                 Sachen spenden.
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Bitte vorher kurz per E-Mail abstimmen, was aktuell gebraucht
-                wird. Wir unterhalten keine Kleiderkammer.
+                Sachspenden helfen uns dort, wo sie gerade wirklich gebraucht
+                werden. Bitte stimmen Sie deshalb vorab kurz per E-Mail mit
+                uns ab, was aktuell benötigt wird. Eine allgemeine
+                Kleiderkammer betreiben wir nicht.
               </p>
               <Link href="/bedarf" className="btn-secondary mt-8 w-full sm:w-fit">
-                Zur Bedarfsliste
+                Aktuellen Bedarf ansehen
               </Link>
             </article>
           </Reveal>
@@ -117,14 +119,15 @@ export function Spenden() {
                 03 · Zeitspende
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Zeit spenden.
+                Zeit schenken.
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Der Verein arbeitet ehrenamtlich. Wer sich einbringen möchte,
-                schreibt uns eine kurze E-Mail.
+                Der Kältebus lebt vom Engagement freiwilliger Helferinnen und
+                Helfer. Wer sich einbringen und mit seiner Zeit unterstützen
+                möchte, kann sich ganz unkompliziert bei uns melden.
               </p>
               <Link href="/helfen" className="btn-secondary mt-8 w-full sm:w-fit">
-                Ehrenamtlich helfen
+                Ehrenamtlich mithelfen
               </Link>
             </article>
           </Reveal>

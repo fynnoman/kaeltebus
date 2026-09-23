@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { Spenden } from "@/components/Spenden";
-import { Unterstuetzer } from "@/components/Unterstuetzer";
+import { SpendenDetail } from "@/components/SpendenDetail";
 
 export const metadata: Metadata = {
   title: "Spenden",
@@ -15,11 +15,11 @@ export default function Page() {
       <PageHeader
         kicker="Spenden"
         title="Ihre Spende zählt."
-        lead="Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung im Kältedorf am Römerkastell."
+        lead="Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung am Kältebus am Römerkastell."
         crumbs={[{ label: "Start", href: "/" }, { label: "Spenden" }]}
       />
       <Spenden />
-      <Unterstuetzer />
+      <SpendenDetail />
     </main>
   );
 }

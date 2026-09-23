@@ -16,7 +16,7 @@
 html,
 body {
   background: #ffffff;
-  color: #1c1c1c;
+  color: #111111;
 }
 
 html {
@@ -36,7 +36,7 @@ section[id] {
 }
 
 ::selection {
-  background: #b0201e;
+  background: #d13a3a;
   color: #fff;
 }
 
@@ -89,13 +89,185 @@ img {
   font-size: 11.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #b0201e;
+  color: #d13a3a;
   font-weight: 600;
 }
 @media (min-width: 640px) {
   .kicker {
     font-size: 12px;
   }
+}
+
+/* kicker with a short red rule to the left — editorial signature */
+.kicker-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #d13a3a;
+  font-weight: 700;
+}
+.kicker-line::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 2px;
+  background: #d13a3a;
+}
+@media (min-width: 640px) {
+  .kicker-line {
+    font-size: 12.5px;
+  }
+  .kicker-line::before {
+    width: 48px;
+  }
+}
+
+/* thin red rule under a section title for editorial cadence */
+.rule-accent {
+  display: block;
+  width: 44px;
+  height: 2px;
+  background: #d13a3a;
+}
+
+/* large serif numeral for cards, editorial */
+.numeral {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: 44px;
+  line-height: 1;
+  color: #d13a3a;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 640px) {
+  .numeral {
+    font-size: 52px;
+  }
+}
+
+/* huge ghosted serif numeral behind card content, editorial signature */
+.ghost-numeral {
+  position: absolute;
+  top: -24px;
+  right: -8px;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: 180px;
+  line-height: 1;
+  font-weight: 700;
+  color: #d13a3a;
+  opacity: 0.06;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 260ms var(--ease-out), transform 400ms var(--ease-out);
+}
+@media (min-width: 768px) {
+  .ghost-numeral {
+    font-size: 220px;
+    top: -32px;
+    right: -12px;
+  }
+}
+
+/* animated red hairline that grows across the top of a card on hover */
+.card-line {
+  position: relative;
+  overflow: hidden;
+}
+.card-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #d13a3a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 420ms var(--ease-out);
+  z-index: 2;
+}
+.card-line:hover::before,
+.card-line:focus-visible::before {
+  transform: scaleX(1);
+}
+.card-line:hover .ghost-numeral {
+  opacity: 0.1;
+  transform: translate3d(-4px, 4px, 0);
+}
+
+/* editorial section eyebrow: red rule + kicker on same baseline, wider */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d13a3a;
+  font-weight: 700;
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 48px;
+  height: 2px;
+  background: #d13a3a;
+}
+@media (min-width: 640px) {
+  .eyebrow {
+    font-size: 12.5px;
+  }
+  .eyebrow::before {
+    width: 64px;
+  }
+}
+
+/* thicker section rule for editorial punch */
+.rule-accent-lg {
+  display: block;
+  width: 72px;
+  height: 3px;
+  background: #d13a3a;
+}
+
+/* image frame with offset red outline (behind image) */
+.frame-offset {
+  position: relative;
+}
+.frame-offset > .frame-inner {
+  position: relative;
+  z-index: 2;
+}
+.frame-offset::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: -16px;
+  bottom: -16px;
+  border: 2px solid #d13a3a;
+  z-index: 1;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .frame-offset::before {
+    top: 24px;
+    left: 24px;
+    right: -24px;
+    bottom: -24px;
+  }
+}
+
+/* dramatic serif display for hero-scale headings */
+.display-serif {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 0.98;
 }
 
 .h-serif {
@@ -105,7 +277,7 @@ img {
 
 .divider {
   height: 1px;
-  background: #e5e0d3;
+  background: #e5e5e5;
 }
 
 /* buttons */
@@ -115,7 +287,7 @@ img {
   justify-content: center;
   gap: 0.5rem;
   min-height: 46px;
-  background: #b0201e;
+  background: #d13a3a;
   color: #fff;
   padding: 0.75rem 1.35rem;
   border-radius: 4px;
@@ -125,7 +297,7 @@ img {
   transition: background 180ms var(--ease-out), transform 160ms var(--ease-out);
 }
 .btn-primary:hover {
-  background: #8f1917;
+  background: #b02929;
 }
 .btn-primary:active {
   transform: scale(0.98);
@@ -138,10 +310,10 @@ img {
   gap: 0.5rem;
   min-height: 46px;
   background: #ffffff;
-  color: #1c1c1c;
+  color: #111111;
   padding: 0.7rem 1.3rem;
   border-radius: 4px;
-  border: 1px solid #d9d3c4;
+  border: 1px solid #d4d4d4;
   font-weight: 600;
   font-size: 15px;
   line-height: 1.2;
@@ -149,8 +321,8 @@ img {
     transform 160ms var(--ease-out);
 }
 .btn-secondary:hover {
-  border-color: #b0201e;
-  color: #b0201e;
+  border-color: #d13a3a;
+  color: #d13a3a;
 }
 .btn-secondary:active {
   transform: scale(0.98);
@@ -158,8 +330,8 @@ img {
 
 /* info box */
 .infobox {
-  border-left: 4px solid #b0201e;
-  background: #fbf9f4;
+  border-left: 4px solid #d13a3a;
+  background: #f7f7f7;
   padding: 1rem 1.15rem;
 }
 @media (min-width: 640px) {
@@ -171,15 +343,15 @@ img {
 /* card */
 .card {
   background: #ffffff;
-  border: 1px solid #ece7d9;
+  border: 1px solid #e5e5e5;
   border-radius: 6px;
   transition: box-shadow 200ms var(--ease-out), transform 200ms var(--ease-out),
     border-color 200ms var(--ease-out);
 }
 .card:hover {
-  box-shadow: 0 1px 2px rgba(20, 20, 18, 0.05),
-    0 18px 40px -18px rgba(20, 20, 18, 0.18);
-  border-color: #d9d3c4;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    0 18px 40px -18px rgba(0, 0, 0, 0.18);
+  border-color: #d4d4d4;
 }
 
 /* scrollbar */
@@ -188,15 +360,15 @@ img {
   height: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #f6f2ea;
+  background: #f5f5f5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d9d3c4;
+  background: #c9c9c9;
   border-radius: 8px;
-  border: 3px solid #f6f2ea;
+  border: 3px solid #f5f5f5;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b0201e;
+  background: #d13a3a;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { Bedarf } from "@/components/Bedarf";
+import { BedarfDetail } from "@/components/BedarfDetail";
 
 export const metadata: Metadata = {
   title: "Bedarfsliste",
@@ -18,6 +19,7 @@ export default function Page() {
         crumbs={[{ label: "Start", href: "/" }, { label: "Bedarfsliste" }]}
       />
       <Bedarf />
+      <BedarfDetail />
     </main>
   );
 }

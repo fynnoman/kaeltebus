@@ -16,8 +16,14 @@ export function PageHeader({
   crumbs?: Crumb[];
 }) {
   return (
-    <section className="border-b border-line bg-paper-100">
-      <div className="container-x py-14 sm:py-20 md:py-24">
+    <section className="relative overflow-hidden border-b border-line bg-paper-100">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-8 -top-16 select-none font-serif text-[220px] font-bold leading-none text-rot opacity-[0.05] sm:text-[300px] md:-right-16 md:-top-24 md:text-[420px]"
+      >
+        §
+      </span>
+      <div className="container-x relative py-14 sm:py-20 md:py-28">
         {crumbs.length > 0 && (
           <Reveal variant="up" duration={500}>
             <nav
@@ -44,16 +50,19 @@ export function PageHeader({
           </Reveal>
         )}
         <Reveal variant="up" duration={700}>
-          <div className="kicker">{kicker}</div>
+          <div className="eyebrow">{kicker}</div>
         </Reveal>
         <Reveal variant="up" delay={100} duration={800}>
-          <h1 className="h-serif mt-4 text-[32px] font-bold leading-[1.05] tracking-tight text-ink sm:text-[44px] md:text-[56px]">
+          <h1 className="display-serif mt-5 text-[36px] text-ink sm:text-[52px] md:text-[72px] lg:text-[84px]">
             {title}
           </h1>
         </Reveal>
+        <Reveal variant="up" delay={180} duration={700}>
+          <span className="rule-accent-lg mt-8" />
+        </Reveal>
         {lead && (
-          <Reveal variant="up" delay={220} duration={800}>
-            <p className="mt-5 max-w-2xl text-[15.5px] leading-relaxed text-ink-500 sm:text-[17px]">
+          <Reveal variant="up" delay={260} duration={800}>
+            <p className="mt-6 max-w-2xl text-[15.5px] leading-relaxed text-ink-500 sm:text-[17px]">
               {lead}
             </p>
           </Reveal>

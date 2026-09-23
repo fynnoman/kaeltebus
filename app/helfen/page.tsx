@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { Helfen } from "@/components/Helfen";
+import { HelfenDetail } from "@/components/HelfenDetail";
 
 export const metadata: Metadata = {
   title: "Ehrenamt",
   description:
-    "Ehrenamtlich beim Kältebus Saarbrücken e.V. mitmachen: im Kältedorf, in der Küche, beim Aufbau oder materiell.",
+    "Ehrenamtlich beim Kältebus Saarbrücken e.V. mitmachen: am Kältebus, in der Küche, beim Aufbau oder materiell.",
 };
 
 export default function Page() {
@@ -18,6 +19,7 @@ export default function Page() {
         crumbs={[{ label: "Start", href: "/" }, { label: "Ehrenamt" }]}
       />
       <Helfen />
+      <HelfenDetail />
     </main>
   );
 }
