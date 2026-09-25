@@ -1,5 +1,6 @@
 export const SITE = {
   name: "Kältebus Saarbrücken e.V.",
+  legalName: "Kältebus Saarbrücken - Hilfe für Menschen in Not e.V.",
   claim: "Hilfe für Obdachlose und Menschen in Not.",
   register: "VR 5477, Amtsgericht Saarbrücken",
   address: {
@@ -14,7 +15,7 @@ export const SITE = {
     season: "Jeden Winter",
   },
   bank: {
-    holder: "Kältebus Saarbrücken · Hilfe für Obdachlose e.V.",
+    holder: "Kältebus Saarbrücken - Hilfe für Menschen in Not e.V.",
     bank: "Sparkasse Saarbrücken",
     iban: "DE31 5905 0101 0067 0773 88",
     bic: "SAKSDE55",

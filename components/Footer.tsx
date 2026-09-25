@@ -133,9 +133,9 @@ export function Footer() {
             VR 5477
           </div>
           <div className="flex flex-wrap gap-4 sm:gap-6">
-            <a href="#impressum" className="hover:text-white">
+            <Link href="/impressum" className="hover:text-white">
               Impressum
-            </a>
+            </Link>
             <a href="#datenschutz" className="hover:text-white">
               Datenschutz
             </a>
