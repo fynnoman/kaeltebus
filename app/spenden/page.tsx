@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { PageHeader } from "@/components/PageHeader";
 import { Spenden } from "@/components/Spenden";
 import { SpendenDetail } from "@/components/SpendenDetail";
@@ -20,6 +21,10 @@ export default function Page() {
       />
       <Spenden />
       <SpendenDetail />
+      <Script
+        src="https://www.betterplace.org/de/widgets/overlays/HLtn7WX_zxMC4isLSCtZ4dY2.js"
+        strategy="afterInteractive"
+      />
     </main>
   );
 }
