@@ -46,8 +46,6 @@ export const metadata: Metadata = {
     "Ehrenamt Obdachlosenhilfe",
     "Hilfe für Obdachlose Saarbrücken",
     "Am Römerkastell",
-    "Wärmestube Saarbrücken",
-    "Notunterkunft Saarbrücken",
     "Sachspende Obdachlose",
     "Gemeinnütziger Verein Saarbrücken",
   ],

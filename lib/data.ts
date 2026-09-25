@@ -3,6 +3,7 @@ export const SITE = {
   legalName: "Kältebus Saarbrücken- Hilfe für Menschen in Not e.V.",
   claim: "Hilfe für Obdachlose und Menschen in Not.",
   register: "VR 5477, Amtsgericht Saarbrücken",
+  foundingDate: "2014-12-15",
   address: {
     street: "Sankt-Johanner-Straße 49",
     zip: "66111",

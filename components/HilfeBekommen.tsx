@@ -11,23 +11,15 @@ const FAQ = [
   },
   {
     q: "Muss ich etwas erzählen?",
-    a: "Nein. Du musst nichts erzählen. Wir fragen nicht nach deiner Geschichte, nicht nach deinem Namen, nicht nach deinem Aufenthalt.",
+    a: "Nein. Wir fragen nicht nach deiner Herkunft, deinem Aufenthaltsstatus oder deiner Vorgeschichte.",
   },
   {
     q: "Kostet das etwas?",
-    a: "Nein. Alles ist kostenlos. Wärme, Essen, Trinken, ein Platz zum Sitzen.",
+    a: "Nein. Alles ist kostenlos.",
   },
   {
     q: "Wer ist da?",
-    a: "Ehrenamtliche Helferinnen und Helfer. Menschen, die zuhören und da sind.",
-  },
-  {
-    q: "Kann ich Tiere mitbringen?",
-    a: "Ja. Dein Hund ist willkommen. Sag den Helfern kurz Bescheid.",
-  },
-  {
-    q: "Bin ich sicher?",
-    a: "Ja. Der Kältebus ist ein geschützter Ort. Niemand wird gemeldet. Niemand wird weitergeschickt.",
+    a: "Ehrenamtliche Helferinnen und Helfer.",
   },
 ];
 
@@ -98,11 +90,12 @@ export function HilfeBekommen() {
                     </span>
                   </div>
                   <h3 className="h-serif relative z-10 mt-5 text-[19px] font-bold leading-tight text-ink sm:text-[21px]">
-                    An kalten Winternächten.
+                    In der Wintersaison.
                   </h3>
                   <p className="relative z-10 mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                    Der Kältebus ist im Winter geöffnet, abends und nachts.
-                    Wenn du unsicher bist, ob heute geöffnet ist: ruf kurz an.
+                    Der Kältebus ist während der Wintermonate im Einsatz.
+                    Wenn du wissen möchtest, wann geöffnet ist, meld dich
+                    kurz beim Verein.
                   </p>
                   <a
                     href={`tel:${SITE.contact.phoneHref}`}

@@ -21,6 +21,17 @@ export function ngoSchema() {
     description:
       "Gemeinnütziger Verein aus Saarbrücken. Der Kältebus am Römerkastell bietet obdachlosen und bedürftigen Menschen in den Wintermonaten Wärme, warme Mahlzeiten und Ansprechpartner. Ohne Bedürftigkeitsprüfung.",
     slogan: SITE.claim,
+    foundingDate: SITE.foundingDate,
+    foundingLocation: {
+      "@type": "Place",
+      name: "Saarbrücken",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Saarbrücken",
+        addressRegion: "Saarland",
+        addressCountry: "DE",
+      },
+    },
     areaServed: [
       { "@type": "City", name: "Saarbrücken" },
       { "@type": "AdministrativeArea", name: "Saarland" },
@@ -49,8 +60,6 @@ export function ngoSchema() {
       "Obdachlosenhilfe",
       "Winterhilfe",
       "Wohlfahrtswesen",
-      "Notunterkunft",
-      "Sozialarbeit",
       "Ehrenamt",
     ],
     keywords:
@@ -88,7 +97,7 @@ export function placeSchema() {
     "@id": PLACE_ID,
     name: `Kältebus am Römerkastell`,
     description:
-      "Standort des Kältebus in Saarbrücken. Beheizter Aufenthaltsort, warme Mahlzeit, Ansprechpartner an kalten Winternächten.",
+      "Standort des Kältebus in Saarbrücken. Beheizter Aufenthaltsort, warme Mahlzeit und Ansprechpartner während der Wintersaison.",
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.standort.location,
@@ -237,7 +246,9 @@ export function webPageSchema(opts: {
   name: string;
   description: string;
   breadcrumbs?: Crumb[];
+  dateModified?: string;
 }) {
+  const modified = opts.dateModified ?? new Date().toISOString().slice(0, 10);
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -247,6 +258,8 @@ export function webPageSchema(opts: {
     inLanguage: "de-DE",
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    dateModified: modified,
     ...(opts.breadcrumbs
       ? { breadcrumb: breadcrumbSchema(opts.breadcrumbs) }
       : {}),

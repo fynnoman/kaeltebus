@@ -141,9 +141,9 @@ export function Footer() {
             <Link href="/impressum" className="hover:text-white">
               Impressum
             </Link>
-            <a href="#datenschutz" className="hover:text-white">
+            <Link href="/datenschutz" className="hover:text-white">
               Datenschutz
-            </a>
+            </Link>
           </div>
         </div>
       </div>

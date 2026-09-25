@@ -32,23 +32,19 @@ const faqs = [
   },
   {
     q: "Muss ich meine Geschichte erzählen?",
-    a: "Nein. Der Kältebus fragt nicht nach Namen, Aufenthaltsstatus oder Vorgeschichte.",
+    a: "Nein. Der Kältebus fragt nicht nach Herkunft, Aufenthaltsstatus oder Vorgeschichte.",
   },
   {
     q: "Kostet der Aufenthalt am Kältebus etwas?",
-    a: "Nein. Wärme, Essen, Trinken und Gespräche sind kostenlos.",
+    a: "Nein. Es entstehen keine Kosten.",
   },
   {
     q: "Wo genau ist der Kältebus in Saarbrücken?",
     a: "Am Römerkastell in Saarbrücken. Mit der Saarbahn erreichbar über die Haltestelle Römerkastell.",
   },
   {
-    q: "Wann ist der Kältebus geöffnet?",
-    a: "In der Wintersaison, abends und nachts an kalten Tagen. Bei Unsicherheit unter 0151 56348795 nachfragen.",
-  },
-  {
-    q: "Kann ich meinen Hund mitbringen?",
-    a: "Ja. Hunde sind willkommen. Kurz den Helfern Bescheid geben.",
+    q: "Wann ist der Kältebus im Einsatz?",
+    a: "Während der Wintersaison. Für aktuelle Öffnungstage bitte kurz beim Verein melden (Telefon 0151 56348795 oder info@kaeltebus-saarbruecken.de).",
   },
 ];
 
