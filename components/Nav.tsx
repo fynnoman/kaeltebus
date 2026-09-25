@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const links = [
   { href: "/verein", label: "Unser Auftrag" },
+  { href: "/hilfe-bekommen", label: "Hilfe bekommen" },
   { href: "/spenden", label: "Spenden" },
   { href: "/bedarf", label: "Bedarfsliste" },
   { href: "/helfen", label: "Ehrenamt" },

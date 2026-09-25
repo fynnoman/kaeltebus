@@ -3,17 +3,38 @@ import Link from "next/link";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/Reveal";
 import { SITE } from "@/lib/data";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Impressum",
   description:
     "Impressum des Kältebus Saarbrücken- Hilfe für Menschen in Not e.V. Angaben gemäß § 5 TMG.",
+  alternates: { canonical: "/impressum" },
   robots: { index: true, follow: true },
 };
+
+const impressumCrumbs = [
+  { name: "Start", href: "/" },
+  { name: "Impressum" },
+];
 
 export default function Page() {
   return (
     <main>
+      <JsonLd
+        id="ld-impressum"
+        data={[
+          webPageSchema({
+            url: "/impressum",
+            name: "Impressum · Kältebus Saarbrücken e.V.",
+            description:
+              "Angaben gemäß § 5 TMG zum Kältebus Saarbrücken- Hilfe für Menschen in Not e.V.",
+            breadcrumbs: impressumCrumbs,
+          }),
+          breadcrumbSchema(impressumCrumbs),
+        ]}
+      />
       <PageHeader
         kicker="Impressum"
         title="Impressum."

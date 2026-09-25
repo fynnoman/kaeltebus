@@ -48,6 +48,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/hilfe-bekommen" className="hover:text-white">
+                  Hilfe bekommen
+                </Link>
+              </li>
+              <li>
                 <Link href="/spenden" className="hover:text-white">
                   Spenden
                 </Link>
