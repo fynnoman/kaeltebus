@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Kältebus Saarbrücken e.V.",
-  legalName: "Kältebus Saarbrücken - Hilfe für Menschen in Not e.V.",
+  legalName: "Kältebus Saarbrücken- Hilfe für Menschen in Not e.V.",
   claim: "Hilfe für Obdachlose und Menschen in Not.",
   register: "VR 5477, Amtsgericht Saarbrücken",
   address: {
@@ -15,7 +15,7 @@ export const SITE = {
     season: "Jeden Winter",
   },
   bank: {
-    holder: "Kältebus Saarbrücken - Hilfe für Menschen in Not e.V.",
+    holder: "Kältebus Saarbrücken- Hilfe für Menschen in Not e.V.",
     bank: "Sparkasse Saarbrücken",
     iban: "DE31 5905 0101 0067 0773 88",
     bic: "SAKSDE55",
@@ -25,8 +25,23 @@ export const SITE = {
     project: "26744",
   },
   contact: {
-    email: "info@kaeltebussaarbruecken.de",
+    email: "info@kaeltebus-saarbruecken.de",
+    phone: "0151 56348795",
+    phoneHref: "+4915156348795",
   },
+  tax: {
+    finanzamt: "Finanzamt Saarbrücken I",
+    steuernummer: "040/140/42305",
+    bescheid: "Freistellungsbescheid vom 11.03.2024 für die Jahre 2019 bis 2021",
+    zweck:
+      "Förderung des Wohlfahrtswesens (§ 52 Abs. 2 Satz 1 Nr. 9 AO)",
+  },
+  vorstand: [
+    { rolle: "1. Vorsitzender", name: "Phil Sahner" },
+    { rolle: "2. Vorsitzender", name: "Willi Kühnreich" },
+    { rolle: "Schatzmeister", name: "Wolfgang Stalter" },
+    { rolle: "Schriftführerin", name: "Melanie Müller" },
+  ],
   social: {
     facebook: "https://facebook.com/kaeltebus.saarbruecken",
     instagram: "https://instagram.com/kaeltebus_saarbruecken",

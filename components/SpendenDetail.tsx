@@ -29,7 +29,7 @@ const FAQ = [
   },
   {
     q: "Wie erhalte ich eine Spendenquittung?",
-    a: "Für eine Spendenbescheinigung genügt eine kurze E-Mail an info@kaeltebussaarbruecken.de mit dem Spendendatum und der Adresse für die Zustellung.",
+    a: "Für eine Spendenbescheinigung genügt eine kurze E-Mail an info@kaeltebus-saarbruecken.de mit dem Spendendatum und der Adresse für die Zustellung.",
   },
   {
     q: "Kann ich zweckgebunden spenden?",

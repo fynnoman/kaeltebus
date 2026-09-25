@@ -55,10 +55,10 @@ export function Nav() {
           </div>
           <div className="flex items-center gap-5">
             <a
-              href="mailto:info@kaeltebussaarbruecken.de"
+              href="mailto:info@kaeltebus-saarbruecken.de"
               className="hover:text-white"
             >
-              info@kaeltebussaarbruecken.de
+              info@kaeltebus-saarbruecken.de
             </a>
           </div>
         </div>
@@ -182,7 +182,7 @@ export function Nav() {
                   Jetzt spenden
                 </Link>
                 <a
-                  href="mailto:info@kaeltebussaarbruecken.de"
+                  href="mailto:info@kaeltebus-saarbruecken.de"
                   onClick={() => setOpen(false)}
                   className="btn-secondary w-full"
                 >

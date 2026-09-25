@@ -68,10 +68,10 @@ export function Unterstuetzer() {
             <strong>Sie oder Ihr Unternehmen möchten helfen?</strong> Melden
             Sie sich per E-Mail an{" "}
             <a
-              href="mailto:info@kaeltebussaarbruecken.de"
+              href="mailto:info@kaeltebus-saarbruecken.de"
               className="text-rot hover:underline"
             >
-              info@kaeltebussaarbruecken.de
+              info@kaeltebus-saarbruecken.de
             </a>
             .
           </div>

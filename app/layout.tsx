@@ -20,7 +20,7 @@ const serif = Merriweather({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kaeltebussaarbruecken.de"),
+  metadataBase: new URL("https://kaeltebus-saarbruecken.de"),
   title: {
     default:
       "Kältebus Saarbrücken e.V. · Hilfe für Obdachlose und Menschen in Not",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "de_DE",
-    url: "https://kaeltebussaarbruecken.de",
+    url: "https://kaeltebus-saarbruecken.de",
     title:
       "Kältebus Saarbrücken e.V. · Hilfe für Obdachlose und Menschen in Not",
     description:

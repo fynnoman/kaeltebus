@@ -7,7 +7,7 @@ import { SITE } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Impressum",
   description:
-    "Impressum des Kältebus Saarbrücken - Hilfe für Menschen in Not e.V. Angaben gemäß § 5 TMG.",
+    "Impressum des Kältebus Saarbrücken- Hilfe für Menschen in Not e.V. Angaben gemäß § 5 TMG.",
   robots: { index: true, follow: true },
 };
 
@@ -71,6 +71,14 @@ export default function Page() {
                     Kontakt
                   </div>
                   <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
+                    Telefon:{" "}
+                    <a
+                      href={`tel:${SITE.contact.phoneHref}`}
+                      className="text-spende hover:underline"
+                    >
+                      {SITE.contact.phone}
+                    </a>
+                    <br />
                     E-Mail:{" "}
                     <a
                       href={`mailto:${SITE.contact.email}`}
@@ -102,9 +110,32 @@ export default function Page() {
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
                     Vertretungsberechtigter Vorstand
                   </div>
-                  <p className="mt-3 text-[15px] leading-relaxed text-ink-500 sm:text-[15.5px]">
-                    Die Namen der vertretungsberechtigten Vorstandsmitglieder
-                    werden hier zeitnah ergänzt.
+                  <ul className="mt-3 space-y-1.5 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
+                    {SITE.vorstand.map((v) => (
+                      <li key={v.name}>
+                        <span className="text-ink-500">{v.rolle}:</span>{" "}
+                        <span className="font-semibold">{v.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+
+              <Reveal variant="up" delay={380} duration={700} distance={20}>
+                <div>
+                  <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
+                    Steuerliche Angaben
+                  </div>
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
+                    {SITE.tax.finanzamt}
+                    <br />
+                    Steuernummer: {SITE.tax.steuernummer}
+                  </p>
+                  <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
+                    Der Verein ist wegen Förderung mildtätiger und
+                    gemeinnütziger Zwecke ({SITE.tax.zweck}) nach § 5 Abs. 1
+                    Nr. 9 KStG von der Körperschaftsteuer und nach § 3 Nr. 6
+                    GewStG von der Gewerbesteuer befreit ({SITE.tax.bescheid}).
                   </p>
                 </div>
               </Reveal>

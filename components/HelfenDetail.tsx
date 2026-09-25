@@ -27,7 +27,7 @@ const SCHRITTE = [
     step: "01",
     kicker: "Kontakt",
     title: "Einfach kurz schreiben.",
-    body: "Eine kurze E-Mail an info@kaeltebussaarbruecken.de genügt. Schreiben Sie uns, wobei Sie unterstützen möchten, wie viel Zeit Sie ungefähr mitbringen und ab wann Sie starten könnten.",
+    body: "Eine kurze E-Mail an info@kaeltebus-saarbruecken.de genügt. Schreiben Sie uns, wobei Sie unterstützen möchten, wie viel Zeit Sie ungefähr mitbringen und ab wann Sie starten könnten.",
   },
   {
     step: "02",
