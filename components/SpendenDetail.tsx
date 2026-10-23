@@ -29,7 +29,7 @@ const FAQ = [
   },
   {
     q: "Wie erhalte ich eine Spendenquittung?",
-    a: "Für eine Spendenbescheinigung genügt eine kurze E-Mail an info@kaeltebus-saarbruecken.de mit dem Spendendatum und der Adresse für die Zustellung.",
+    a: "Für eine Spendenbescheinigung genügt eine kurze E-Mail an finanzen@kaeltebus-saarbruecken.de mit dem Spendendatum und der Adresse für die Zustellung.",
   },
   {
     q: "Kann ich zweckgebunden spenden?",
@@ -153,12 +153,13 @@ export function SpendenDetail() {
 
           <Reveal variant="up" delay={300} duration={800}>
             <div className="infobox mt-10 text-[13.5px] leading-relaxed text-ink-600 sm:mt-12 sm:text-[14px]">
-              <strong>Noch eine Frage offen?</strong> Schreiben Sie kurz an{" "}
+              <strong>Noch eine Frage offen?</strong> Für Geldspenden,
+              Spendenquittungen und steuerliche Rückfragen schreiben Sie an{" "}
               <a
-                href={`mailto:${SITE.contact.email}`}
+                href={`mailto:${SITE.contact.emailFinanzen}`}
                 className="text-spende hover:underline"
               >
-                {SITE.contact.email}
+                {SITE.contact.emailFinanzen}
               </a>
               . Sie bekommen zeitnah Antwort.{" "}
               <Link href="/bedarf" className="text-spende hover:underline">

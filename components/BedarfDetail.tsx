@@ -151,10 +151,10 @@ export function BedarfDetail() {
                 <strong>Sie sind unsicher, ob Ihre Sache passt?</strong> Kurze
                 Anfrage per E-Mail an{" "}
                 <a
-                  href={`mailto:${SITE.contact.email}`}
+                  href={`mailto:${SITE.contact.emailSachspenden}`}
                   className="text-rot hover:underline"
                 >
-                  {SITE.contact.email}
+                  {SITE.contact.emailSachspenden}
                 </a>
                 . Wir antworten zeitnah.
               </div>

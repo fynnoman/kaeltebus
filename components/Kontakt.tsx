@@ -26,21 +26,44 @@ export function Kontakt() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-            <Reveal variant="up" duration={800} distance={22}>
-              <a
-                href={`mailto:${SITE.contact.email}`}
-                className="card flex h-full min-w-0 flex-col p-6 sm:p-7 md:p-8"
-              >
+            <Reveal
+              variant="up"
+              duration={800}
+              distance={22}
+              className="sm:col-span-2"
+            >
+              <div className="card min-w-0 p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                  E-Mail
+                  E-Mail-Adressen
                 </div>
-                <div className="mt-4 break-all font-sans text-[15px] font-semibold leading-snug tracking-tight text-ink sm:mt-5 sm:text-[16px] md:text-[17px]">
-                  {SITE.contact.email}
-                </div>
-                <div className="mt-5 inline-flex items-center gap-2 text-[13px] text-ink-500 sm:mt-6">
-                  Direkt schreiben
-                </div>
-              </a>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-ink-500 sm:text-[14px]">
+                  Jedes Thema hat ein eigenes Postfach. So landet Ihre Nachricht
+                  schneller bei der richtigen Person.
+                </p>
+                <ul className="mt-5 divide-y divide-line border-t border-line sm:mt-6">
+                  {SITE.emails.map((e) => (
+                    <li
+                      key={e.key}
+                      className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                    >
+                      <div className="min-w-0">
+                        <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
+                          {e.label}
+                        </div>
+                        <div className="mt-1 text-[13px] leading-snug text-ink-500 sm:text-[13.5px]">
+                          {e.note}
+                        </div>
+                      </div>
+                      <a
+                        href={`mailto:${e.address}`}
+                        className="break-all font-sans text-[14px] font-semibold leading-snug tracking-tight text-ink hover:text-rot sm:text-[15px] md:text-[15.5px]"
+                      >
+                        {e.address}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
 
             <Reveal variant="up" delay={120} duration={800} distance={22}>
@@ -59,21 +82,15 @@ export function Kontakt() {
               </div>
             </Reveal>
 
-            <Reveal
-              variant="up"
-              delay={240}
-              duration={800}
-              distance={22}
-              className="sm:col-span-2"
-            >
-              <div className="card min-w-0 p-6 sm:p-7 md:p-8">
+            <Reveal variant="up" delay={240} duration={800} distance={22}>
+              <div className="card flex h-full min-w-0 flex-col p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
                   Standort
                 </div>
-                <div className="h-serif mt-3 break-words text-[18px] font-bold leading-snug text-ink sm:text-[20px] md:text-[22px]">
+                <div className="h-serif mt-4 break-words text-[17px] font-bold leading-snug text-ink sm:mt-5 sm:text-[19px]">
                   {SITE.standort.location}
                   <br />
-                  <span className="font-normal text-[14.5px] text-ink-500 sm:text-[16px]">
+                  <span className="font-normal text-[14px] text-ink-500 sm:text-[15px]">
                     {SITE.standort.detail}
                   </span>
                 </div>

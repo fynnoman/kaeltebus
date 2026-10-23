@@ -27,9 +27,38 @@ export const SITE = {
   },
   contact: {
     email: "info@kaeltebus-saarbruecken.de",
+    emailFinanzen: "finanzen@kaeltebus-saarbruecken.de",
+    emailKochen: "kochen@kaeltebus-saarbruecken.de",
+    emailSachspenden: "sachspenden@kaeltebus-saarbruecken.de",
     phone: "0151 56348795",
     phoneHref: "+4915156348795",
   },
+  emails: [
+    {
+      key: "info",
+      label: "Allgemeines",
+      address: "info@kaeltebus-saarbruecken.de",
+      note: "Presse, Terminanfragen, Vereinsthemen und alles, was nicht in die anderen Postfächer passt.",
+    },
+    {
+      key: "finanzen",
+      label: "Finanzen",
+      address: "finanzen@kaeltebus-saarbruecken.de",
+      note: "Geldspenden, Spendenquittungen, Rechnungen und steuerliche Rückfragen.",
+    },
+    {
+      key: "kochen",
+      label: "Küche",
+      address: "kochen@kaeltebus-saarbruecken.de",
+      note: "Küche, warme Mahlzeiten, Mithilfe beim Kochen und Lebensmittelthemen.",
+    },
+    {
+      key: "sachspenden",
+      label: "Sachspenden",
+      address: "sachspenden@kaeltebus-saarbruecken.de",
+      note: "Abstimmung zu Sachspenden, Bedarfsliste und Übergabeterminen am Römerkastell.",
+    },
+  ],
   tax: {
     finanzamt: "Finanzamt Saarbrücken I",
     steuernummer: "040/140/42305",

@@ -7,20 +7,41 @@ import { Reveal } from "@/components/Reveal";
 const KANAELE = [
   {
     kicker: "Alles rund um den Verein",
-    title: "E-Mail.",
-    body: "Spenden, Ehrenamt, Presse, Terminanfragen: Der schnellste Weg zur Antwort. Wir lesen die Mail regelmäßig.",
+    title: "Allgemeines.",
+    body: "Presse, Terminanfragen, Vereinsthemen und alles, was nicht in die anderen Postfächer passt. Wir lesen die Mail regelmäßig.",
     action: { label: SITE.contact.email, href: `mailto:${SITE.contact.email}` },
   },
   {
     kicker: "Geldspende",
-    title: "Vereinskonto oder betterplace.",
-    body: "Beide Wege sind möglich: Überweisung auf das Vereinskonto bei der Sparkasse Saarbrücken oder eine Online-Spende über das betterplace-Projekt des Vereins.",
-    action: { label: "Spendenwege ansehen", href: "/spenden" },
+    title: "Finanzen.",
+    body: "Spendenquittungen, Rechnungen und steuerliche Rückfragen. Für Überweisungen und Online-Spende gibt es die Spendenseite.",
+    action: {
+      label: SITE.contact.emailFinanzen,
+      href: `mailto:${SITE.contact.emailFinanzen}`,
+    },
+  },
+  {
+    kicker: "Küche",
+    title: "Kochen und Verpflegung.",
+    body: "Mithilfe in der Küche, warme Mahlzeiten und alle Themen rund um Lebensmittel am Kältebus.",
+    action: {
+      label: SITE.contact.emailKochen,
+      href: `mailto:${SITE.contact.emailKochen}`,
+    },
   },
   {
     kicker: "Sachspende",
-    title: "Bedarfsliste.",
-    body: "Was gerade gebraucht wird und was nicht. Bitte vor jeder Übergabe kurz per E-Mail Bescheid geben.",
+    title: "Sachspenden.",
+    body: "Vor jeder Übergabe kurz per E-Mail Bescheid geben. Was gerade gebraucht wird, steht auf der Bedarfsliste.",
+    action: {
+      label: SITE.contact.emailSachspenden,
+      href: `mailto:${SITE.contact.emailSachspenden}`,
+    },
+  },
+  {
+    kicker: "Bedarfsliste",
+    title: "Was gebraucht wird.",
+    body: "Vor der Übergabe lohnt ein Blick auf die aktuelle Liste. So kommt an, was tatsächlich im Betrieb gebraucht wird.",
     action: { label: "Zur Bedarfsliste", href: "/bedarf" },
   },
   {

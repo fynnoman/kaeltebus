@@ -103,6 +103,12 @@ export function HilfeBekommen() {
                   >
                     {SITE.contact.phone} anrufen →
                   </a>
+                  <a
+                    href={`mailto:${SITE.contact.email}`}
+                    className="relative z-10 mt-2 inline-flex w-fit items-center gap-1.5 text-[14px] font-semibold text-rot hover:underline"
+                  >
+                    {SITE.contact.email} →
+                  </a>
                 </article>
               </Reveal>
 

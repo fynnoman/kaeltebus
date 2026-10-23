@@ -99,15 +99,25 @@ export default function Page() {
                     >
                       {SITE.contact.phone}
                     </a>
-                    <br />
-                    E-Mail:{" "}
-                    <a
-                      href={`mailto:${SITE.contact.email}`}
-                      className="text-spende hover:underline"
-                    >
-                      {SITE.contact.email}
-                    </a>
                   </p>
+                  <ul className="mt-4 space-y-2.5 text-[14.5px] leading-relaxed text-ink sm:text-[15px]">
+                    {SITE.emails.map((e) => (
+                      <li
+                        key={e.key}
+                        className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3"
+                      >
+                        <span className="text-ink-500 sm:min-w-[120px]">
+                          {e.label}:
+                        </span>
+                        <a
+                          href={`mailto:${e.address}`}
+                          className="break-all text-spende hover:underline"
+                        >
+                          {e.address}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
 
