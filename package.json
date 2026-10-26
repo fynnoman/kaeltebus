@@ -9,7 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@neon/config": "^1.9.4",
+    "@neon/env": "^1.6.5",
+    "@neondatabase/serverless": "^1.2.0",
+    "@tiptap/extension-link": "^3.32.0",
+    "@tiptap/pm": "^3.32.0",
+    "@tiptap/react": "^3.32.0",
+    "@tiptap/starter-kit": "^3.32.0",
+    "@vercel/blob": "^2.8.2",
     "framer-motion": "^11.11.17",
+    "jose": "^6.2.13",
     "next": "15.5.24",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

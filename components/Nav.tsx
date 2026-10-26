@@ -10,6 +10,7 @@ const links = [
   { href: "/spenden", label: "Spenden" },
   { href: "/bedarf", label: "Bedarfsliste" },
   { href: "/helfen", label: "Ehrenamt" },
+  { href: "/aktuelles", label: "Aktuelles" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 
