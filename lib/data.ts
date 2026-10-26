@@ -27,6 +27,7 @@ export const SITE = {
   },
   contact: {
     email: "info@kaeltebus-saarbruecken.de",
+    emailVorstand: "vorstand@kaeltebus-saarbruecken.de",
     emailFinanzen: "finanzen@kaeltebus-saarbruecken.de",
     emailKochen: "kochen@kaeltebus-saarbruecken.de",
     emailSachspenden: "sachspenden@kaeltebus-saarbruecken.de",
@@ -39,6 +40,12 @@ export const SITE = {
       label: "Allgemeines",
       address: "info@kaeltebus-saarbruecken.de",
       note: "Presse, Terminanfragen, Vereinsthemen und alles, was nicht in die anderen Postfächer passt.",
+    },
+    {
+      key: "vorstand",
+      label: "Vorstand",
+      address: "vorstand@kaeltebus-saarbruecken.de",
+      note: "Direkter Draht zum Vorstand für offizielle Vereinsangelegenheiten.",
     },
     {
       key: "finanzen",
