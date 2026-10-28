@@ -1,10 +1,19 @@
-import { neon } from "@neondatabase/serverless";
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL ist nicht gesetzt");
+let cached: NeonQueryFunction<false, false> | null = null;
+
+function getClient() {
+  if (cached) return cached;
+  const url = process.env.DATABASE_URL;
+  if (!url) throw new Error("DATABASE_URL ist nicht gesetzt");
+  cached = neon(url);
+  return cached;
 }
 
-export const sql = neon(process.env.DATABASE_URL);
+export const sql: NeonQueryFunction<false, false> = ((
+  strings: TemplateStringsArray,
+  ...values: unknown[]
+) => getClient()(strings, ...values)) as NeonQueryFunction<false, false>;
 
 export type Post = {
   id: string;

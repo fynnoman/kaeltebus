@@ -36,6 +36,9 @@ export default async function PortalDashboard() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Link href="/portal/downloads" className="btn-secondary">
+              Downloads
+            </Link>
             <Link href="/portal/texte" className="btn-secondary">
               Texte der Website
             </Link>

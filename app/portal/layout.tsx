@@ -27,6 +27,9 @@ export default async function PortalLayout({ children }: { children: React.React
             <Link href="/portal/texte" className="text-ink-500 hover:text-rot">
               Texte
             </Link>
+            <Link href="/portal/downloads" className="text-ink-500 hover:text-rot">
+              Downloads
+            </Link>
             <Link href="/" className="hidden text-ink-400 hover:text-rot sm:inline">
               Zur Website
             </Link>
