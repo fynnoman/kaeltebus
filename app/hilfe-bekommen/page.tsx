@@ -4,6 +4,7 @@ import { HilfeBekommen } from "@/components/HilfeBekommen";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, faqPageSchema, webPageSchema } from "@/lib/schema";
 import { isWinterSeason } from "@/lib/season";
+import { loadPageTexts, t } from "@/lib/texts";
 
 const SITE_URL = "https://kaeltebus-saarbruecken.de";
 
@@ -48,14 +49,23 @@ const faqs = [
   },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("hilfe-bekommen");
   const winter = isWinterSeason();
   const title = winter
-    ? "Wir sind für dich da."
-    : "Der Kältebus öffnet wieder im Winter.";
+    ? t(texts, "header_title_winter", "Wir sind für dich da.")
+    : t(texts, "header_title_offseason", "Der Kältebus öffnet wieder im Winter.");
   const lead = winter
-    ? "Wenn du im Winter Wärme, Essen oder einen sicheren Ort brauchst: du kannst zum Kältebus am Römerkastell kommen. Ohne Ausweis, ohne Anmeldung."
-    : "In der kalten Jahreszeit steht der Kältebus am Römerkastell. Wärme, Essen und ein Ort zum Ausruhen. Ohne Ausweis, ohne Anmeldung.";
+    ? t(
+        texts,
+        "header_lead_winter",
+        "Wenn du im Winter Wärme, Essen oder einen sicheren Ort brauchst: du kannst zum Kältebus am Römerkastell kommen. Ohne Ausweis, ohne Anmeldung.",
+      )
+    : t(
+        texts,
+        "header_lead_offseason",
+        "In der kalten Jahreszeit steht der Kältebus am Römerkastell. Wärme, Essen und ein Ort zum Ausruhen. Ohne Ausweis, ohne Anmeldung.",
+      );
 
   return (
     <main>
@@ -74,12 +84,12 @@ export default function Page() {
         ]}
       />
       <PageHeader
-        kicker="Hilfe bekommen"
+        kicker={t(texts, "header_kicker", "Hilfe bekommen")}
         title={title}
         lead={lead}
         crumbs={[{ label: "Start", href: "/" }, { label: "Hilfe bekommen" }]}
       />
-      <HilfeBekommen />
+      <HilfeBekommen texts={texts} />
     </main>
   );
 }

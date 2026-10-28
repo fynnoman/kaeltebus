@@ -2,7 +2,7 @@
 
 import { Reveal } from "@/components/Reveal";
 
-type Crumb = { label: string; href?: string };
+export type Crumb = { label: string; href?: string };
 
 export function PageHeader({
   kicker,

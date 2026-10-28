@@ -3,27 +3,26 @@
 import Link from "next/link";
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-const FAQ = [
-  {
-    q: "Brauche ich einen Ausweis?",
-    a: "Nein. Du brauchst keinen Ausweis. Du musst dich nicht anmelden.",
-  },
-  {
-    q: "Muss ich etwas erzählen?",
-    a: "Nein. Wir fragen nicht nach deiner Herkunft, deinem Aufenthaltsstatus oder deiner Vorgeschichte.",
-  },
-  {
-    q: "Kostet das etwas?",
-    a: "Nein. Alles ist kostenlos.",
-  },
-  {
-    q: "Wer ist da?",
-    a: "Ehrenamtliche Helferinnen und Helfer.",
-  },
-];
+export function HilfeBekommen({ texts }: { texts?: PageTexts }) {
+  const faqs = [
+    {
+      q: t(texts, "faq1_q", "Brauche ich einen Ausweis?"),
+      a: t(texts, "faq1_a", "Nein. Du brauchst keinen Ausweis. Du musst dich nicht anmelden."),
+    },
+    {
+      q: t(texts, "faq2_q", "Muss ich etwas erzählen?"),
+      a: t(
+        texts,
+        "faq2_a",
+        "Nein. Wir fragen nicht nach deiner Herkunft, deinem Aufenthaltsstatus oder deiner Vorgeschichte.",
+      ),
+    },
+    { q: t(texts, "faq3_q", "Kostet das etwas?"), a: t(texts, "faq3_a", "Nein. Alles ist kostenlos.") },
+    { q: t(texts, "faq4_q", "Wer ist da?"), a: t(texts, "faq4_a", "Ehrenamtliche Helferinnen und Helfer.") },
+  ];
 
-export function HilfeBekommen() {
   return (
     <>
       <section className="section bg-white">
@@ -31,11 +30,11 @@ export function HilfeBekommen() {
           <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-start md:gap-16">
             <div>
               <Reveal variant="up" duration={700}>
-                <div className="kicker-line">Für dich</div>
+                <div className="kicker-line">{t(texts, "intro_kicker", "Für dich")}</div>
               </Reveal>
               <Reveal variant="up" delay={100} duration={800}>
                 <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.15] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                  Du bist willkommen.
+                  {t(texts, "intro_title", "Du bist willkommen.")}
                 </h2>
               </Reveal>
               <Reveal variant="up" delay={180} duration={700}>
@@ -43,15 +42,20 @@ export function HilfeBekommen() {
               </Reveal>
               <Reveal variant="up" delay={260} duration={800}>
                 <p className="mt-6 text-[16px] leading-relaxed text-ink sm:text-[17px]">
-                  Wenn es kalt ist und du einen sicheren Ort brauchst, kannst
-                  du zum Kältebus kommen. Du bekommst Wärme, etwas zu essen
-                  und zu trinken. Und Menschen, die dir zuhören.
+                  {t(
+                    texts,
+                    "intro_body1",
+                    "Wenn es kalt ist und du einen sicheren Ort brauchst, kannst du zum Kältebus kommen. Du bekommst Wärme, etwas zu essen und zu trinken. Und Menschen, die dir zuhören.",
+                  )}
                 </p>
               </Reveal>
               <Reveal variant="up" delay={340} duration={800}>
                 <p className="mt-4 text-[15.5px] leading-relaxed text-ink-500 sm:text-[16px]">
-                  Du musst keinen Ausweis zeigen. Du musst dich nicht anmelden.
-                  Du musst nichts erzählen. Wer kommt, kommt herein.
+                  {t(
+                    texts,
+                    "intro_body2",
+                    "Du musst keinen Ausweis zeigen. Du musst dich nicht anmelden. Du musst nichts erzählen. Wer kommt, kommt herein.",
+                  )}
                 </p>
               </Reveal>
             </div>
@@ -65,15 +69,18 @@ export function HilfeBekommen() {
                   <div className="relative z-10 flex items-baseline gap-4">
                     <span className="numeral">01</span>
                     <span className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                      Wo
+                      {t(texts, "card1_kicker", "Wo")}
                     </span>
                   </div>
                   <h3 className="h-serif relative z-10 mt-5 text-[19px] font-bold leading-tight text-ink sm:text-[21px]">
-                    {SITE.standort.location}.
+                    {t(texts, "card1_title", "Am Römerkastell.")}
                   </h3>
                   <p className="relative z-10 mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                    Der Kältebus steht am Römerkastell in Saarbrücken. Mit der
-                    Saarbahn kommst du direkt hin: {SITE.standort.tram}.
+                    {t(
+                      texts,
+                      "card1_body",
+                      "Der Kältebus steht am Römerkastell in Saarbrücken. Mit der Saarbahn kommst du direkt hin: Saarbahn-Haltestelle Römerkastell.",
+                    )}
                   </p>
                 </article>
               </Reveal>
@@ -86,16 +93,18 @@ export function HilfeBekommen() {
                   <div className="relative z-10 flex items-baseline gap-4">
                     <span className="numeral">02</span>
                     <span className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                      Wann
+                      {t(texts, "card2_kicker", "Wann")}
                     </span>
                   </div>
                   <h3 className="h-serif relative z-10 mt-5 text-[19px] font-bold leading-tight text-ink sm:text-[21px]">
-                    In der Wintersaison.
+                    {t(texts, "card2_title", "In der Wintersaison.")}
                   </h3>
                   <p className="relative z-10 mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                    Der Kältebus ist während der Wintermonate im Einsatz.
-                    Wenn du wissen möchtest, wann geöffnet ist, meld dich
-                    kurz beim Verein.
+                    {t(
+                      texts,
+                      "card2_body",
+                      "Der Kältebus ist während der Wintermonate im Einsatz. Wenn du wissen möchtest, wann geöffnet ist, meld dich kurz beim Verein.",
+                    )}
                   </p>
                   <a
                     href={`tel:${SITE.contact.phoneHref}`}
@@ -120,17 +129,17 @@ export function HilfeBekommen() {
                   <div className="relative z-10 flex items-baseline gap-4">
                     <span className="numeral">03</span>
                     <span className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                      Was du bekommst
+                      {t(texts, "card3_kicker", "Was du bekommst")}
                     </span>
                   </div>
                   <h3 className="h-serif relative z-10 mt-5 text-[19px] font-bold leading-tight text-ink sm:text-[21px]">
-                    Wärme, Essen, Ruhe.
+                    {t(texts, "card3_title", "Wärme, Essen, Ruhe.")}
                   </h3>
                   <ul className="relative z-10 mt-3 space-y-2 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                    <li>Ein beheizter Ort zum Sitzen und Ausruhen.</li>
-                    <li>Eine warme Mahlzeit und ein Getränk.</li>
-                    <li>Menschen, die zuhören, wenn du reden möchtest.</li>
-                    <li>Ruhe, wenn du keine Fragen möchtest.</li>
+                    <li>{t(texts, "card3_item1", "Ein beheizter Ort zum Sitzen und Ausruhen.")}</li>
+                    <li>{t(texts, "card3_item2", "Eine warme Mahlzeit und ein Getränk.")}</li>
+                    <li>{t(texts, "card3_item3", "Menschen, die zuhören, wenn du reden möchtest.")}</li>
+                    <li>{t(texts, "card3_item4", "Ruhe, wenn du keine Fragen möchtest.")}</li>
                   </ul>
                 </article>
               </Reveal>
@@ -143,11 +152,11 @@ export function HilfeBekommen() {
         <div className="container-x">
           <div className="max-w-2xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">Fragen und Antworten</div>
+              <div className="kicker-line">{t(texts, "faq_kicker", "Fragen und Antworten")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.15] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Was du wissen solltest.
+                {t(texts, "faq_title", "Was du wissen solltest.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -156,9 +165,9 @@ export function HilfeBekommen() {
           </div>
 
           <div className="mt-10 divide-y divide-line border-y border-line md:mt-14">
-            {FAQ.map((f, i) => (
+            {faqs.map((f, i) => (
               <Reveal
-                key={f.q}
+                key={i}
                 variant="up"
                 delay={i * 70}
                 duration={700}
@@ -193,19 +202,26 @@ export function HilfeBekommen() {
           <div className="grid gap-10 md:grid-cols-2 md:gap-14">
             <Reveal variant="up" duration={700}>
               <div>
-                <div className="kicker-line">Für Angehörige und Passanten</div>
+                <div className="kicker-line">
+                  {t(texts, "passant_kicker", "Für Angehörige und Passanten")}
+                </div>
                 <h2 className="h-serif mt-4 text-[24px] font-bold leading-[1.15] tracking-tight text-ink sm:text-[28px] md:text-[32px]">
-                  Du siehst jemanden in Not?
+                  {t(texts, "passant_title", "Du siehst jemanden in Not?")}
                 </h2>
                 <span className="rule-accent mt-5" />
                 <p className="mt-5 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                  Wenn ein Mensch bei Kälte draußen liegt und du unsicher
-                  bist, ob es ihm gut geht: sprich die Person an, wenn möglich.
-                  Bleib in ihrer Nähe.
+                  {t(
+                    texts,
+                    "passant_body1",
+                    "Wenn ein Mensch bei Kälte draußen liegt und du unsicher bist, ob es ihm gut geht: sprich die Person an, wenn möglich. Bleib in ihrer Nähe.",
+                  )}
                 </p>
                 <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                  Wenn die Person nicht ansprechbar ist, bewusstlos wirkt oder
-                  stark unterkühlt scheint, ruf sofort den Rettungsdienst.
+                  {t(
+                    texts,
+                    "passant_body2",
+                    "Wenn die Person nicht ansprechbar ist, bewusstlos wirkt oder stark unterkühlt scheint, ruf sofort den Rettungsdienst.",
+                  )}
                 </p>
               </div>
             </Reveal>
@@ -213,20 +229,23 @@ export function HilfeBekommen() {
             <Reveal variant="up" delay={120} duration={800} distance={22}>
               <div className="rounded-lg border border-notfall/40 bg-notfall/5 p-6 sm:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-notfall sm:text-[12px]">
-                  Akute Not · Rettungsdienst
+                  {t(texts, "notruf_kicker", "Akute Not · Rettungsdienst")}
                 </div>
                 <div className="h-serif mt-3 text-[38px] font-bold leading-none text-notfall sm:text-[46px]">
                   112
                 </div>
                 <p className="mt-4 text-[14.5px] leading-relaxed text-ink sm:text-[15px]">
-                  Wenn eine Person bewusstlos, nicht ansprechbar oder stark
-                  unterkühlt ist: nicht warten. Sofort 112 wählen.
+                  {t(
+                    texts,
+                    "notruf_body",
+                    "Wenn eine Person bewusstlos, nicht ansprechbar oder stark unterkühlt ist: nicht warten. Sofort 112 wählen.",
+                  )}
                 </p>
                 <a
                   href="tel:112"
                   className="mt-6 inline-flex min-h-[52px] items-center justify-center gap-2 rounded bg-notfall px-6 py-3 text-[16px] font-bold text-white transition-colors hover:bg-notfall-600"
                 >
-                  112 anrufen
+                  {t(texts, "notruf_cta", "112 anrufen")}
                 </a>
               </div>
             </Reveal>
@@ -234,14 +253,19 @@ export function HilfeBekommen() {
 
           <Reveal variant="up" delay={260} duration={800}>
             <div className="infobox mt-12 text-[14px] leading-relaxed text-ink-600 sm:mt-16 sm:text-[14.5px]">
-              <strong>Wenn du helfen möchtest:</strong> Der Kältebus lebt vom
-              Ehrenamt und von Spenden.{" "}
+              <strong>
+                {t(
+                  texts,
+                  "infobox_body",
+                  "Wenn du helfen möchtest: Der Kältebus lebt vom Ehrenamt und von Spenden.",
+                )}
+              </strong>{" "}
               <Link href="/helfen" className="text-rot hover:underline">
-                Ehrenamtlich mithelfen
+                {t(texts, "infobox_link_helfen", "Ehrenamtlich mithelfen")}
               </Link>{" "}
               oder{" "}
               <Link href="/spenden" className="text-rot hover:underline">
-                den Kältebus mit einer Spende unterstützen
+                {t(texts, "infobox_link_spenden", "den Kältebus mit einer Spende unterstützen")}
               </Link>
               .
             </div>

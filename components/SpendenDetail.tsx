@@ -3,45 +3,74 @@
 import Link from "next/link";
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-const WOHIN = [
-  {
-    kicker: "Verpflegung",
-    title: "Eine warme Mahlzeit.",
-    body: "Lebensmittel, Getränke und alles, was für die tägliche Versorgung am Kältebus benötigt wird. Abend für Abend, während der gesamten Wintersaison.",
-  },
-  {
-    kicker: "Wärme",
-    title: "Schutz vor der Kälte.",
-    body: "Spenden unterstützen den Betrieb des Kältebusses am Römerkastell: von Heizung und Beleuchtung bis hin zu Küche und Aufenthaltsbereich.",
-  },
-  {
-    kicker: "Ausstattung",
-    title: "Das Wichtigste für draußen.",
-    body: "Neue Unterwäsche und Socken, Hygieneartikel, Isomatten und warme Schlafsäcke helfen dabei, kalte Nächte ein Stück sicherer und erträglicher zu machen.",
-  },
-];
+export function SpendenDetail({ texts }: { texts?: PageTexts }) {
+  const wohin = [
+    {
+      kicker: t(texts, "wohin1_kicker", "Verpflegung"),
+      title: t(texts, "wohin1_title", "Eine warme Mahlzeit."),
+      body: t(
+        texts,
+        "wohin1_body",
+        "Lebensmittel, Getränke und alles, was für die tägliche Versorgung am Kältebus benötigt wird. Abend für Abend, während der gesamten Wintersaison.",
+      ),
+    },
+    {
+      kicker: t(texts, "wohin2_kicker", "Wärme"),
+      title: t(texts, "wohin2_title", "Schutz vor der Kälte."),
+      body: t(
+        texts,
+        "wohin2_body",
+        "Spenden unterstützen den Betrieb des Kältebusses am Römerkastell: von Heizung und Beleuchtung bis hin zu Küche und Aufenthaltsbereich.",
+      ),
+    },
+    {
+      kicker: t(texts, "wohin3_kicker", "Ausstattung"),
+      title: t(texts, "wohin3_title", "Das Wichtigste für draußen."),
+      body: t(
+        texts,
+        "wohin3_body",
+        "Neue Unterwäsche und Socken, Hygieneartikel, Isomatten und warme Schlafsäcke helfen dabei, kalte Nächte ein Stück sicherer und erträglicher zu machen.",
+      ),
+    },
+  ];
 
-const FAQ = [
-  {
-    q: "Sind Spenden steuerlich absetzbar?",
-    a: "Ja. Der Kältebus Saarbrücken ist ein gemeinnütziger Verein (VR 5477, Amtsgericht Saarbrücken). Zuwendungen an den Verein sind nach den geltenden Regeln steuerlich abzugsfähig.",
-  },
-  {
-    q: "Wie erhalte ich eine Spendenquittung?",
-    a: "Für eine Spendenbescheinigung genügt eine kurze E-Mail an finanzen@kaeltebus-saarbruecken.de mit dem Spendendatum und der Adresse für die Zustellung.",
-  },
-  {
-    q: "Kann ich zweckgebunden spenden?",
-    a: "Ja. Ein Hinweis im Verwendungszweck (zum Beispiel 'Verpflegung' oder 'Ausstattung') wird bei der Verwendung berücksichtigt. Bei größeren Zuwendungen bitte kurz per E-Mail Kontakt aufnehmen.",
-  },
-  {
-    q: "Können wir als Firma, Schule oder Gemeinde spenden?",
-    a: "Sehr gerne. In den letzten Wintern haben Schulen, Firmen, Kirchengemeinden und Vereine den Betrieb mitgetragen. Für Übergaben vor Ort oder Presseterminen bitte vorab per E-Mail abstimmen.",
-  },
-];
+  const faqs = [
+    {
+      q: t(texts, "faq1_q", "Sind Spenden steuerlich absetzbar?"),
+      a: t(
+        texts,
+        "faq1_a",
+        "Ja. Der Kältebus Saarbrücken ist ein gemeinnütziger Verein (VR 5477, Amtsgericht Saarbrücken). Zuwendungen an den Verein sind nach den geltenden Regeln steuerlich abzugsfähig.",
+      ),
+    },
+    {
+      q: t(texts, "faq2_q", "Wie erhalte ich eine Spendenquittung?"),
+      a: t(
+        texts,
+        "faq2_a",
+        "Für eine Spendenbescheinigung genügt eine kurze E-Mail an finanzen@kaeltebus-saarbruecken.de mit dem Spendendatum und der Adresse für die Zustellung.",
+      ),
+    },
+    {
+      q: t(texts, "faq3_q", "Kann ich zweckgebunden spenden?"),
+      a: t(
+        texts,
+        "faq3_a",
+        "Ja. Ein Hinweis im Verwendungszweck (zum Beispiel 'Verpflegung' oder 'Ausstattung') wird bei der Verwendung berücksichtigt. Bei größeren Zuwendungen bitte kurz per E-Mail Kontakt aufnehmen.",
+      ),
+    },
+    {
+      q: t(texts, "faq4_q", "Können wir als Firma, Schule oder Gemeinde spenden?"),
+      a: t(
+        texts,
+        "faq4_a",
+        "Sehr gerne. In den letzten Wintern haben Schulen, Firmen, Kirchengemeinden und Vereine den Betrieb mitgetragen. Für Übergaben vor Ort oder Presseterminen bitte vorab per E-Mail abstimmen.",
+      ),
+    },
+  ];
 
-export function SpendenDetail() {
   return (
     <>
       <section className="section bg-paper-100">
@@ -49,11 +78,13 @@ export function SpendenDetail() {
           <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start md:gap-16">
             <div>
               <Reveal variant="up" duration={700}>
-                <div className="kicker-line">Wohin die Spende geht</div>
+                <div className="kicker-line">
+                  {t(texts, "wohin_kicker", "Wohin die Spende geht")}
+                </div>
               </Reveal>
               <Reveal variant="up" delay={100} duration={800}>
                 <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                  Hilfe, die direkt ankommt.
+                  {t(texts, "wohin_title", "Hilfe, die direkt ankommt.")}
                 </h2>
               </Reveal>
               <Reveal variant="up" delay={180} duration={700}>
@@ -61,18 +92,19 @@ export function SpendenDetail() {
               </Reveal>
               <Reveal variant="up" delay={260} duration={800}>
                 <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-ink-500 sm:text-[16px]">
-                  Der Kältebus wird vollständig ehrenamtlich getragen. Spenden
-                  fließen deshalb unmittelbar in das, was im Winter gebraucht
-                  wird: warme Mahlzeiten, einen geschützten und beheizten Ort
-                  sowie wichtige Dinge für Menschen, die draußen schlafen.
+                  {t(
+                    texts,
+                    "wohin_lead",
+                    "Der Kältebus wird vollständig ehrenamtlich getragen. Spenden fließen deshalb unmittelbar in das, was im Winter gebraucht wird: warme Mahlzeiten, einen geschützten und beheizten Ort sowie wichtige Dinge für Menschen, die draußen schlafen.",
+                  )}
                 </p>
               </Reveal>
             </div>
 
             <div className="grid gap-4 sm:gap-5">
-              {WOHIN.map((w, i) => (
+              {wohin.map((w, i) => (
                 <Reveal
-                  key={w.kicker}
+                  key={i}
                   variant="up"
                   delay={i * 110}
                   duration={700}
@@ -108,11 +140,11 @@ export function SpendenDetail() {
         <div className="container-x">
           <div className="max-w-2xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">Fragen zur Spende</div>
+              <div className="kicker-line">{t(texts, "faq_kicker", "Fragen zur Spende")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Was wir häufig gefragt werden.
+                {t(texts, "faq_title", "Was wir häufig gefragt werden.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -121,9 +153,9 @@ export function SpendenDetail() {
           </div>
 
           <div className="mt-10 divide-y divide-line border-y border-line md:mt-14">
-            {FAQ.map((f, i) => (
+            {faqs.map((f, i) => (
               <Reveal
-                key={f.q}
+                key={i}
                 variant="up"
                 delay={i * 90}
                 duration={700}
@@ -153,15 +185,20 @@ export function SpendenDetail() {
 
           <Reveal variant="up" delay={300} duration={800}>
             <div className="infobox mt-10 text-[13.5px] leading-relaxed text-ink-600 sm:mt-12 sm:text-[14px]">
-              <strong>Noch eine Frage offen?</strong> Für Geldspenden,
-              Spendenquittungen und steuerliche Rückfragen schreiben Sie an{" "}
+              <strong>
+                {t(
+                  texts,
+                  "faq_infobox",
+                  "Noch eine Frage offen? Für Geldspenden, Spendenquittungen und steuerliche Rückfragen schreiben Sie an",
+                )}
+              </strong>{" "}
               <a
                 href={`mailto:${SITE.contact.emailFinanzen}`}
                 className="text-spende hover:underline"
               >
                 {SITE.contact.emailFinanzen}
               </a>
-              . Sie bekommen zeitnah Antwort.{" "}
+              .{" "}
               <Link href="/bedarf" className="text-spende hover:underline">
                 Bedarfsliste ansehen →
               </Link>

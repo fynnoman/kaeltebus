@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { IMAGES, SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Winter() {
+export function Winter({ texts }: { texts?: PageTexts }) {
   return (
     <section className="section bg-paper-100">
       <div className="container-x">
@@ -21,11 +22,17 @@ export function Winter() {
 
           <div>
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">Der Winter am Römerkastell</div>
+              <div className="kicker-line">
+                {t(texts, "winter_kicker", "Der Winter am Römerkastell")}
+              </div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Ein beheizter Ort, wenn draußen alles gefriert.
+                {t(
+                  texts,
+                  "winter_title",
+                  "Ein beheizter Ort, wenn draußen alles gefriert.",
+                )}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -33,10 +40,11 @@ export function Winter() {
             </Reveal>
             <Reveal variant="up" delay={260} duration={800}>
               <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-ink-500 sm:text-[16px]">
-                Der Kältebus steht jeden Winter am Römerkastell in Saarbrücken.
-                Wer hierher kommt, findet einen beheizten Ort, eine warme
-                Mahlzeit und Menschen, die zuhören. Ohne Bedürftigkeitsprüfung,
-                unabhängig von Herkunft, Aufenthaltsstatus oder Vorgeschichte.
+                {t(
+                  texts,
+                  "winter_body",
+                  "Der Kältebus steht jeden Winter am Römerkastell in Saarbrücken. Wer hierher kommt, findet einen beheizten Ort, eine warme Mahlzeit und Menschen, die zuhören. Ohne Bedürftigkeitsprüfung, unabhängig von Herkunft, Aufenthaltsstatus oder Vorgeschichte.",
+                )}
               </p>
             </Reveal>
 
@@ -44,7 +52,7 @@ export function Winter() {
               <Reveal variant="up" delay={340} duration={700}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-winter sm:text-[12px]">
-                    Standort
+                    {t(texts, "winter_fact1_kicker", "Standort")}
                   </div>
                   <div className="mt-2 text-[14px] leading-snug text-ink-600 sm:text-[14.5px]">
                     {SITE.standort.location}
@@ -56,7 +64,7 @@ export function Winter() {
               <Reveal variant="up" delay={420} duration={700}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-winter sm:text-[12px]">
-                    Anreise
+                    {t(texts, "winter_fact2_kicker", "Anreise")}
                   </div>
                   <div className="mt-2 text-[14px] leading-snug text-ink-600 sm:text-[14.5px]">
                     {SITE.standort.tram}
@@ -70,10 +78,10 @@ export function Winter() {
             <Reveal variant="up" delay={520} duration={700}>
               <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:gap-3">
                 <Link href="/verein" className="btn-secondary w-full sm:w-auto">
-                  Unser Auftrag
+                  {t(texts, "winter_cta1", "Unser Auftrag")}
                 </Link>
                 <Link href="/helfen" className="btn-secondary w-full sm:w-auto">
-                  Ehrenamt
+                  {t(texts, "winter_cta2", "Ehrenamt")}
                 </Link>
               </div>
             </Reveal>

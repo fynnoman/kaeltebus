@@ -9,6 +9,7 @@ import {
   donateActionSchema,
   webPageSchema,
 } from "@/lib/schema";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const metadata: Metadata = {
   title: "Spenden",
@@ -28,7 +29,8 @@ const crumbs = [
   { name: "Spenden" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("spenden");
   return (
     <main>
       <JsonLd
@@ -46,13 +48,17 @@ export default function Page() {
         ]}
       />
       <PageHeader
-        kicker="Spenden"
-        title="Ihre Spende zählt."
-        lead="Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung am Kältebus am Römerkastell."
+        kicker={t(texts, "header_kicker", "Spenden")}
+        title={t(texts, "header_title", "Ihre Spende zählt.")}
+        lead={t(
+          texts,
+          "header_lead",
+          "Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung am Kältebus am Römerkastell.",
+        )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Spenden" }]}
       />
-      <Spenden />
-      <SpendenDetail />
+      <Spenden texts={texts} />
+      <SpendenDetail texts={texts} />
       <Script
         src="https://www.betterplace.org/de/widgets/overlays/HLtn7WX_zxMC4isLSCtZ4dY2.js"
         strategy="afterInteractive"

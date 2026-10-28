@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { SITE, IMAGES } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Hero() {
+export function Hero({ texts }: { texts?: PageTexts }) {
   return (
     <section id="top" className="relative bg-paper-100">
       <div className="container-x grid gap-10 py-12 sm:py-16 md:grid-cols-[1.05fr_1fr] md:gap-16 md:py-24">
@@ -15,32 +16,36 @@ export function Hero() {
                 <span className="absolute inset-0 animate-ping rounded-full bg-rot/60" />
                 <span className="relative h-2 w-2 rounded-full bg-rot" />
               </span>
-              {SITE.name}
+              {t(texts, "hero_badge", SITE.name)}
             </div>
           </Reveal>
 
           <Reveal variant="up" delay={80} duration={800}>
             <h1 className="display-serif text-[40px] text-ink sm:text-[56px] md:text-[76px] lg:text-[88px]">
-              Ein warmer
+              {t(texts, "hero_title_line1", "Ein warmer")}
               <br />
-              Schlafplatz
+              {t(texts, "hero_title_line2", "Schlafplatz")}
               <br />
-              <span className="italic text-rot">rettet Leben.</span>
+              <span className="italic text-rot">
+                {t(texts, "hero_title_line3", "rettet Leben.")}
+              </span>
             </h1>
           </Reveal>
 
           <Reveal variant="up" delay={200} duration={800}>
             <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed text-ink-500 sm:text-[17px]">
-              Jeden Winter am Römerkastell. Ein beheizter Ort für obdachlose
-              und bedürftige Menschen. Ohne Bedürftigkeitsprüfung, unabhängig
-              von Herkunft, Aufenthaltsstatus oder Vorgeschichte.
+              {t(
+                texts,
+                "hero_lead",
+                "Jeden Winter am Römerkastell. Ein beheizter Ort für obdachlose und bedürftige Menschen. Ohne Bedürftigkeitsprüfung, unabhängig von Herkunft, Aufenthaltsstatus oder Vorgeschichte.",
+              )}
             </p>
           </Reveal>
 
           <Reveal variant="up" delay={320} duration={800}>
             <div className="mt-7 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
               <Link href="/spenden" className="btn-primary w-full sm:w-auto">
-                Jetzt spenden
+                {t(texts, "hero_cta_primary", "Jetzt spenden")}
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path
                     d="M2 7h10m0 0L8 3m4 4L8 11"
@@ -52,7 +57,7 @@ export function Hero() {
                 </svg>
               </Link>
               <Link href="/helfen" className="btn-secondary w-full sm:w-auto">
-                Ehrenamtlich helfen
+                {t(texts, "hero_cta_secondary", "Ehrenamtlich helfen")}
               </Link>
             </div>
           </Reveal>
@@ -60,18 +65,22 @@ export function Hero() {
           <div className="mt-9 grid gap-4 sm:grid-cols-2">
             <Reveal variant="up" delay={440} duration={700}>
               <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                Standort
+                {t(texts, "hero_fact1_kicker", "Standort")}
               </div>
               <div className="mt-1 whitespace-pre-line text-[13.5px] leading-snug text-ink-600 sm:text-[14px]">
-                Am Römerkastell{"\n"}66121 Saarbrücken
+                {t(texts, "hero_fact1_body", "Am Römerkastell\n66121 Saarbrücken")}
               </div>
             </Reveal>
             <Reveal variant="up" delay={520} duration={700}>
               <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                Rechtsform
+                {t(texts, "hero_fact2_kicker", "Rechtsform")}
               </div>
               <div className="mt-1 whitespace-pre-line text-[13.5px] leading-snug text-ink-600 sm:text-[14px]">
-                Gemeinnütziger Verein{"\n"}VR 5477, Amtsgericht Saarbrücken
+                {t(
+                  texts,
+                  "hero_fact2_body",
+                  "Gemeinnütziger Verein\nVR 5477, Amtsgericht Saarbrücken",
+                )}
               </div>
             </Reveal>
           </div>

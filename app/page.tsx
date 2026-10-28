@@ -10,10 +10,12 @@ import {
   localBusinessSchema,
   webPageSchema,
 } from "@/lib/schema";
+import { loadPageTexts } from "@/lib/texts";
 
 const homeCrumbs = [{ name: "Start" }];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("home");
   return (
     <main>
       <JsonLd
@@ -30,12 +32,12 @@ export default function Page() {
           breadcrumbSchema(homeCrumbs),
         ]}
       />
-      <Hero />
-      <Notfall />
-      <Winter />
-      <Pillars />
-      <Unterstuetzer />
-      <Fakten />
+      <Hero texts={texts} />
+      <Notfall texts={texts} />
+      <Winter texts={texts} />
+      <Pillars texts={texts} />
+      <Unterstuetzer texts={texts} />
+      <Fakten texts={texts} />
     </main>
   );
 }

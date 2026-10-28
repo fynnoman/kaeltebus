@@ -1,28 +1,45 @@
 "use client";
 
-import { BEDARF } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Bedarf() {
+export function Bedarf({ texts }: { texts?: PageTexts }) {
+  const yesItems = [
+    t(texts, "yes_item1", "Haltbare Lebensmittel"),
+    t(texts, "yes_item2", "Kaffee, Tee, Kakao, Zucker, Milch (H)"),
+    t(texts, "yes_item3", "Wasser und Getränke in Flaschen"),
+    t(texts, "yes_item4", "Neue Unterwäsche und neue Socken"),
+    t(texts, "yes_item5", "Neue Hygieneartikel"),
+    t(texts, "yes_item6", "Isomatten und warme Schlafsäcke"),
+  ];
+  const noItems = [
+    t(texts, "no_item1", "Getragene Kleidung und Textilien"),
+    t(texts, "no_item2", "Bettwäsche und Handtücher"),
+    t(texts, "no_item3", "Porzellan, Geschirr und Besteck"),
+    t(texts, "no_item4", "Gegenstände unbekannter Herkunft"),
+  ];
+
   return (
     <section id="bedarf" className="section bg-paper-100">
       <div className="container-x">
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <Reveal variant="up" duration={700}>
-              <div className="kicker">Aktuelle Bedarfsliste</div>
+              <div className="kicker">{t(texts, "list_kicker", "Aktuelle Bedarfsliste")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
-                Was gerade gebraucht wird.
+                {t(texts, "list_title", "Was gerade gebraucht wird.")}
               </h2>
             </Reveal>
           </div>
           <Reveal variant="up" delay={200} duration={800}>
             <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
-              Die Liste wird jede Saison gepflegt. Ein festes Spendenwochenende
-              gibt Rhythmus zur Annahme, in der laufenden Saison bitte kurz per
-              WhatsApp anmelden.
+              {t(
+                texts,
+                "list_lead",
+                "Die Liste wird jede Saison gepflegt. Ein festes Spendenwochenende gibt Rhythmus zur Annahme, in der laufenden Saison bitte kurz per WhatsApp anmelden.",
+              )}
             </p>
           </Reveal>
         </div>
@@ -44,17 +61,17 @@ export function Bedarf() {
                 </span>
                 <div>
                   <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot">
-                    wir nehmen an
+                    {t(texts, "yes_kicker", "wir nehmen an")}
                   </div>
                   <div className="h-serif text-[18px] font-bold leading-tight text-ink sm:text-[20px]">
-                    Diese Spenden helfen sofort
+                    {t(texts, "yes_title", "Diese Spenden helfen sofort")}
                   </div>
                 </div>
               </div>
               <ul className="mt-6 space-y-3">
-                {BEDARF.yes.map((y, i) => (
+                {yesItems.map((y, i) => (
                   <Reveal
-                    key={y}
+                    key={i}
                     as="li"
                     variant="up"
                     delay={i * 60}
@@ -100,17 +117,17 @@ export function Bedarf() {
                 </span>
                 <div>
                   <div className="text-[12px] font-semibold uppercase tracking-kicker text-ink-400">
-                    bitte nicht
+                    {t(texts, "no_kicker", "bitte nicht")}
                   </div>
                   <div className="h-serif text-[18px] font-bold leading-tight text-ink sm:text-[20px]">
-                    Diese Spenden können wir nicht annehmen
+                    {t(texts, "no_title", "Diese Spenden können wir nicht annehmen")}
                   </div>
                 </div>
               </div>
               <ul className="mt-6 space-y-3">
-                {BEDARF.no.map((n, i) => (
+                {noItems.map((n, i) => (
                   <Reveal
-                    key={n}
+                    key={i}
                     as="li"
                     variant="up"
                     delay={i * 60}
@@ -139,9 +156,11 @@ export function Bedarf() {
               </ul>
               <Reveal variant="up" delay={200} duration={700}>
                 <div className="infobox mt-8 text-[13.5px] leading-relaxed text-ink-600">
-                  <strong>Wichtig:</strong> Wir unterhalten keine Kleiderkammer.
-                  Kleidung wird gezielt in passender Größe aus Geldspenden
-                  gekauft, damit jede Person genau das bekommt, was passt.
+                  {t(
+                    texts,
+                    "no_info",
+                    "Wichtig: Wir unterhalten keine Kleiderkammer. Kleidung wird gezielt in passender Größe aus Geldspenden gekauft, damit jede Person genau das bekommt, was passt.",
+                  )}
                 </div>
               </Reveal>
             </div>

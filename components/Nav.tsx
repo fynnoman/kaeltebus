@@ -3,21 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { t, type PageTexts } from "@/lib/texts";
 
-const links = [
-  { href: "/verein", label: "Unser Auftrag" },
-  { href: "/hilfe-bekommen", label: "Hilfe bekommen" },
-  { href: "/spenden", label: "Spenden" },
-  { href: "/bedarf", label: "Bedarfsliste" },
-  { href: "/helfen", label: "Ehrenamt" },
-  { href: "/aktuelles", label: "Aktuelles" },
-  { href: "/kontakt", label: "Kontakt" },
-];
-
-export function Nav() {
+export function Nav({ texts }: { texts?: PageTexts }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  const links = [
+    { href: "/verein", label: t(texts, "nav_verein", "Unser Auftrag") },
+    { href: "/hilfe-bekommen", label: t(texts, "nav_hilfe", "Hilfe bekommen") },
+    { href: "/spenden", label: t(texts, "nav_spenden", "Spenden") },
+    { href: "/bedarf", label: t(texts, "nav_bedarf", "Bedarfsliste") },
+    { href: "/helfen", label: t(texts, "nav_helfen", "Ehrenamt") },
+    { href: "/aktuelles", label: t(texts, "nav_aktuelles", "Aktuelles") },
+    { href: "/kontakt", label: t(texts, "nav_kontakt", "Kontakt") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -50,9 +51,15 @@ export function Nav() {
       <div className="hidden bg-ink-800 text-paper-100 md:block">
         <div className="container-x flex items-center justify-between py-2 text-[12.5px]">
           <div className="flex items-center gap-6">
-            <span>Vereinssitz Saarbrücken · Sankt-Johanner-Straße 49</span>
+            <span>
+              {t(texts, "meta_sitz", "Vereinssitz Saarbrücken · Sankt-Johanner-Straße 49")}
+            </span>
             <span className="text-paper-200/70">
-              Gemeinnützig anerkannt · VR 5477 Amtsgericht Saarbrücken
+              {t(
+                texts,
+                "meta_register",
+                "Gemeinnützig anerkannt · VR 5477 Amtsgericht Saarbrücken",
+              )}
             </span>
           </div>
           <div className="flex items-center gap-5">
@@ -136,7 +143,7 @@ export function Nav() {
               href="/spenden"
               className="btn-primary hidden !min-h-[42px] !px-4 !py-2 text-[13.5px] sm:inline-flex md:!min-h-[46px] md:!px-5 md:!py-2.5 md:text-[14px]"
             >
-              Spenden
+              {t(texts, "nav_cta", "Spenden")}
             </Link>
           </div>
         </div>
@@ -181,14 +188,14 @@ export function Nav() {
                   onClick={() => setOpen(false)}
                   className="btn-primary w-full"
                 >
-                  Jetzt spenden
+                  {t(texts, "nav_mobile_cta_primary", "Jetzt spenden")}
                 </Link>
                 <a
                   href="mailto:info@kaeltebus-saarbruecken.de"
                   onClick={() => setOpen(false)}
                   className="btn-secondary w-full"
                 >
-                  Per E-Mail schreiben
+                  {t(texts, "nav_mobile_cta_secondary", "Per E-Mail schreiben")}
                 </a>
               </div>
             </div>

@@ -8,6 +8,7 @@ import {
   contactPageSchema,
   localBusinessSchema,
 } from "@/lib/schema";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -27,7 +28,8 @@ const crumbs = [
   { name: "Kontakt" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("kontakt");
   return (
     <main>
       <JsonLd
@@ -39,13 +41,17 @@ export default function Page() {
         ]}
       />
       <PageHeader
-        kicker="Kontakt"
-        title="Schreiben Sie uns."
-        lead="Für Spenden, Ehrenamt, Presse oder allgemeine Fragen erreichen Sie uns am schnellsten per E-Mail."
+        kicker={t(texts, "header_kicker", "Kontakt")}
+        title={t(texts, "header_title", "Schreiben Sie uns.")}
+        lead={t(
+          texts,
+          "header_lead",
+          "Für Spenden, Ehrenamt, Presse oder allgemeine Fragen erreichen Sie uns am schnellsten per E-Mail.",
+        )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Kontakt" }]}
       />
-      <Kontakt />
-      <KontaktDetail />
+      <Kontakt texts={texts} />
+      <KontaktDetail texts={texts} />
     </main>
   );
 }

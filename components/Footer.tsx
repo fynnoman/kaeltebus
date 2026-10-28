@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { SITE } from "@/lib/data";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Footer() {
+export function Footer({ texts }: { texts?: PageTexts }) {
   return (
     <footer className="bg-ink-800 text-paper-100">
       <div className="container-x pt-12 pb-10 sm:pt-16 md:pt-20">
@@ -21,12 +22,17 @@ export function Footer() {
               />
             </Link>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-paper-100/80">
-              Gemeinnütziger Verein aus Saarbrücken. Winterbetrieb am
-              Kältebus am Römerkastell. Ohne Bedürftigkeitsprüfung.
+              {t(
+                texts,
+                "footer_about",
+                "Gemeinnütziger Verein aus Saarbrücken. Winterbetrieb am Kältebus am Römerkastell. Ohne Bedürftigkeitsprüfung.",
+              )}
             </p>
 
             <div className="mt-6 border-l-4 border-rot bg-white/5 p-4 text-[13.5px] text-paper-100/90">
-              <div className="font-semibold text-white">Spendenkonto</div>
+              <div className="font-semibold text-white">
+                {t(texts, "footer_spenden_title", "Spendenkonto")}
+              </div>
               <div className="mt-1">{SITE.bank.holder}</div>
               <div className="mt-1 break-all font-mono tracking-wider">
                 {SITE.bank.iban}
@@ -39,32 +45,32 @@ export function Footer() {
 
           <div>
             <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot-300">
-              Bereiche
+              {t(texts, "footer_bereiche", "Bereiche")}
             </div>
             <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
                 <Link href="/verein" className="hover:text-white">
-                  Unser Auftrag
+                  {t(texts, "nav_verein", "Unser Auftrag")}
                 </Link>
               </li>
               <li>
                 <Link href="/hilfe-bekommen" className="hover:text-white">
-                  Hilfe bekommen
+                  {t(texts, "nav_hilfe", "Hilfe bekommen")}
                 </Link>
               </li>
               <li>
                 <Link href="/spenden" className="hover:text-white">
-                  Spenden
+                  {t(texts, "nav_spenden", "Spenden")}
                 </Link>
               </li>
               <li>
                 <Link href="/bedarf" className="hover:text-white">
-                  Bedarfsliste
+                  {t(texts, "nav_bedarf", "Bedarfsliste")}
                 </Link>
               </li>
               <li>
                 <Link href="/helfen" className="hover:text-white">
-                  Ehrenamt
+                  {t(texts, "nav_helfen", "Ehrenamt")}
                 </Link>
               </li>
             </ul>
@@ -72,7 +78,7 @@ export function Footer() {
 
           <div>
             <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot-300">
-              Kontakt
+              {t(texts, "footer_kontakt", "Kontakt")}
             </div>
             <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
@@ -93,7 +99,7 @@ export function Footer() {
 
           <div>
             <div className="text-[12px] font-semibold uppercase tracking-kicker text-rot-300">
-              Folgen
+              {t(texts, "footer_folgen", "Folgen")}
             </div>
             <ul className="mt-5 space-y-3 text-[14px] text-paper-100/90">
               <li>
@@ -139,10 +145,10 @@ export function Footer() {
           </div>
           <div className="flex flex-wrap gap-4 sm:gap-6">
             <Link href="/impressum" className="hover:text-white">
-              Impressum
+              {t(texts, "footer_impressum", "Impressum")}
             </Link>
             <Link href="/datenschutz" className="hover:text-white">
-              Datenschutz
+              {t(texts, "footer_datenschutz", "Datenschutz")}
             </Link>
           </div>
         </div>

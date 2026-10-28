@@ -2,8 +2,9 @@
 
 import { Reveal } from "@/components/Reveal";
 import { SITE } from "@/lib/data";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Notfall() {
+export function Notfall({ texts }: { texts?: PageTexts }) {
   return (
     <section className="bg-white">
       <div className="container-x py-10 sm:py-14 md:py-20">
@@ -18,18 +19,21 @@ export function Notfall() {
             <div className="relative grid gap-5 p-6 sm:gap-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center md:gap-10 md:p-12">
               <div>
                 <div className="eyebrow">
-                  Wenn Sie jemanden in der Kälte sehen
+                  {t(texts, "notfall_eyebrow", "Wenn Sie jemanden in der Kälte sehen")}
                 </div>
                 <h3 className="h-serif mt-4 text-[24px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[30px] md:text-[38px]">
-                  Erst ansprechen.
+                  {t(texts, "notfall_title_line1", "Erst ansprechen.")}
                   <br />
-                  <span className="italic text-notfall">Im Zweifel 112 anrufen.</span>
+                  <span className="italic text-notfall">
+                    {t(texts, "notfall_title_line2", "Im Zweifel 112 anrufen.")}
+                  </span>
                 </h3>
                 <p className="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-ink-600 sm:mt-5 sm:text-[15px]">
-                  Vor allem in extrem kalten Nächten. Fragen Sie, ob Hilfe
-                  gewünscht ist. Bei Bewusstlosigkeit, Unterkühlung oder wenn
-                  eine Person nicht mehr ansprechbar ist, sofort den
-                  Rettungsdienst rufen.
+                  {t(
+                    texts,
+                    "notfall_body",
+                    "Vor allem in extrem kalten Nächten. Fragen Sie, ob Hilfe gewünscht ist. Bei Bewusstlosigkeit, Unterkühlung oder wenn eine Person nicht mehr ansprechbar ist, sofort den Rettungsdienst rufen.",
+                  )}
                 </p>
               </div>
               <div className="flex flex-col gap-2.5 sm:gap-3">
@@ -37,13 +41,13 @@ export function Notfall() {
                   href="tel:112"
                   className="inline-flex min-h-[60px] items-center justify-center gap-2 rounded bg-notfall px-7 py-4 text-[18px] font-bold text-white shadow-card transition-colors hover:bg-notfall-600 sm:text-[19px]"
                 >
-                  Notruf 112 anrufen
+                  {t(texts, "notfall_cta_call", "Notruf 112 anrufen")}
                 </a>
                 <a
                   href={`mailto:${SITE.contact.email}`}
                   className="btn-secondary w-full justify-center"
                 >
-                  Hinweis per E-Mail
+                  {t(texts, "notfall_cta_mail", "Hinweis per E-Mail")}
                 </a>
               </div>
             </div>

@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ngoSchema, websiteSchema, placeSchema } from "@/lib/schema";
 import { SITE } from "@/lib/data";
+import { loadPageTexts } from "@/lib/texts";
 
 const sans = Source_Sans_3({
   subsets: ["latin"],
@@ -89,11 +90,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const sharedTexts = await loadPageTexts("shared");
   return (
     <html lang="de" className={`${sans.variable} ${serif.variable}`}>
       <body className="bg-white text-ink font-sans antialiased">
@@ -101,9 +103,9 @@ export default function RootLayout({
           id="ld-organization"
           data={[ngoSchema(), websiteSchema(), placeSchema()]}
         />
-        <Nav />
+        <Nav texts={sharedTexts} />
         {children}
-        <Footer />
+        <Footer texts={sharedTexts} />
       </body>
     </html>
   );

@@ -2,26 +2,48 @@
 
 import { IMAGES, SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Helfen() {
+export function Helfen({ texts }: { texts?: PageTexts }) {
+  const rollen = [
+    {
+      title: t(texts, "rolle1_title", "Am Kältebus mitarbeiten"),
+      body: t(texts, "rolle1_body", "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen."),
+    },
+    {
+      title: t(texts, "rolle2_title", "In der Küche unterstützen"),
+      body: t(texts, "rolle2_body", "Freiwillige kochen für eine Nacht am Kältebus."),
+    },
+    {
+      title: t(texts, "rolle3_title", "Aufbau und Abbau"),
+      body: t(texts, "rolle3_body", "Zu Saisonbeginn und Saisonende packen alle Hände mit an."),
+    },
+    {
+      title: t(texts, "rolle4_title", "Materiell unterstützen"),
+      body: t(texts, "rolle4_body", "Aktuelle Bedarfsliste ansehen und direkt beitragen."),
+    },
+  ];
+
   return (
     <section id="helfen" className="section bg-white">
       <div className="container-x">
         <div className="grid gap-10 md:grid-cols-[minmax(0,380px)_1fr] md:gap-16">
           <div>
             <Reveal variant="up" duration={700}>
-              <div className="kicker">Mitmachen</div>
+              <div className="kicker">{t(texts, "mitmachen_kicker", "Mitmachen")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
-                Ehrenamtlich helfen.
+                {t(texts, "mitmachen_title", "Ehrenamtlich helfen.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={220} duration={800}>
               <p className="mt-4 text-[15px] leading-relaxed text-ink-500 sm:mt-5 sm:text-[15.5px]">
-                Der Verein arbeitet ausschließlich ehrenamtlich. Wer sich
-                einbringen möchte, meldet sich per E-Mail und bekommt alle
-                Informationen zum Ablauf.
+                {t(
+                  texts,
+                  "mitmachen_lead",
+                  "Der Verein arbeitet ausschließlich ehrenamtlich. Wer sich einbringen möchte, meldet sich per E-Mail und bekommt alle Informationen zum Ablauf.",
+                )}
               </p>
             </Reveal>
 
@@ -40,32 +62,15 @@ export function Helfen() {
                 href={`mailto:${SITE.contact.email}?subject=Ich%20m%C3%B6chte%20helfen`}
                 className="btn-primary mt-8 w-full sm:w-auto"
               >
-                Per E-Mail melden
+                {t(texts, "mitmachen_cta", "Per E-Mail melden")}
               </a>
             </Reveal>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-            {[
-              {
-                title: "Am Kältebus mitarbeiten",
-                body: "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen.",
-              },
-              {
-                title: "In der Küche unterstützen",
-                body: "Freiwillige kochen für eine Nacht am Kältebus.",
-              },
-              {
-                title: "Aufbau und Abbau",
-                body: "Zu Saisonbeginn und Saisonende packen alle Hände mit an.",
-              },
-              {
-                title: "Materiell unterstützen",
-                body: "Aktuelle Bedarfsliste ansehen und direkt beitragen.",
-              },
-            ].map((r, i) => (
+            {rollen.map((r, i) => (
               <Reveal
-                key={r.title}
+                key={i}
                 variant="up"
                 delay={i * 110}
                 duration={800}

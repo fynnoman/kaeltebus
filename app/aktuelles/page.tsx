@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { sql, type Post } from "@/lib/db";
 import { PageHeader } from "@/components/PageHeader";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,7 @@ function formatDate(iso: string | null) {
 }
 
 export default async function AktuellesPage() {
+  const texts = await loadPageTexts("aktuelles");
   const rows = (await sql`
     SELECT id, slug, title, excerpt, cover_url, cover_alt, published_at
     FROM posts
@@ -32,16 +34,20 @@ export default async function AktuellesPage() {
   return (
     <>
       <PageHeader
-        kicker="Aktuelles"
-        title="Berichte aus unserer Arbeit"
-        lead="Was gerade läuft, worum wir bitten und was wir im Dienst erleben. Kurz, nüchtern, aus erster Hand."
+        kicker={t(texts, "header_kicker", "Aktuelles")}
+        title={t(texts, "header_title", "Berichte aus unserer Arbeit")}
+        lead={t(
+          texts,
+          "header_lead",
+          "Was gerade läuft, worum wir bitten und was wir im Dienst erleben. Kurz, nüchtern, aus erster Hand.",
+        )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Aktuelles" }]}
       />
       <section className="section">
         <div className="container-x">
           {rows.length === 0 ? (
             <p className="text-ink-500">
-              Es sind noch keine Beiträge veröffentlicht.
+              {t(texts, "empty_text", "Es sind noch keine Beiträge veröffentlicht.")}
             </p>
           ) : (
             <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -76,7 +82,7 @@ export default async function AktuellesPage() {
                         </p>
                       )}
                       <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-rot">
-                        Beitrag lesen
+                        {t(texts, "read_more", "Beitrag lesen")}
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                           <path d="M4 7h7m0 0-3-3m3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
 function CopyableIban() {
   const [copied, setCopied] = useState(false);
@@ -31,25 +32,30 @@ function CopyableIban() {
   );
 }
 
-export function Spenden() {
+export function Spenden({ texts }: { texts?: PageTexts }) {
   return (
     <section id="spenden" className="section bg-white">
       <div className="container-x">
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <Reveal variant="up" duration={700}>
-              <div className="kicker">Drei Wege zu helfen</div>
+              <div className="kicker">
+                {t(texts, "overview_kicker", "Drei Wege zu helfen")}
+              </div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
-                Geld. Sache. Zeit.
+                {t(texts, "overview_title", "Geld. Sache. Zeit.")}
               </h2>
             </Reveal>
           </div>
           <Reveal variant="up" delay={200} duration={800}>
             <p className="max-w-md text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
-              Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die
-              Versorgung vor Ort.
+              {t(
+                texts,
+                "overview_lead",
+                "Der Verein arbeitet ehrenamtlich. Spenden fließen direkt in die Versorgung vor Ort.",
+              )}
             </p>
           </Reveal>
         </div>
@@ -60,14 +66,17 @@ export function Spenden() {
             <article className="card relative flex h-full flex-col p-6 sm:p-8" id="spende-geld">
               <span className="absolute inset-x-0 top-0 h-[3px] bg-spende" />
               <div className="text-[12px] font-semibold uppercase tracking-kicker text-spende">
-                01 · Geldspende
+                {t(texts, "geld_kicker", "01 · Geldspende")}
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Geld spenden.
+                {t(texts, "geld_title", "Geld spenden.")}
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Der zuverlässigste Weg. Jede Spende hilft im laufenden Betrieb
-                am Kältebus.
+                {t(
+                  texts,
+                  "geld_body",
+                  "Der zuverlässigste Weg. Jede Spende hilft im laufenden Betrieb am Kältebus.",
+                )}
               </p>
 
               <div className="mt-6 border-t border-line pt-5 text-[13.5px] text-ink-600">
@@ -84,7 +93,7 @@ export function Spenden() {
                 rel="noreferrer"
                 className="btn-primary mt-6 w-full sm:w-fit"
               >
-                Online spenden über betterplace
+                {t(texts, "geld_cta", "Online spenden über betterplace")}
               </a>
             </article>
           </Reveal>
@@ -94,19 +103,20 @@ export function Spenden() {
             <article className="card relative flex h-full flex-col p-6 sm:p-8" id="spende-sach">
               <span className="absolute inset-x-0 top-0 h-[3px] bg-spende/50" />
               <div className="text-[12px] font-semibold uppercase tracking-kicker text-spende">
-                02 · Sachspende
+                {t(texts, "sach_kicker", "02 · Sachspende")}
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Sachen spenden.
+                {t(texts, "sach_title", "Sachen spenden.")}
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Sachspenden helfen uns dort, wo sie gerade wirklich gebraucht
-                werden. Bitte stimmen Sie deshalb vorab kurz per E-Mail mit
-                uns ab, was aktuell benötigt wird. Eine allgemeine
-                Kleiderkammer betreiben wir nicht.
+                {t(
+                  texts,
+                  "sach_body",
+                  "Sachspenden helfen uns dort, wo sie gerade wirklich gebraucht werden. Bitte stimmen Sie deshalb vorab kurz per E-Mail mit uns ab, was aktuell benötigt wird. Eine allgemeine Kleiderkammer betreiben wir nicht.",
+                )}
               </p>
               <Link href="/bedarf" className="btn-secondary mt-8 w-full sm:w-fit">
-                Aktuellen Bedarf ansehen
+                {t(texts, "sach_cta", "Aktuellen Bedarf ansehen")}
               </Link>
             </article>
           </Reveal>
@@ -116,18 +126,20 @@ export function Spenden() {
             <article className="card relative flex h-full flex-col p-6 sm:p-8" id="spende-zeit">
               <span className="absolute inset-x-0 top-0 h-[3px] bg-spende/50" />
               <div className="text-[12px] font-semibold uppercase tracking-kicker text-spende">
-                03 · Zeitspende
+                {t(texts, "zeit_kicker", "03 · Zeitspende")}
               </div>
               <h3 className="h-serif mt-4 text-[20px] font-bold leading-tight text-ink sm:text-[22px]">
-                Zeit schenken.
+                {t(texts, "zeit_title", "Zeit schenken.")}
               </h3>
               <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                Der Kältebus lebt vom Engagement freiwilliger Helferinnen und
-                Helfer. Wer sich einbringen und mit seiner Zeit unterstützen
-                möchte, kann sich ganz unkompliziert bei uns melden.
+                {t(
+                  texts,
+                  "zeit_body",
+                  "Der Kältebus lebt vom Engagement freiwilliger Helferinnen und Helfer. Wer sich einbringen und mit seiner Zeit unterstützen möchte, kann sich ganz unkompliziert bei uns melden.",
+                )}
               </p>
               <Link href="/helfen" className="btn-secondary mt-8 w-full sm:w-fit">
-                Ehrenamtlich mithelfen
+                {t(texts, "zeit_cta", "Ehrenamtlich mithelfen")}
               </Link>
             </article>
           </Reveal>

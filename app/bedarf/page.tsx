@@ -8,6 +8,7 @@ import {
   breadcrumbSchema,
   webPageSchema,
 } from "@/lib/schema";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const metadata: Metadata = {
   title: "Bedarfsliste",
@@ -27,7 +28,8 @@ const crumbs = [
   { name: "Bedarfsliste" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("bedarf");
   return (
     <main>
       <JsonLd
@@ -45,13 +47,17 @@ export default function Page() {
         ]}
       />
       <PageHeader
-        kicker="Bedarfsliste"
-        title="Was gerade gebraucht wird."
-        lead="Bitte vor jeder Sachspende kurz per E-Mail Bescheid geben. So verhindern wir, dass Dinge angeliefert werden, die wir nicht lagern oder verteilen können."
+        kicker={t(texts, "header_kicker", "Bedarfsliste")}
+        title={t(texts, "header_title", "Was gerade gebraucht wird.")}
+        lead={t(
+          texts,
+          "header_lead",
+          "Bitte vor jeder Sachspende kurz per E-Mail Bescheid geben. So verhindern wir, dass Dinge angeliefert werden, die wir nicht lagern oder verteilen können.",
+        )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Bedarfsliste" }]}
       />
-      <Bedarf />
-      <BedarfDetail />
+      <Bedarf texts={texts} />
+      <BedarfDetail texts={texts} />
     </main>
   );
 }

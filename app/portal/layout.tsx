@@ -15,17 +15,23 @@ export default async function PortalLayout({ children }: { children: React.React
   return (
     <div className="bg-paper-100 min-h-[60vh]">
       <div className="border-b border-line bg-white">
-        <div className="container-x flex items-center justify-between py-4">
+        <div className="container-x flex flex-wrap items-center justify-between gap-3 py-4">
           <Link href="/portal" className="flex items-center gap-3">
             <span className="h-7 w-1 bg-rot" aria-hidden />
             <span className="font-semibold text-ink">Mitarbeiter-Portal</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <Link href="/aktuelles" className="hidden text-sm text-ink-500 hover:text-rot sm:inline">
-              Zur Aktuelles-Seite
+          <nav className="flex items-center gap-5 text-sm">
+            <Link href="/portal" className="text-ink-500 hover:text-rot">
+              Beiträge
+            </Link>
+            <Link href="/portal/texte" className="text-ink-500 hover:text-rot">
+              Texte
+            </Link>
+            <Link href="/" className="hidden text-ink-400 hover:text-rot sm:inline">
+              Zur Website
             </Link>
             <LogoutButton />
-          </div>
+          </nav>
         </div>
       </div>
       {children}

@@ -35,9 +35,14 @@ export default async function PortalDashboard() {
               Hier könnt ihr neue Beiträge schreiben, speichern und mit einem Klick veröffentlichen.
             </p>
           </div>
-          <Link href="/portal/neu" className="btn-primary">
-            Neuer Beitrag
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/portal/texte" className="btn-secondary">
+              Texte der Website
+            </Link>
+            <Link href="/portal/neu" className="btn-primary">
+              Neuer Beitrag
+            </Link>
+          </div>
         </div>
 
         <div className="mt-10 overflow-hidden rounded-md border border-line bg-white">

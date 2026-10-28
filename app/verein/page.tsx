@@ -4,6 +4,7 @@ import { Pillars } from "@/components/Pillars";
 import { VereinDetail } from "@/components/VereinDetail";
 import { JsonLd } from "@/components/JsonLd";
 import { aboutPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const metadata: Metadata = {
   title: "Unser Auftrag",
@@ -23,7 +24,11 @@ const crumbs = [
   { name: "Unser Auftrag" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const [vereinTexts, homeTexts] = await Promise.all([
+    loadPageTexts("verein"),
+    loadPageTexts("home"),
+  ]);
   return (
     <main>
       <JsonLd
@@ -31,13 +36,17 @@ export default function Page() {
         data={[aboutPageSchema(), breadcrumbSchema(crumbs)]}
       />
       <PageHeader
-        kicker="Unser Auftrag"
-        title="Warum es uns gibt."
-        lead="Der Kältebus Saarbrücken ist ein eingetragener, gemeinnütziger Verein aus Saarbrücken. Wir betreiben den Kältebus am Römerkastell für alle, die im Winter einen beheizten, sicheren Ort brauchen."
+        kicker={t(vereinTexts, "header_kicker", "Unser Auftrag")}
+        title={t(vereinTexts, "header_title", "Warum es uns gibt.")}
+        lead={t(
+          vereinTexts,
+          "header_lead",
+          "Der Kältebus Saarbrücken ist ein eingetragener, gemeinnütziger Verein aus Saarbrücken. Wir betreiben den Kältebus am Römerkastell für alle, die im Winter einen beheizten, sicheren Ort brauchen.",
+        )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Unser Auftrag" }]}
       />
-      <Pillars />
-      <VereinDetail />
+      <Pillars texts={homeTexts} />
+      <VereinDetail texts={vereinTexts} />
     </main>
   );
 }

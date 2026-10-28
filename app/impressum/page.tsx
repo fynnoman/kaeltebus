@@ -5,6 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import { SITE } from "@/lib/data";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -19,7 +20,8 @@ const impressumCrumbs = [
   { name: "Impressum" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("impressum");
   return (
     <main>
       <JsonLd
@@ -36,9 +38,9 @@ export default function Page() {
         ]}
       />
       <PageHeader
-        kicker="Impressum"
-        title="Impressum."
-        lead="Angaben gemäß § 5 TMG."
+        kicker={t(texts, "header_kicker", "Impressum")}
+        title={t(texts, "header_title", "Impressum.")}
+        lead={t(texts, "header_lead", "Angaben gemäß § 5 TMG.")}
         crumbs={[{ label: "Start", href: "/" }, { label: "Impressum" }]}
       />
 
@@ -47,14 +49,17 @@ export default function Page() {
           <div className="grid gap-12 md:grid-cols-[1fr_1.6fr] md:gap-16">
             <Reveal variant="up" duration={700}>
               <div>
-                <div className="kicker-line">Verein</div>
+                <div className="kicker-line">{t(texts, "verein_kicker", "Verein")}</div>
                 <h2 className="h-serif mt-4 text-[26px] font-bold leading-[1.15] tracking-tight text-ink sm:text-[30px]">
-                  Anbieter im Sinne des Telemediengesetzes.
+                  {t(texts, "verein_title", "Anbieter im Sinne des Telemediengesetzes.")}
                 </h2>
                 <span className="rule-accent mt-6" />
                 <p className="mt-6 text-[14.5px] leading-relaxed text-ink-500 sm:text-[15px]">
-                  Verantwortlich für den Inhalt dieser Website ist der
-                  eingetragene, gemeinnützige Verein mit Sitz in Saarbrücken.
+                  {t(
+                    texts,
+                    "verein_body",
+                    "Verantwortlich für den Inhalt dieser Website ist der eingetragene, gemeinnützige Verein mit Sitz in Saarbrücken.",
+                  )}
                 </p>
               </div>
             </Reveal>
@@ -63,7 +68,7 @@ export default function Page() {
               <Reveal variant="up" delay={80} duration={700} distance={20}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                    Vereinsname
+                    {t(texts, "label_vereinsname", "Vereinsname")}
                   </div>
                   <p className="h-serif mt-3 text-[19px] font-bold leading-snug text-ink sm:text-[21px]">
                     {SITE.legalName}
@@ -74,7 +79,7 @@ export default function Page() {
               <Reveal variant="up" delay={140} duration={700} distance={20}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                    Anschrift
+                    {t(texts, "label_anschrift", "Anschrift")}
                   </div>
                   <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
                     {SITE.address.street}
@@ -89,7 +94,7 @@ export default function Page() {
               <Reveal variant="up" delay={200} duration={700} distance={20}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                    Kontakt
+                    {t(texts, "label_kontakt", "Kontakt")}
                   </div>
                   <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
                     Telefon:{" "}
@@ -124,14 +129,14 @@ export default function Page() {
               <Reveal variant="up" delay={260} duration={700} distance={20}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                    Registereintrag
+                    {t(texts, "label_register", "Registereintrag")}
                   </div>
-                  <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
-                    Eintragung im Vereinsregister
-                    <br />
-                    Registergericht: Amtsgericht Saarbrücken
-                    <br />
-                    Registernummer: VR 5477
+                  <p className="mt-3 whitespace-pre-line text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
+                    {t(
+                      texts,
+                      "register_text",
+                      "Eintragung im Vereinsregister\nRegistergericht: Amtsgericht Saarbrücken\nRegisternummer: VR 5477",
+                    )}
                   </p>
                 </div>
               </Reveal>
@@ -139,7 +144,7 @@ export default function Page() {
               <Reveal variant="up" delay={320} duration={700} distance={20}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                    Vertretungsberechtigter Vorstand
+                    {t(texts, "label_vorstand", "Vertretungsberechtigter Vorstand")}
                   </div>
                   <ul className="mt-3 space-y-1.5 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
                     {SITE.vorstand.map((v) => (
@@ -155,7 +160,7 @@ export default function Page() {
               <Reveal variant="up" delay={380} duration={700} distance={20}>
                 <div>
                   <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                    Steuerliche Angaben
+                    {t(texts, "label_steuer", "Steuerliche Angaben")}
                   </div>
                   <p className="mt-3 text-[15px] leading-relaxed text-ink sm:text-[15.5px]">
                     {SITE.tax.finanzamt}
@@ -163,10 +168,11 @@ export default function Page() {
                     Steuernummer: {SITE.tax.steuernummer}
                   </p>
                   <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                    Der Verein ist wegen Förderung mildtätiger und
-                    gemeinnütziger Zwecke ({SITE.tax.zweck}) nach § 5 Abs. 1
-                    Nr. 9 KStG von der Körperschaftsteuer und nach § 3 Nr. 6
-                    GewStG von der Gewerbesteuer befreit ({SITE.tax.bescheid}).
+                    {t(
+                      texts,
+                      "steuer_body",
+                      "Der Verein ist wegen Förderung mildtätiger und gemeinnütziger Zwecke nach § 5 Abs. 1 Nr. 9 KStG von der Körperschaftsteuer und nach § 3 Nr. 6 GewStG von der Gewerbesteuer befreit.",
+                    )}
                   </p>
                 </div>
               </Reveal>
@@ -179,11 +185,11 @@ export default function Page() {
         <div className="container-x">
           <div className="max-w-3xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">Haftung und Rechte</div>
+              <div className="kicker-line">{t(texts, "haftung_kicker", "Haftung und Rechte")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[26px] font-bold leading-[1.15] tracking-tight text-ink sm:text-[30px] md:text-[34px]">
-                Hinweise zu Inhalten, Links und Urheberrecht.
+                {t(texts, "haftung_title", "Hinweise zu Inhalten, Links und Urheberrecht.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -195,21 +201,17 @@ export default function Page() {
             <Reveal variant="up" delay={0} duration={700} distance={20}>
               <div>
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                  Inhalte
+                  {t(texts, "inhalte_kicker", "Inhalte")}
                 </div>
                 <h3 className="h-serif mt-3 text-[17px] font-bold leading-snug text-ink sm:text-[18.5px]">
-                  Haftung für Inhalte.
+                  {t(texts, "inhalte_title", "Haftung für Inhalte.")}
                 </h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                  Die Inhalte dieser Website werden mit größtmöglicher Sorgfalt
-                  erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität
-                  wird jedoch keine Gewähr übernommen. Als Diensteanbieter sind
-                  wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
-                  nach den allgemeinen Gesetzen verantwortlich. Nach den §§ 8
-                  bis 10 TMG besteht keine Verpflichtung, übermittelte oder
-                  gespeicherte fremde Informationen zu überwachen oder nach
-                  Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
-                  hinweisen.
+                  {t(
+                    texts,
+                    "inhalte_body",
+                    "Die Inhalte dieser Website werden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität wird jedoch keine Gewähr übernommen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach den §§ 8 bis 10 TMG besteht keine Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.",
+                  )}
                 </p>
               </div>
             </Reveal>
@@ -217,19 +219,17 @@ export default function Page() {
             <Reveal variant="up" delay={100} duration={700} distance={20}>
               <div>
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                  Externe Links
+                  {t(texts, "links_kicker", "Externe Links")}
                 </div>
                 <h3 className="h-serif mt-3 text-[17px] font-bold leading-snug text-ink sm:text-[18.5px]">
-                  Haftung für Links.
+                  {t(texts, "links_title", "Haftung für Links.")}
                 </h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                  Die Website enthält Links zu externen Websites Dritter, auf
-                  deren Inhalte kein Einfluss besteht. Für die Inhalte der
-                  verlinkten Seiten ist stets der jeweilige Anbieter oder
-                  Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung waren
-                  keine Rechtsverstöße erkennbar. Bei Bekanntwerden von
-                  Rechtsverletzungen werden entsprechende Links umgehend
-                  entfernt.
+                  {t(
+                    texts,
+                    "links_body",
+                    "Die Website enthält Links zu externen Websites Dritter, auf deren Inhalte kein Einfluss besteht. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Bei Bekanntwerden von Rechtsverletzungen werden entsprechende Links umgehend entfernt.",
+                  )}
                 </p>
               </div>
             </Reveal>
@@ -237,19 +237,17 @@ export default function Page() {
             <Reveal variant="up" delay={200} duration={700} distance={20}>
               <div>
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                  Urheberrecht
+                  {t(texts, "urheber_kicker", "Urheberrecht")}
                 </div>
                 <h3 className="h-serif mt-3 text-[17px] font-bold leading-snug text-ink sm:text-[18.5px]">
-                  Texte, Bilder, Marken.
+                  {t(texts, "urheber_title", "Texte, Bilder, Marken.")}
                 </h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
-                  Die durch die Betreiber erstellten Inhalte und Werke auf
-                  dieser Website unterliegen dem deutschen Urheberrecht.
-                  Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
-                  Verwertung außerhalb der Grenzen des Urheberrechts bedürfen
-                  der schriftlichen Zustimmung des Vereins. Downloads und
-                  Kopien sind nur für den privaten, nicht kommerziellen Gebrauch
-                  gestattet.
+                  {t(
+                    texts,
+                    "urheber_body",
+                    "Die durch die Betreiber erstellten Inhalte und Werke auf dieser Website unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des Vereins. Downloads und Kopien sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.",
+                  )}
                 </p>
               </div>
             </Reveal>
@@ -257,8 +255,13 @@ export default function Page() {
 
           <Reveal variant="up" delay={300} duration={800}>
             <div className="infobox mt-12 text-[13.5px] leading-relaxed text-ink-600 sm:mt-16 sm:text-[14px]">
-              <strong>Kontakt bei Fragen zum Impressum:</strong> Schreiben Sie
-              kurz an{" "}
+              <strong>
+                {t(
+                  texts,
+                  "impressum_infobox",
+                  "Kontakt bei Fragen zum Impressum: Schreiben Sie kurz an",
+                )}
+              </strong>{" "}
               <a
                 href={`mailto:${SITE.contact.email}`}
                 className="text-spende hover:underline"

@@ -3,55 +3,80 @@
 import Link from "next/link";
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-const GRUENDE = [
-  {
-    kicker: "Hygiene",
-    title: "Neu statt getragen.",
-    body: "Unterwäsche, Socken und Hygieneartikel geben wir ausschließlich neu und in Originalverpackung heraus. Alles andere wäre für die Menschen im Kältebus nicht zumutbar.",
-  },
-  {
-    kicker: "Lagerung",
-    title: "Nur, was direkt gebraucht wird.",
-    body: "Der Kältebus verfügt über kein dauerhaftes Lager für Kleidung, Möbel oder Haushaltsgegenstände. Deshalb können wir nur Sachspenden annehmen, die aktuell benötigt und zeitnah eingesetzt werden können.",
-  },
-  {
-    kicker: "Passform",
-    title: "Damit es wirklich passt.",
-    body: "Benötigte Kleidung kaufen wir gezielt in der passenden Größe. So können wir sicherstellen, dass jede Person genau das erhält, was sie aktuell braucht und auch wirklich tragen kann. Deshalb setzen wir bewusst auf eine gezielte Versorgung statt auf eine klassische Kleiderkammer.",
-  },
-];
+export function BedarfDetail({ texts }: { texts?: PageTexts }) {
+  const gruende = [
+    {
+      kicker: t(texts, "gruende1_kicker", "Hygiene"),
+      title: t(texts, "gruende1_title", "Neu statt getragen."),
+      body: t(
+        texts,
+        "gruende1_body",
+        "Unterwäsche, Socken und Hygieneartikel geben wir ausschließlich neu und in Originalverpackung heraus. Alles andere wäre für die Menschen im Kältebus nicht zumutbar.",
+      ),
+    },
+    {
+      kicker: t(texts, "gruende2_kicker", "Lagerung"),
+      title: t(texts, "gruende2_title", "Nur, was direkt gebraucht wird."),
+      body: t(
+        texts,
+        "gruende2_body",
+        "Der Kältebus verfügt über kein dauerhaftes Lager für Kleidung, Möbel oder Haushaltsgegenstände. Deshalb können wir nur Sachspenden annehmen, die aktuell benötigt und zeitnah eingesetzt werden können.",
+      ),
+    },
+    {
+      kicker: t(texts, "gruende3_kicker", "Passform"),
+      title: t(texts, "gruende3_title", "Damit es wirklich passt."),
+      body: t(
+        texts,
+        "gruende3_body",
+        "Benötigte Kleidung kaufen wir gezielt in der passenden Größe. So können wir sicherstellen, dass jede Person genau das erhält, was sie aktuell braucht und auch wirklich tragen kann. Deshalb setzen wir bewusst auf eine gezielte Versorgung statt auf eine klassische Kleiderkammer.",
+      ),
+    },
+  ];
 
-const ABLAUF = [
-  {
-    step: "01",
-    title: "Kurz per E-Mail Bescheid geben.",
-    body: "Eine Zeile reicht: was Sie mitbringen möchten und in welcher Menge. So wissen wir, ob es aktuell in den Betrieb passt.",
-  },
-  {
-    step: "02",
-    title: "Termin abstimmen.",
-    body: "Wir melden uns mit einem Übergabetermin am Kältebus am Römerkastell oder mit einer Alternative, falls das gerade nicht möglich ist.",
-  },
-  {
-    step: "03",
-    title: "Übergabe vor Ort.",
-    body: "Am vereinbarten Tag am Römerkastell. Auf Wunsch mit kurzer Führung am Kältebus und, wenn passend, mit einem Foto für die Vereinskanäle.",
-  },
-];
+  const ablauf = [
+    {
+      step: "01",
+      title: t(texts, "ablauf1_title", "Kurz per E-Mail Bescheid geben."),
+      body: t(
+        texts,
+        "ablauf1_body",
+        "Eine Zeile reicht: was Sie mitbringen möchten und in welcher Menge. So wissen wir, ob es aktuell in den Betrieb passt.",
+      ),
+    },
+    {
+      step: "02",
+      title: t(texts, "ablauf2_title", "Termin abstimmen."),
+      body: t(
+        texts,
+        "ablauf2_body",
+        "Wir melden uns mit einem Übergabetermin am Kältebus am Römerkastell oder mit einer Alternative, falls das gerade nicht möglich ist.",
+      ),
+    },
+    {
+      step: "03",
+      title: t(texts, "ablauf3_title", "Übergabe vor Ort."),
+      body: t(
+        texts,
+        "ablauf3_body",
+        "Am vereinbarten Tag am Römerkastell. Auf Wunsch mit kurzer Führung am Kältebus und, wenn passend, mit einem Foto für die Vereinskanäle.",
+      ),
+    },
+  ];
 
-export function BedarfDetail() {
   return (
     <>
       <section className="section bg-white">
         <div className="container-x">
           <div className="max-w-2xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">Warum nicht alles</div>
+              <div className="kicker-line">{t(texts, "gruende_kicker", "Warum nicht alles")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Weniger, aber das Richtige.
+                {t(texts, "gruende_title", "Weniger, aber das Richtige.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -59,17 +84,19 @@ export function BedarfDetail() {
             </Reveal>
             <Reveal variant="up" delay={260} duration={800}>
               <p className="mt-6 text-[15px] leading-relaxed text-ink-500 sm:text-[16px]">
-                Wir sind ein Winterbetrieb, keine Sammelstelle. Deshalb nehmen
-                wir bewusst nur an, was direkt im Kältebus eingesetzt wird.
-                Drei Gründe stehen dahinter.
+                {t(
+                  texts,
+                  "gruende_lead",
+                  "Wir sind ein Winterbetrieb, keine Sammelstelle. Deshalb nehmen wir bewusst nur an, was direkt im Kältebus eingesetzt wird. Drei Gründe stehen dahinter.",
+                )}
               </p>
             </Reveal>
           </div>
 
           <div className="mt-10 grid gap-4 sm:gap-6 md:mt-14 md:grid-cols-3">
-            {GRUENDE.map((g, i) => (
+            {gruende.map((g, i) => (
               <Reveal
-                key={g.kicker}
+                key={i}
                 variant="up"
                 delay={i * 130}
                 duration={800}
@@ -105,11 +132,11 @@ export function BedarfDetail() {
         <div className="container-x">
           <div className="max-w-2xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">So läuft eine Sachspende ab</div>
+              <div className="kicker-line">{t(texts, "ablauf_kicker", "So läuft eine Sachspende ab")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Drei Schritte, ohne Umwege.
+                {t(texts, "ablauf_title", "Drei Schritte, ohne Umwege.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -118,7 +145,7 @@ export function BedarfDetail() {
           </div>
 
           <ol className="mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-3">
-            {ABLAUF.map((a, i) => (
+            {ablauf.map((a, i) => (
               <Reveal
                 key={a.step}
                 variant="up"
@@ -148,8 +175,13 @@ export function BedarfDetail() {
           <Reveal variant="up" delay={320} duration={800}>
             <div className="mt-10 grid gap-4 md:grid-cols-[1fr_auto] md:items-center md:gap-8">
               <div className="infobox text-[13.5px] leading-relaxed text-ink-600 sm:text-[14px]">
-                <strong>Sie sind unsicher, ob Ihre Sache passt?</strong> Kurze
-                Anfrage per E-Mail an{" "}
+                <strong>
+                  {t(
+                    texts,
+                    "ablauf_infobox",
+                    "Sie sind unsicher, ob Ihre Sache passt? Kurze Anfrage per E-Mail an",
+                  )}
+                </strong>{" "}
                 <a
                   href={`mailto:${SITE.contact.emailSachspenden}`}
                   className="text-rot hover:underline"
@@ -159,7 +191,7 @@ export function BedarfDetail() {
                 . Wir antworten zeitnah.
               </div>
               <Link href="/spenden" className="btn-secondary w-full md:w-auto">
-                Lieber Geld spenden
+                {t(texts, "ablauf_cta", "Lieber Geld spenden")}
               </Link>
             </div>
           </Reveal>

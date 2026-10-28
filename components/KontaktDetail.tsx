@@ -3,82 +3,106 @@
 import Link from "next/link";
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-const KANAELE = [
-  {
-    kicker: "Alles rund um den Verein",
-    title: "Allgemeines.",
-    body: "Presse, Terminanfragen, Vereinsthemen und alles, was nicht in die anderen Postfächer passt. Wir lesen die Mail regelmäßig.",
-    action: { label: SITE.contact.email, href: `mailto:${SITE.contact.email}` },
-  },
-  {
-    kicker: "Geldspende",
-    title: "Finanzen.",
-    body: "Spendenquittungen, Rechnungen und steuerliche Rückfragen. Für Überweisungen und Online-Spende gibt es die Spendenseite.",
-    action: {
-      label: SITE.contact.emailFinanzen,
-      href: `mailto:${SITE.contact.emailFinanzen}`,
+export function KontaktDetail({ texts }: { texts?: PageTexts }) {
+  const kanaele = [
+    {
+      kicker: t(texts, "kanal1_kicker", "Alles rund um den Verein"),
+      title: t(texts, "kanal1_title", "Allgemeines."),
+      body: t(
+        texts,
+        "kanal1_body",
+        "Presse, Terminanfragen, Vereinsthemen und alles, was nicht in die anderen Postfächer passt. Wir lesen die Mail regelmäßig.",
+      ),
+      action: { label: SITE.contact.email, href: `mailto:${SITE.contact.email}` },
     },
-  },
-  {
-    kicker: "Küche",
-    title: "Kochen und Verpflegung.",
-    body: "Mithilfe in der Küche, warme Mahlzeiten und alle Themen rund um Lebensmittel am Kältebus.",
-    action: {
-      label: SITE.contact.emailKochen,
-      href: `mailto:${SITE.contact.emailKochen}`,
+    {
+      kicker: t(texts, "kanal2_kicker", "Geldspende"),
+      title: t(texts, "kanal2_title", "Finanzen."),
+      body: t(
+        texts,
+        "kanal2_body",
+        "Spendenquittungen, Rechnungen und steuerliche Rückfragen. Für Überweisungen und Online-Spende gibt es die Spendenseite.",
+      ),
+      action: { label: SITE.contact.emailFinanzen, href: `mailto:${SITE.contact.emailFinanzen}` },
     },
-  },
-  {
-    kicker: "Sachspende",
-    title: "Sachspenden.",
-    body: "Vor jeder Übergabe kurz per E-Mail Bescheid geben. Was gerade gebraucht wird, steht auf der Bedarfsliste.",
-    action: {
-      label: SITE.contact.emailSachspenden,
-      href: `mailto:${SITE.contact.emailSachspenden}`,
+    {
+      kicker: t(texts, "kanal3_kicker", "Küche"),
+      title: t(texts, "kanal3_title", "Kochen und Verpflegung."),
+      body: t(
+        texts,
+        "kanal3_body",
+        "Mithilfe in der Küche, warme Mahlzeiten und alle Themen rund um Lebensmittel am Kältebus.",
+      ),
+      action: { label: SITE.contact.emailKochen, href: `mailto:${SITE.contact.emailKochen}` },
     },
-  },
-  {
-    kicker: "Bedarfsliste",
-    title: "Was gebraucht wird.",
-    body: "Vor der Übergabe lohnt ein Blick auf die aktuelle Liste. So kommt an, was tatsächlich im Betrieb gebraucht wird.",
-    action: { label: "Zur Bedarfsliste", href: "/bedarf" },
-  },
-  {
-    kicker: "Akute Not",
-    title: "Notruf 112.",
-    body: "Wenn eine Person nicht mehr ansprechbar ist, bewusstlos oder stark unterkühlt: nicht auf uns warten, sofort den Rettungsdienst rufen.",
-    action: { label: "112 wählen", href: "tel:112" },
-  },
-];
+    {
+      kicker: t(texts, "kanal4_kicker", "Sachspende"),
+      title: t(texts, "kanal4_title", "Sachspenden."),
+      body: t(
+        texts,
+        "kanal4_body",
+        "Vor jeder Übergabe kurz per E-Mail Bescheid geben. Was gerade gebraucht wird, steht auf der Bedarfsliste.",
+      ),
+      action: { label: SITE.contact.emailSachspenden, href: `mailto:${SITE.contact.emailSachspenden}` },
+    },
+    {
+      kicker: t(texts, "kanal5_kicker", "Bedarfsliste"),
+      title: t(texts, "kanal5_title", "Was gebraucht wird."),
+      body: t(
+        texts,
+        "kanal5_body",
+        "Vor der Übergabe lohnt ein Blick auf die aktuelle Liste. So kommt an, was tatsächlich im Betrieb gebraucht wird.",
+      ),
+      action: { label: t(texts, "kanal5_cta", "Zur Bedarfsliste"), href: "/bedarf" },
+    },
+    {
+      kicker: t(texts, "kanal6_kicker", "Akute Not"),
+      title: t(texts, "kanal6_title", "Notruf 112."),
+      body: t(
+        texts,
+        "kanal6_body",
+        "Wenn eine Person nicht mehr ansprechbar ist, bewusstlos oder stark unterkühlt: nicht auf uns warten, sofort den Rettungsdienst rufen.",
+      ),
+      action: { label: t(texts, "kanal6_cta", "112 wählen"), href: "tel:112" },
+    },
+  ];
 
-const ORTE = [
-  {
-    kicker: "Vereinssitz",
-    title: "Sankt-Johanner-Straße 49",
-    detail: `${SITE.address.zip} ${SITE.address.city}`,
-    body: "Die Anschrift des Vereins für Post und offizielle Korrespondenz. Kein Publikumsverkehr, kein Übergabeort.",
-  },
-  {
-    kicker: "Standort",
-    title: SITE.standort.location,
-    detail: SITE.standort.detail,
-    body: `Der eigentliche Ort der Arbeit. Erreichbar über die ${SITE.standort.tram}. Betrieb: ${SITE.standort.season.toLowerCase()}.`,
-  },
-];
+  const orte = [
+    {
+      kicker: t(texts, "orte1_kicker", "Vereinssitz"),
+      title: t(texts, "orte1_title", "Sankt-Johanner-Straße 49"),
+      detail: `${SITE.address.zip} ${SITE.address.city}`,
+      body: t(
+        texts,
+        "orte1_body",
+        "Die Anschrift des Vereins für Post und offizielle Korrespondenz. Kein Publikumsverkehr, kein Übergabeort.",
+      ),
+    },
+    {
+      kicker: t(texts, "orte2_kicker", "Standort"),
+      title: SITE.standort.location,
+      detail: SITE.standort.detail,
+      body: t(
+        texts,
+        "orte2_body",
+        "Der eigentliche Ort der Arbeit. Erreichbar über die Saarbahn-Haltestelle Römerkastell. Betrieb: jeden Winter.",
+      ),
+    },
+  ];
 
-export function KontaktDetail() {
   return (
     <>
       <section className="section bg-white">
         <div className="container-x">
           <div className="max-w-2xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">Welcher Kanal für was</div>
+              <div className="kicker-line">{t(texts, "kanal_kicker", "Welcher Kanal für was")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Kurzer Leitfaden.
+                {t(texts, "kanal_title", "Kurzer Leitfaden.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -86,16 +110,19 @@ export function KontaktDetail() {
             </Reveal>
             <Reveal variant="up" delay={260} duration={800}>
               <p className="mt-6 text-[15px] leading-relaxed text-ink-500 sm:text-[16px]">
-                Damit Ihre Anfrage möglichst schnell bei der richtigen Person
-                landet, hier die üblichen Wege im Überblick.
+                {t(
+                  texts,
+                  "kanal_lead",
+                  "Damit Ihre Anfrage möglichst schnell bei der richtigen Person landet, hier die üblichen Wege im Überblick.",
+                )}
               </p>
             </Reveal>
           </div>
 
           <div className="mt-10 grid gap-4 sm:gap-5 md:mt-14 md:grid-cols-2">
-            {KANAELE.map((k, i) => (
+            {kanaele.map((k, i) => (
               <Reveal
-                key={k.title}
+                key={i}
                 variant="up"
                 delay={i * 110}
                 duration={700}
@@ -145,11 +172,11 @@ export function KontaktDetail() {
         <div className="container-x">
           <div className="max-w-2xl">
             <Reveal variant="up" duration={700}>
-              <div className="kicker-line">So finden Sie uns</div>
+              <div className="kicker-line">{t(texts, "orte_kicker", "So finden Sie uns")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-4 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[42px]">
-                Zwei Adressen, zwei Zwecke.
+                {t(texts, "orte_title", "Zwei Adressen, zwei Zwecke.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={180} duration={700}>
@@ -157,17 +184,19 @@ export function KontaktDetail() {
             </Reveal>
             <Reveal variant="up" delay={260} duration={800}>
               <p className="mt-6 text-[15px] leading-relaxed text-ink-500 sm:text-[16px]">
-                Der Vereinssitz ist die postalische Anschrift. Der Kältebus
-                am Römerkastell ist der Ort, an dem die Arbeit tatsächlich
-                stattfindet.
+                {t(
+                  texts,
+                  "orte_lead",
+                  "Der Vereinssitz ist die postalische Anschrift. Der Kältebus am Römerkastell ist der Ort, an dem die Arbeit tatsächlich stattfindet.",
+                )}
               </p>
             </Reveal>
           </div>
 
           <div className="mt-10 grid gap-4 sm:gap-6 md:mt-14 md:grid-cols-2">
-            {ORTE.map((o, i) => (
+            {orte.map((o, i) => (
               <Reveal
-                key={o.kicker}
+                key={i}
                 variant="up"
                 delay={i * 130}
                 duration={800}
@@ -194,9 +223,13 @@ export function KontaktDetail() {
 
           <Reveal variant="up" delay={320} duration={800}>
             <div className="infobox mt-10 text-[13.5px] leading-relaxed text-ink-600 sm:mt-12 sm:text-[14px]">
-              <strong>Hinweis zum Datenschutz:</strong> Wir betreiben kein
-              Kontaktformular. Nachrichten erreichen den Verein direkt per
-              E-Mail an{" "}
+              <strong>
+                {t(
+                  texts,
+                  "orte_infobox",
+                  "Hinweis zum Datenschutz: Wir betreiben kein Kontaktformular. Nachrichten erreichen den Verein direkt per E-Mail an",
+                )}
+              </strong>{" "}
               <a
                 href={`mailto:${SITE.contact.email}`}
                 className="text-rot hover:underline"

@@ -2,25 +2,29 @@
 
 import { SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
+import { t, type PageTexts } from "@/lib/texts";
 
-export function Kontakt() {
+export function Kontakt({ texts }: { texts?: PageTexts }) {
   return (
     <section id="kontakt" className="section bg-paper-100">
       <div className="container-x">
         <div className="grid gap-10 md:grid-cols-[minmax(0,380px)_1fr] md:gap-16">
           <div>
             <Reveal variant="up" duration={700}>
-              <div className="kicker">Kontakt</div>
+              <div className="kicker">{t(texts, "intro_kicker", "Kontakt")}</div>
             </Reveal>
             <Reveal variant="up" delay={100} duration={800}>
               <h2 className="h-serif mt-3 text-[28px] font-bold leading-[1.1] tracking-tight text-ink sm:text-[34px] md:text-[44px]">
-                Schreiben Sie uns.
+                {t(texts, "intro_title", "Schreiben Sie uns.")}
               </h2>
             </Reveal>
             <Reveal variant="up" delay={220} duration={800}>
               <p className="mt-4 text-[15px] leading-relaxed text-ink-500 sm:mt-5 sm:text-[15.5px]">
-                Für Spenden, Ehrenamt, Presse oder allgemeine Fragen erreichen
-                Sie uns am schnellsten per E-Mail.
+                {t(
+                  texts,
+                  "intro_body",
+                  "Für Spenden, Ehrenamt, Presse oder allgemeine Fragen erreichen Sie uns am schnellsten per E-Mail.",
+                )}
               </p>
             </Reveal>
           </div>
@@ -34,11 +38,14 @@ export function Kontakt() {
             >
               <div className="card min-w-0 p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                  E-Mail-Adressen
+                  {t(texts, "mail_kicker", "E-Mail-Adressen")}
                 </div>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-ink-500 sm:text-[14px]">
-                  Jedes Thema hat ein eigenes Postfach. So landet Ihre Nachricht
-                  schneller bei der richtigen Person.
+                  {t(
+                    texts,
+                    "mail_lead",
+                    "Jedes Thema hat ein eigenes Postfach. So landet Ihre Nachricht schneller bei der richtigen Person.",
+                  )}
                 </p>
                 <ul className="mt-5 divide-y divide-line border-t border-line sm:mt-6">
                   {SITE.emails.map((e) => (
@@ -69,7 +76,7 @@ export function Kontakt() {
             <Reveal variant="up" delay={120} duration={800} distance={22}>
               <div className="card flex h-full min-w-0 flex-col p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                  Vereinssitz
+                  {t(texts, "sitz_kicker", "Vereinssitz")}
                 </div>
                 <div className="h-serif mt-4 break-words text-[17px] font-bold leading-snug text-ink sm:mt-5 sm:text-[19px]">
                   {SITE.address.street}
@@ -85,7 +92,7 @@ export function Kontakt() {
             <Reveal variant="up" delay={240} duration={800} distance={22}>
               <div className="card flex h-full min-w-0 flex-col p-6 sm:p-7 md:p-8">
                 <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot sm:text-[12px]">
-                  Standort
+                  {t(texts, "standort_kicker", "Standort")}
                 </div>
                 <div className="h-serif mt-4 break-words text-[17px] font-bold leading-snug text-ink sm:mt-5 sm:text-[19px]">
                   {SITE.standort.location}

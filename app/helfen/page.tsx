@@ -8,6 +8,7 @@ import {
   volunteerActionSchema,
   webPageSchema,
 } from "@/lib/schema";
+import { loadPageTexts, t } from "@/lib/texts";
 
 export const metadata: Metadata = {
   title: "Ehrenamt",
@@ -27,7 +28,8 @@ const crumbs = [
   { name: "Ehrenamt" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const texts = await loadPageTexts("helfen");
   return (
     <main>
       <JsonLd
@@ -45,13 +47,17 @@ export default function Page() {
         ]}
       />
       <PageHeader
-        kicker="Ehrenamt"
-        title="Zeit spenden."
-        lead="Der Verein arbeitet ausschließlich ehrenamtlich. Wer sich einbringen möchte, meldet sich per E-Mail und bekommt alle Informationen zum Ablauf."
+        kicker={t(texts, "header_kicker", "Ehrenamt")}
+        title={t(texts, "header_title", "Zeit spenden.")}
+        lead={t(
+          texts,
+          "header_lead",
+          "Der Verein arbeitet ausschließlich ehrenamtlich. Wer sich einbringen möchte, meldet sich per E-Mail und bekommt alle Informationen zum Ablauf.",
+        )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Ehrenamt" }]}
       />
-      <Helfen />
-      <HelfenDetail />
+      <Helfen texts={texts} />
+      <HelfenDetail texts={texts} />
     </main>
   );
 }
