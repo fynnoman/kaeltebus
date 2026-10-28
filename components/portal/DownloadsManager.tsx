@@ -1,22 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { DOWNLOAD_CATEGORIES, formatBytes, type DownloadVisibility } from "@/lib/downloadsShared";
-
-type DownloadRow = {
-  id: string;
-  title: string;
-  description: string | null;
-  category: string;
-  visibility: DownloadVisibility;
-  file_url: string;
-  file_name: string;
-  file_size: number;
-  sort: number;
-  created_at: string;
-  updated_at: string;
-};
+import { formatBytes, type DownloadRow } from "@/lib/downloadsShared";
 
 type DraftFile = {
   url: string;
@@ -24,26 +10,12 @@ type DraftFile = {
   size: number;
 } | null;
 
-const PUBLIC_CATEGORIES = DOWNLOAD_CATEGORIES.filter((c) => c.visibility === "public");
-const MEMBER_CATEGORIES = DOWNLOAD_CATEGORIES.filter((c) => c.visibility === "members");
-
 export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
   const router = useRouter();
   const [rows, setRows] = useState<DownloadRow[]>(initial);
-  const [tab, setTab] = useState<DownloadVisibility>("public");
   const [editing, setEditing] = useState<DownloadRow | null>(null);
   const [showNew, setShowNew] = useState(false);
-
-  const grouped = useMemo(() => {
-    const map = new Map<string, DownloadRow[]>();
-    for (const row of rows) {
-      if (row.visibility !== tab) continue;
-      const list = map.get(row.category) ?? [];
-      list.push(row);
-      map.set(row.category, list);
-    }
-    return map;
-  }, [rows, tab]);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   async function reload() {
     const res = await fetch("/api/portal/downloads", { cache: "no-store" });
@@ -63,114 +35,83 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
     }
   }
 
-  const activeCats = tab === "public" ? PUBLIC_CATEGORIES : MEMBER_CATEGORIES;
+  async function copyLink(row: DownloadRow) {
+    try {
+      await navigator.clipboard.writeText(row.file_url);
+      setCopiedId(row.id);
+      setTimeout(() => setCopiedId((v) => (v === row.id ? null : v)), 2000);
+    } catch {
+      /* kein Clipboard verfügbar */
+    }
+  }
 
   return (
-    <div className="mt-10 space-y-8">
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setTab("public")}
-          className={`rounded px-4 py-2 text-sm font-semibold ${
-            tab === "public"
-              ? "bg-ink text-white"
-              : "border border-line bg-white text-ink hover:border-rot hover:text-rot"
-          }`}
-        >
-          Öffentlich · für alle
-        </button>
-        <button
-          type="button"
-          onClick={() => setTab("members")}
-          className={`rounded px-4 py-2 text-sm font-semibold ${
-            tab === "members"
-              ? "bg-ink text-white"
-              : "border border-line bg-white text-ink hover:border-rot hover:text-rot"
-          }`}
-        >
-          Mitgliederbereich
-        </button>
-        <button
-          type="button"
-          onClick={() => setShowNew(true)}
-          className="btn-primary ml-auto"
-        >
-          Neue Datei hochladen
+    <div className="mt-10 space-y-6">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-sm text-ink-500">
+          Jede hochgeladene Datei bekommt einen direkten Link, den ihr per Mail oder Chat weitergeben könnt.
+        </p>
+        <button type="button" onClick={() => setShowNew(true)} className="btn-primary shrink-0">
+          Datei hochladen
         </button>
       </div>
 
-      <p className="text-sm text-ink-500">
-        {tab === "public"
-          ? "Diese Dateien sind unter /downloads für alle Besucher sichtbar und herunterladbar."
-          : "Diese Dateien sind nur im Mitgliederbereich unter /mitglieder nach Passworteingabe erreichbar."}
-      </p>
-
-      {activeCats.map((cat) => {
-        const items = grouped.get(cat.slug) ?? [];
-        return (
-          <section key={cat.slug} className="rounded-md border border-line bg-white">
-            <header className="flex items-center justify-between gap-4 border-b border-line px-5 py-3">
-              <div>
-                <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
-                  {cat.slug}
+      <section className="rounded-md border border-line bg-white">
+        {rows.length === 0 ? (
+          <div className="p-10 text-center text-ink-500">Noch keine Dateien hochgeladen.</div>
+        ) : (
+          <ul className="divide-y divide-line">
+            {rows.map((row) => (
+              <li key={row.id} className="flex flex-wrap items-start justify-between gap-4 px-5 py-4">
+                <div className="min-w-0 flex-1">
+                  <div className="font-semibold text-ink">{row.title}</div>
+                  {row.description && (
+                    <div className="mt-1 text-sm text-ink-500">{row.description}</div>
+                  )}
+                  <div className="mt-2 flex flex-wrap items-center gap-3 text-[12.5px] text-ink-400">
+                    <a
+                      href={row.file_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-rot hover:underline"
+                    >
+                      {row.file_name}
+                    </a>
+                    <span>{formatBytes(row.file_size)}</span>
+                  </div>
                 </div>
-                <h2 className="h-serif mt-1 text-lg font-bold text-ink">{cat.label}</h2>
-              </div>
-              <span className="rounded bg-paper-100 px-2 py-1 text-[11px] font-semibold text-ink-500">
-                {items.length} {items.length === 1 ? "Datei" : "Dateien"}
-              </span>
-            </header>
-            {items.length === 0 ? (
-              <div className="p-6 text-sm text-ink-400">Noch nichts hochgeladen.</div>
-            ) : (
-              <ul className="divide-y divide-line">
-                {items.map((row) => (
-                  <li key={row.id} className="flex flex-wrap items-start justify-between gap-4 px-5 py-4">
-                    <div className="min-w-0 flex-1">
-                      <div className="font-semibold text-ink">{row.title}</div>
-                      {row.description && (
-                        <div className="mt-1 text-sm text-ink-500">{row.description}</div>
-                      )}
-                      <div className="mt-2 flex flex-wrap items-center gap-3 text-[12.5px] text-ink-400">
-                        <a
-                          href={row.file_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-medium text-rot hover:underline"
-                        >
-                          {row.file_name}
-                        </a>
-                        <span>{formatBytes(row.file_size)}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setEditing(row)}
-                        className="rounded bg-ink px-3 py-1.5 text-xs text-white hover:bg-ink-700"
-                      >
-                        Bearbeiten
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => remove(row.id)}
-                        className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink-500 hover:border-rot hover:text-rot"
-                      >
-                        Löschen
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-        );
-      })}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => copyLink(row)}
+                    className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink hover:border-rot hover:text-rot"
+                  >
+                    {copiedId === row.id ? "Kopiert" : "Link kopieren"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditing(row)}
+                    className="rounded bg-ink px-3 py-1.5 text-xs text-white hover:bg-ink-700"
+                  >
+                    Bearbeiten
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => remove(row.id)}
+                    className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink-500 hover:border-rot hover:text-rot"
+                  >
+                    Löschen
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       {(showNew || editing) && (
         <DownloadForm
           initial={editing ?? undefined}
-          defaultVisibility={tab}
           onClose={() => {
             setShowNew(false);
             setEditing(null);
@@ -188,20 +129,16 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
 
 function DownloadForm({
   initial,
-  defaultVisibility,
   onClose,
   onSaved,
 }: {
   initial?: DownloadRow;
-  defaultVisibility: DownloadVisibility;
   onClose: () => void;
   onSaved: () => void;
 }) {
   const isEdit = Boolean(initial?.id);
   const [title, setTitle] = useState(initial?.title ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
-  const [visibility, setVisibility] = useState<DownloadVisibility>(initial?.visibility ?? defaultVisibility);
-  const [category, setCategory] = useState(initial?.category ?? "");
   const [file, setFile] = useState<DraftFile>(
     initial
       ? { url: initial.file_url, name: initial.file_name, size: initial.file_size }
@@ -210,17 +147,6 @@ function DownloadForm({
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const availableCats = useMemo(
-    () => DOWNLOAD_CATEGORIES.filter((c) => c.visibility === visibility),
-    [visibility],
-  );
-
-  useEffect(() => {
-    if (!availableCats.find((c) => c.slug === category)) {
-      setCategory(availableCats[0]?.slug ?? "");
-    }
-  }, [availableCats, category]);
 
   async function upload(input: File) {
     setUploading(true);
@@ -244,7 +170,6 @@ function DownloadForm({
 
   async function save() {
     if (!title.trim()) return setError("Bitte einen Titel eingeben.");
-    if (!category) return setError("Bitte eine Kategorie wählen.");
     if (!file) return setError("Bitte zuerst eine Datei hochladen.");
 
     setSaving(true);
@@ -253,8 +178,6 @@ function DownloadForm({
     const payload = {
       title: title.trim(),
       description: description.trim(),
-      category,
-      visibility,
       file_url: file.url,
       file_name: file.name,
       file_size: file.size,
@@ -292,11 +215,7 @@ function DownloadForm({
           <h3 className="h-serif text-xl font-bold text-ink">
             {isEdit ? "Datei bearbeiten" : "Neue Datei"}
           </h3>
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-sm text-ink-400 hover:text-rot"
-          >
+          <button type="button" onClick={onClose} className="text-sm text-ink-400 hover:text-rot">
             Schließen
           </button>
         </div>
@@ -307,7 +226,7 @@ function DownloadForm({
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="z.B. Kompass zur Helfertätigkeit 2026"
+              placeholder="z.B. Kompass zur Helfertätigkeit"
               className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
             />
           </label>
@@ -322,35 +241,6 @@ function DownloadForm({
               className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
             />
           </label>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block">
-              <span className="text-sm font-medium text-ink">Sichtbarkeit</span>
-              <select
-                value={visibility}
-                onChange={(e) => setVisibility(e.target.value as DownloadVisibility)}
-                className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
-              >
-                <option value="public">Öffentlich · für alle</option>
-                <option value="members">Mitgliederbereich (Passwort)</option>
-              </select>
-            </label>
-            <label className="block">
-              <span className="text-sm font-medium text-ink">Kategorie</span>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
-              >
-                <option value="">— bitte wählen —</option>
-                {availableCats.map((c) => (
-                  <option key={c.slug} value={c.slug}>
-                    {c.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
 
           <div className="rounded border border-line bg-paper-100 p-4">
             <div className="text-sm font-medium text-ink">Datei (PDF, DOC, DOCX, max. 40 MB)</div>
@@ -405,11 +295,7 @@ function DownloadForm({
           )}
 
           <div className="flex items-center justify-end gap-3 border-t border-line pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="text-sm text-ink-500 hover:text-rot"
-            >
+            <button type="button" onClick={onClose} className="text-sm text-ink-500 hover:text-rot">
               Abbrechen
             </button>
             <button
