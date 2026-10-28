@@ -62,6 +62,24 @@ export function Hero({ texts }: { texts?: PageTexts }) {
             </div>
           </Reveal>
 
+          <Reveal variant="up" delay={380} duration={800}>
+            <Link
+              href="/aktuelles"
+              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-rot hover:text-rot-600"
+            >
+              {t(texts, "hero_news_link", "Aktuelles aus unserer Arbeit")}
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                <path
+                  d="M4 7h7m0 0-3-3m3 3-3 3"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          </Reveal>
+
           <div className="mt-9 grid gap-4 sm:grid-cols-2">
             <Reveal variant="up" delay={440} duration={700}>
               <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">

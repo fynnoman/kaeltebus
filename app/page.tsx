@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import { AktuellesPreview } from "@/components/AktuellesPreview";
 import { Pillars } from "@/components/Pillars";
 import { Notfall } from "@/components/Notfall";
 import { Winter } from "@/components/Winter";
@@ -33,6 +34,7 @@ export default async function Page() {
         ]}
       />
       <Hero texts={texts} />
+      <AktuellesPreview />
       <Notfall texts={texts} />
       <Winter texts={texts} />
       <Pillars texts={texts} />
