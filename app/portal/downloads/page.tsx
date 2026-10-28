@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { sql } from "@/lib/db";
+import { isAdmin } from "@/lib/auth";
 import { ensureDownloadsTable, type DownloadRow } from "@/lib/downloads";
 import { DownloadsManager } from "@/components/portal/DownloadsManager";
 
@@ -7,11 +8,19 @@ export const dynamic = "force-dynamic";
 
 export default async function PortalDownloadsPage() {
   await ensureDownloadsTable();
-  const rows = (await sql`
-    SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
-    FROM downloads
-    ORDER BY created_at DESC
-  `) as DownloadRow[];
+  const admin = await isAdmin();
+  const rows = admin
+    ? ((await sql`
+        SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
+        FROM downloads
+        ORDER BY created_at DESC
+      `) as DownloadRow[])
+    : ((await sql`
+        SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
+        FROM downloads
+        WHERE visibility = 'public'
+        ORDER BY created_at DESC
+      `) as DownloadRow[]);
 
   return (
     <main className="section">
@@ -35,7 +44,7 @@ export default async function PortalDownloadsPage() {
           </p>
         </div>
 
-        <DownloadsManager initial={rows} />
+        <DownloadsManager initial={rows} admin={admin} />
       </div>
     </main>
   );

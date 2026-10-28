@@ -15,13 +15,23 @@ type DraftFile = {
   size: number;
 } | null;
 
-export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
+export function DownloadsManager({
+  initial,
+  admin: initialAdmin,
+}: {
+  initial: DownloadRow[];
+  admin: boolean;
+}) {
   const router = useRouter();
   const [rows, setRows] = useState<DownloadRow[]>(initial);
   const [tab, setTab] = useState<DownloadVisibility>("public");
   const [editing, setEditing] = useState<DownloadRow | null>(null);
   const [showNew, setShowNew] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [admin, setAdmin] = useState(initialAdmin);
+  const [adminPending, setAdminPending] = useState(false);
+  const [adminError, setAdminError] = useState<string | null>(null);
+  const [adminPassword, setAdminPassword] = useState("");
 
   const activeRows = useMemo(() => rows.filter((r) => r.visibility === tab), [rows, tab]);
 
@@ -50,7 +60,8 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
       setRows((prev) => prev.filter((r) => r.id !== id));
       router.refresh();
     } else {
-      alert("Löschen fehlgeschlagen");
+      const data = await res.json().catch(() => ({}));
+      alert(data?.error ?? "Löschen fehlgeschlagen");
     }
   }
 
@@ -63,6 +74,42 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
       /* kein Clipboard verfügbar */
     }
   }
+
+  async function unlockAdmin(e: React.FormEvent) {
+    e.preventDefault();
+    setAdminPending(true);
+    setAdminError(null);
+    try {
+      const res = await fetch("/api/portal/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: adminPassword }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setAdminError(data?.error ?? "Freischalten fehlgeschlagen");
+        setAdminPending(false);
+        return;
+      }
+      setAdmin(true);
+      setAdminPassword("");
+      setAdminPending(false);
+      await reload();
+    } catch {
+      setAdminError("Netzwerkfehler");
+      setAdminPending(false);
+    }
+  }
+
+  async function lockAdmin() {
+    await fetch("/api/portal/admin", { method: "DELETE" });
+    setAdmin(false);
+    setRows((prev) => prev.filter((r) => r.visibility === "public"));
+    setTab("public");
+    router.refresh();
+  }
+
+  const canCreate = tab === "public" || admin;
 
   return (
     <div className="mt-10 space-y-6">
@@ -81,23 +128,42 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
         <button
           type="button"
           onClick={() => setTab("internal")}
-          className={`rounded px-4 py-2 text-sm font-semibold ${
+          className={`inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-semibold ${
             tab === "internal"
               ? "bg-ink text-white"
               : "border border-line bg-white text-ink hover:border-rot hover:text-rot"
           }`}
+          aria-label="Interne Downloads"
         >
-          Interne Downloads
+          <span>Interne Downloads</span>
+          {!admin && (
+            <span aria-hidden className="text-[13px]">
+              🔒
+            </span>
+          )}
         </button>
-        <button type="button" onClick={() => setShowNew(true)} className="btn-primary ml-auto">
-          Neue Datei hochladen
-        </button>
+        {canCreate && (
+          <button type="button" onClick={() => setShowNew(true)} className="btn-primary ml-auto">
+            Neue Datei hochladen
+          </button>
+        )}
+        {admin && (
+          <button
+            type="button"
+            onClick={lockAdmin}
+            className="ml-auto rounded border border-line bg-white px-3 py-1.5 text-xs text-ink-500 hover:border-rot hover:text-rot"
+          >
+            Admin-Session beenden
+          </button>
+        )}
       </div>
 
       <p className="text-sm text-ink-500">
         {tab === "public"
           ? "Diese Dateien erscheinen für alle Besucher unter /downloads, geordnet nach Kategorien."
-          : "Diese Dateien bleiben im passwortgeschützten Portal. Nutzt den Link-kopieren-Button, um ihn intern zu teilen."}
+          : admin
+            ? "Diese Dateien bleiben im passwortgeschützten Portal. Nutzt den Link-kopieren-Button, um ihn intern zu teilen."
+            : "Dieser Bereich ist zusätzlich durch ein Admin-Passwort geschützt. Gib das Admin-Passwort ein, um interne Dateien zu sehen und zu verwalten."}
       </p>
 
       {tab === "public" ? (
@@ -129,7 +195,7 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
             />
           ) : null}
         </div>
-      ) : (
+      ) : admin ? (
         <section className="rounded-md border border-line bg-white">
           {activeRows.length === 0 ? (
             <div className="p-10 text-center text-ink-500">Noch keine internen Dateien.</div>
@@ -148,12 +214,42 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
             </ul>
           )}
         </section>
+      ) : (
+        <section className="rounded-md border border-line bg-white p-6">
+          <h3 className="h-serif text-lg font-bold text-ink">Admin-Zugang erforderlich</h3>
+          <p className="mt-2 text-sm text-ink-500">
+            Gib das Admin-Passwort ein, um die internen Dateien zu sehen oder neue hochzuladen.
+            Die Freischaltung gilt für die aktuelle Sitzung.
+          </p>
+          <form onSubmit={unlockAdmin} className="mt-6 flex flex-wrap items-end gap-3">
+            <label className="min-w-[240px] flex-1">
+              <span className="text-sm font-medium text-ink">Admin-Passwort</span>
+              <input
+                type="password"
+                autoFocus
+                required
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
+              />
+            </label>
+            <button type="submit" disabled={adminPending} className="btn-primary disabled:opacity-60">
+              {adminPending ? "Prüfe …" : "Freischalten"}
+            </button>
+          </form>
+          {adminError && (
+            <p className="mt-3 text-sm text-rot" role="alert">
+              {adminError}
+            </p>
+          )}
+        </section>
       )}
 
       {(showNew || editing) && (
         <DownloadForm
           initial={editing ?? undefined}
           defaultVisibility={tab}
+          admin={admin}
           onClose={() => {
             setShowNew(false);
             setEditing(null);
@@ -281,11 +377,13 @@ function DownloadRowItem({
 function DownloadForm({
   initial,
   defaultVisibility,
+  admin,
   onClose,
   onSaved,
 }: {
   initial?: DownloadRow;
   defaultVisibility: DownloadVisibility;
+  admin: boolean;
   onClose: () => void;
   onSaved: () => void;
 }) {
@@ -336,6 +434,9 @@ function DownloadForm({
     if (!title.trim()) return setError("Bitte einen Titel eingeben.");
     if (visibility === "public" && !category) {
       return setError("Für öffentliche Downloads bitte eine Kategorie wählen.");
+    }
+    if (visibility === "internal" && !admin) {
+      return setError("Admin-Freigabe erforderlich. Bitte zuerst oben freischalten.");
     }
     if (!file) return setError("Bitte zuerst eine Datei hochladen.");
 
@@ -420,7 +521,9 @@ function DownloadForm({
                 className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
               >
                 <option value="public">Öffentlich (für Besucher)</option>
-                <option value="internal">Intern (nur im Portal)</option>
+                <option value="internal" disabled={!admin}>
+                  Intern (nur im Portal){!admin ? " — Admin erforderlich" : ""}
+                </option>
               </select>
             </label>
             {visibility === "public" && (
@@ -512,4 +615,3 @@ function DownloadForm({
     </div>
   );
 }
-

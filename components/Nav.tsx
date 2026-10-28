@@ -63,6 +63,18 @@ export function Nav({ texts }: { texts?: PageTexts }) {
             </span>
           </div>
           <div className="flex items-center gap-5">
+            <Link
+              href="/portal/login"
+              className="text-paper-200/80 hover:text-white"
+            >
+              Vereinsmitglieder Portal
+            </Link>
+            <Link
+              href="/portal/login?mode=admin"
+              className="text-paper-200/80 hover:text-white"
+            >
+              Admin Portal
+            </Link>
             <a
               href="mailto:info@kaeltebus-saarbruecken.de"
               className="hover:text-white"
@@ -197,6 +209,22 @@ export function Nav({ texts }: { texts?: PageTexts }) {
                 >
                   {t(texts, "nav_mobile_cta_secondary", "Per E-Mail schreiben")}
                 </a>
+              </div>
+              <div className="mt-2 flex flex-col gap-1 border-t border-line pt-3 pb-4 text-[13.5px]">
+                <Link
+                  href="/portal/login"
+                  onClick={() => setOpen(false)}
+                  className="py-1 text-ink-500 hover:text-rot"
+                >
+                  Vereinsmitglieder Portal
+                </Link>
+                <Link
+                  href="/portal/login?mode=admin"
+                  onClick={() => setOpen(false)}
+                  className="py-1 text-ink-500 hover:text-rot"
+                >
+                  Admin Portal
+                </Link>
               </div>
             </div>
           </nav>

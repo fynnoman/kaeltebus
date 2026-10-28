@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { del } from "@vercel/blob";
 import { sql } from "@/lib/db";
+import { isAdmin } from "@/lib/auth";
 import {
   ensureDownloadsTable,
   PUBLIC_CATEGORIES,
@@ -49,6 +50,16 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     );
   }
 
+  if (
+    (existing.visibility === "internal" || visibility === "internal") &&
+    !(await isAdmin())
+  ) {
+    return NextResponse.json(
+      { error: "Admin-Freigabe erforderlich" },
+      { status: 403 },
+    );
+  }
+
   const category = categoryRaw || null;
 
   await sql`
@@ -85,9 +96,19 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
   await ensureDownloadsTable();
   const { id } = await params;
 
-  const rows = (await sql`SELECT file_url FROM downloads WHERE id = ${id}`) as { file_url: string }[];
+  const rows = (await sql`SELECT file_url, visibility FROM downloads WHERE id = ${id}`) as {
+    file_url: string;
+    visibility: DownloadVisibility;
+  }[];
   const row = rows[0];
   if (!row) return NextResponse.json({ error: "Nicht gefunden" }, { status: 404 });
+
+  if (row.visibility === "internal" && !(await isAdmin())) {
+    return NextResponse.json(
+      { error: "Admin-Freigabe erforderlich" },
+      { status: 403 },
+    );
+  }
 
   await sql`DELETE FROM downloads WHERE id = ${id}`;
 

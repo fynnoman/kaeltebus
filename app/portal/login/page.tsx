@@ -9,20 +9,24 @@ export const metadata: Metadata = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ redirect?: string }>;
+  searchParams: Promise<{ redirect?: string; mode?: string }>;
 }) {
-  const { redirect } = await searchParams;
+  const { redirect, mode } = await searchParams;
+  const adminMode = mode === "admin";
+
   return (
     <main className="section">
       <div className="container-x max-w-md">
-        <p className="eyebrow">Mitarbeiter-Portal</p>
+        <p className="eyebrow">{adminMode ? "Admin-Portal" : "Vereinsmitglieder-Portal"}</p>
         <h1 className="h-serif mt-4 text-3xl font-bold text-ink md:text-4xl">
           Anmelden
         </h1>
         <p className="mt-4 text-ink-500">
-          Zugang ist Mitarbeitern des Vereins vorbehalten.
+          {adminMode
+            ? "Für den Admin-Bereich sind beide Passwörter erforderlich. Das Admin-Passwort schaltet die interne Dateiverwaltung frei."
+            : "Zugang ist Mitarbeitern des Vereins vorbehalten."}
         </p>
-        <LoginForm redirectTo={redirect ?? "/portal"} />
+        <LoginForm redirectTo={redirect ?? "/portal"} adminMode={adminMode} />
       </div>
     </main>
   );

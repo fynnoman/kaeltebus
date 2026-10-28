@@ -3,9 +3,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function LoginForm({ redirectTo }: { redirectTo: string }) {
+export function LoginForm({
+  redirectTo,
+  adminMode = false,
+}: {
+  redirectTo: string;
+  adminMode?: boolean;
+}) {
   const router = useRouter();
   const [password, setPassword] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -17,7 +24,10 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
       const res = await fetch("/api/portal/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({
+          password,
+          admin_password: adminMode ? adminPassword : undefined,
+        }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -25,7 +35,7 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
         setPending(false);
         return;
       }
-      router.replace(redirectTo || "/portal");
+      router.replace(adminMode ? "/portal/downloads" : redirectTo || "/portal");
       router.refresh();
     } catch {
       setError("Netzwerkfehler");
@@ -36,7 +46,7 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
   return (
     <form onSubmit={onSubmit} className="mt-8 space-y-4">
       <label className="block">
-        <span className="text-sm font-medium text-ink">Passwort</span>
+        <span className="text-sm font-medium text-ink">Vereinsmitglieder-Passwort</span>
         <input
           type="password"
           autoFocus
@@ -46,6 +56,23 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
           className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
         />
       </label>
+
+      {adminMode && (
+        <label className="block">
+          <span className="text-sm font-medium text-ink">Admin-Passwort</span>
+          <input
+            type="password"
+            required
+            value={adminPassword}
+            onChange={(e) => setAdminPassword(e.target.value)}
+            className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
+          />
+          <span className="mt-1 block text-xs text-ink-400">
+            Schaltet die Verwaltung interner Dateien frei.
+          </span>
+        </label>
+      )}
+
       {error && (
         <p className="text-sm text-rot" role="alert">
           {error}

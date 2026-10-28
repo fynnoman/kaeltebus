@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { sql } from "@/lib/db";
+import { isAdmin } from "@/lib/auth";
 import {
   ensureDownloadsTable,
   PUBLIC_CATEGORIES,
@@ -12,11 +13,19 @@ const PUBLIC_SLUGS = new Set(PUBLIC_CATEGORIES.map((c) => c.slug));
 
 export async function GET() {
   await ensureDownloadsTable();
-  const rows = (await sql`
-    SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
-    FROM downloads
-    ORDER BY created_at DESC
-  `) as DownloadRow[];
+  const admin = await isAdmin();
+  const rows = admin
+    ? ((await sql`
+        SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
+        FROM downloads
+        ORDER BY created_at DESC
+      `) as DownloadRow[])
+    : ((await sql`
+        SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
+        FROM downloads
+        WHERE visibility = 'public'
+        ORDER BY created_at DESC
+      `) as DownloadRow[]);
   return NextResponse.json({ downloads: rows });
 }
 
@@ -52,6 +61,13 @@ export async function POST(req: Request) {
   }
   if (!fileUrl || !fileName) {
     return NextResponse.json({ error: "Datei fehlt. Bitte zuerst hochladen." }, { status: 400 });
+  }
+
+  if (visibility === "internal" && !(await isAdmin())) {
+    return NextResponse.json(
+      { error: "Admin-Freigabe erforderlich" },
+      { status: 403 },
+    );
   }
 
   const category = categoryRaw || null;
