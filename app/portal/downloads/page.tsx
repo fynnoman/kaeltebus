@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function PortalDownloadsPage() {
   await ensureDownloadsTable();
   const rows = (await sql`
-    SELECT id, title, description, file_url, file_name, file_size, created_at, updated_at
+    SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
     FROM downloads
     ORDER BY created_at DESC
   `) as DownloadRow[];

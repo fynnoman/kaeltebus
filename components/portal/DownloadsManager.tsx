@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { formatBytes, type DownloadRow } from "@/lib/downloadsShared";
+import {
+  PUBLIC_CATEGORIES,
+  formatBytes,
+  type DownloadRow,
+  type DownloadVisibility,
+} from "@/lib/downloadsShared";
 
 type DraftFile = {
   url: string;
@@ -13,9 +18,23 @@ type DraftFile = {
 export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
   const router = useRouter();
   const [rows, setRows] = useState<DownloadRow[]>(initial);
+  const [tab, setTab] = useState<DownloadVisibility>("public");
   const [editing, setEditing] = useState<DownloadRow | null>(null);
   const [showNew, setShowNew] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const activeRows = useMemo(() => rows.filter((r) => r.visibility === tab), [rows, tab]);
+
+  const groupedPublic = useMemo(() => {
+    const map = new Map<string, DownloadRow[]>();
+    for (const row of activeRows) {
+      const key = row.category ?? "";
+      const list = map.get(key) ?? [];
+      list.push(row);
+      map.set(key, list);
+    }
+    return map;
+  }, [activeRows]);
 
   async function reload() {
     const res = await fetch("/api/portal/downloads", { cache: "no-store" });
@@ -47,71 +66,94 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
 
   return (
     <div className="mt-10 space-y-6">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-sm text-ink-500">
-          Jede hochgeladene Datei bekommt einen direkten Link, den ihr per Mail oder Chat weitergeben könnt.
-        </p>
-        <button type="button" onClick={() => setShowNew(true)} className="btn-primary shrink-0">
-          Datei hochladen
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setTab("public")}
+          className={`rounded px-4 py-2 text-sm font-semibold ${
+            tab === "public"
+              ? "bg-ink text-white"
+              : "border border-line bg-white text-ink hover:border-rot hover:text-rot"
+          }`}
+        >
+          Öffentliche Downloads
+        </button>
+        <button
+          type="button"
+          onClick={() => setTab("internal")}
+          className={`rounded px-4 py-2 text-sm font-semibold ${
+            tab === "internal"
+              ? "bg-ink text-white"
+              : "border border-line bg-white text-ink hover:border-rot hover:text-rot"
+          }`}
+        >
+          Interne Downloads
+        </button>
+        <button type="button" onClick={() => setShowNew(true)} className="btn-primary ml-auto">
+          Neue Datei hochladen
         </button>
       </div>
 
-      <section className="rounded-md border border-line bg-white">
-        {rows.length === 0 ? (
-          <div className="p-10 text-center text-ink-500">Noch keine Dateien hochgeladen.</div>
-        ) : (
-          <ul className="divide-y divide-line">
-            {rows.map((row) => (
-              <li key={row.id} className="flex flex-wrap items-start justify-between gap-4 px-5 py-4">
-                <div className="min-w-0 flex-1">
-                  <div className="font-semibold text-ink">{row.title}</div>
-                  {row.description && (
-                    <div className="mt-1 text-sm text-ink-500">{row.description}</div>
-                  )}
-                  <div className="mt-2 flex flex-wrap items-center gap-3 text-[12.5px] text-ink-400">
-                    <a
-                      href={row.file_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-medium text-rot hover:underline"
-                    >
-                      {row.file_name}
-                    </a>
-                    <span>{formatBytes(row.file_size)}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => copyLink(row)}
-                    className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink hover:border-rot hover:text-rot"
-                  >
-                    {copiedId === row.id ? "Kopiert" : "Link kopieren"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setEditing(row)}
-                    className="rounded bg-ink px-3 py-1.5 text-xs text-white hover:bg-ink-700"
-                  >
-                    Bearbeiten
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => remove(row.id)}
-                    className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink-500 hover:border-rot hover:text-rot"
-                  >
-                    Löschen
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <p className="text-sm text-ink-500">
+        {tab === "public"
+          ? "Diese Dateien erscheinen für alle Besucher unter /downloads, geordnet nach Kategorien."
+          : "Diese Dateien bleiben im passwortgeschützten Portal. Nutzt den Link-kopieren-Button, um ihn intern zu teilen."}
+      </p>
+
+      {tab === "public" ? (
+        <div className="space-y-6">
+          {PUBLIC_CATEGORIES.map((cat) => {
+            const items = groupedPublic.get(cat.slug) ?? [];
+            return (
+              <CategorySection
+                key={cat.slug}
+                label={cat.label}
+                slug={cat.slug}
+                items={items}
+                onEdit={setEditing}
+                onDelete={remove}
+                onCopy={copyLink}
+                copiedId={copiedId}
+              />
+            );
+          })}
+          {groupedPublic.get("")?.length ? (
+            <CategorySection
+              label="Ohne Kategorie"
+              slug=""
+              items={groupedPublic.get("") ?? []}
+              onEdit={setEditing}
+              onDelete={remove}
+              onCopy={copyLink}
+              copiedId={copiedId}
+            />
+          ) : null}
+        </div>
+      ) : (
+        <section className="rounded-md border border-line bg-white">
+          {activeRows.length === 0 ? (
+            <div className="p-10 text-center text-ink-500">Noch keine internen Dateien.</div>
+          ) : (
+            <ul className="divide-y divide-line">
+              {activeRows.map((row) => (
+                <DownloadRowItem
+                  key={row.id}
+                  row={row}
+                  onEdit={setEditing}
+                  onDelete={remove}
+                  onCopy={copyLink}
+                  copiedId={copiedId}
+                />
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
 
       {(showNew || editing) && (
         <DownloadForm
           initial={editing ?? undefined}
+          defaultVisibility={tab}
           onClose={() => {
             setShowNew(false);
             setEditing(null);
@@ -127,18 +169,133 @@ export function DownloadsManager({ initial }: { initial: DownloadRow[] }) {
   );
 }
 
+function CategorySection({
+  label,
+  slug,
+  items,
+  onEdit,
+  onDelete,
+  onCopy,
+  copiedId,
+}: {
+  label: string;
+  slug: string;
+  items: DownloadRow[];
+  onEdit: (row: DownloadRow) => void;
+  onDelete: (id: string) => void;
+  onCopy: (row: DownloadRow) => void;
+  copiedId: string | null;
+}) {
+  return (
+    <section className="rounded-md border border-line bg-white">
+      <header className="flex items-center justify-between gap-4 border-b border-line px-5 py-3">
+        <div>
+          {slug && (
+            <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
+              {slug}
+            </div>
+          )}
+          <h3 className="h-serif mt-1 text-lg font-bold text-ink">{label}</h3>
+        </div>
+        <span className="rounded bg-paper-100 px-2 py-1 text-[11px] font-semibold text-ink-500">
+          {items.length} {items.length === 1 ? "Datei" : "Dateien"}
+        </span>
+      </header>
+      {items.length === 0 ? (
+        <div className="p-6 text-sm text-ink-400">Noch nichts hochgeladen.</div>
+      ) : (
+        <ul className="divide-y divide-line">
+          {items.map((row) => (
+            <DownloadRowItem
+              key={row.id}
+              row={row}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              onCopy={onCopy}
+              copiedId={copiedId}
+            />
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function DownloadRowItem({
+  row,
+  onEdit,
+  onDelete,
+  onCopy,
+  copiedId,
+}: {
+  row: DownloadRow;
+  onEdit: (row: DownloadRow) => void;
+  onDelete: (id: string) => void;
+  onCopy: (row: DownloadRow) => void;
+  copiedId: string | null;
+}) {
+  return (
+    <li className="flex flex-wrap items-start justify-between gap-4 px-5 py-4">
+      <div className="min-w-0 flex-1">
+        <div className="font-semibold text-ink">{row.title}</div>
+        {row.description && <div className="mt-1 text-sm text-ink-500">{row.description}</div>}
+        <div className="mt-2 flex flex-wrap items-center gap-3 text-[12.5px] text-ink-400">
+          <a
+            href={row.file_url}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-rot hover:underline"
+          >
+            {row.file_name}
+          </a>
+          <span>{formatBytes(row.file_size)}</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => onCopy(row)}
+          className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink hover:border-rot hover:text-rot"
+        >
+          {copiedId === row.id ? "Kopiert" : "Link kopieren"}
+        </button>
+        <button
+          type="button"
+          onClick={() => onEdit(row)}
+          className="rounded bg-ink px-3 py-1.5 text-xs text-white hover:bg-ink-700"
+        >
+          Bearbeiten
+        </button>
+        <button
+          type="button"
+          onClick={() => onDelete(row.id)}
+          className="rounded border border-line bg-white px-3 py-1.5 text-xs text-ink-500 hover:border-rot hover:text-rot"
+        >
+          Löschen
+        </button>
+      </div>
+    </li>
+  );
+}
+
 function DownloadForm({
   initial,
+  defaultVisibility,
   onClose,
   onSaved,
 }: {
   initial?: DownloadRow;
+  defaultVisibility: DownloadVisibility;
   onClose: () => void;
   onSaved: () => void;
 }) {
   const isEdit = Boolean(initial?.id);
   const [title, setTitle] = useState(initial?.title ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
+  const [visibility, setVisibility] = useState<DownloadVisibility>(
+    initial?.visibility ?? defaultVisibility,
+  );
+  const [category, setCategory] = useState(initial?.category ?? "");
   const [file, setFile] = useState<DraftFile>(
     initial
       ? { url: initial.file_url, name: initial.file_name, size: initial.file_size }
@@ -147,6 +304,13 @@ function DownloadForm({
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (visibility !== "public") return;
+    if (!PUBLIC_CATEGORIES.find((c) => c.slug === category)) {
+      setCategory("");
+    }
+  }, [visibility, category]);
 
   async function upload(input: File) {
     setUploading(true);
@@ -170,6 +334,9 @@ function DownloadForm({
 
   async function save() {
     if (!title.trim()) return setError("Bitte einen Titel eingeben.");
+    if (visibility === "public" && !category) {
+      return setError("Für öffentliche Downloads bitte eine Kategorie wählen.");
+    }
     if (!file) return setError("Bitte zuerst eine Datei hochladen.");
 
     setSaving(true);
@@ -178,6 +345,8 @@ function DownloadForm({
     const payload = {
       title: title.trim(),
       description: description.trim(),
+      visibility,
+      category: visibility === "public" ? category : "",
       file_url: file.url,
       file_name: file.name,
       file_size: file.size,
@@ -226,7 +395,7 @@ function DownloadForm({
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="z.B. Kompass zur Helfertätigkeit"
+              placeholder="z.B. Kompass zur Helfertätigkeit 2026"
               className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
             />
           </label>
@@ -241,6 +410,37 @@ function DownloadForm({
               className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
             />
           </label>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="text-sm font-medium text-ink">Sichtbarkeit</span>
+              <select
+                value={visibility}
+                onChange={(e) => setVisibility(e.target.value as DownloadVisibility)}
+                className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
+              >
+                <option value="public">Öffentlich (für Besucher)</option>
+                <option value="internal">Intern (nur im Portal)</option>
+              </select>
+            </label>
+            {visibility === "public" && (
+              <label className="block">
+                <span className="text-sm font-medium text-ink">Kategorie</span>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
+                >
+                  <option value="">— bitte wählen —</option>
+                  {PUBLIC_CATEGORIES.map((c) => (
+                    <option key={c.slug} value={c.slug}>
+                      {c.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+          </div>
 
           <div className="rounded border border-line bg-paper-100 p-4">
             <div className="text-sm font-medium text-ink">Datei (PDF, DOC, DOCX, max. 40 MB)</div>
@@ -312,3 +512,4 @@ function DownloadForm({
     </div>
   );
 }
+

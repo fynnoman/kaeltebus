@@ -1,6 +1,12 @@
 import { sql } from "@/lib/db";
 
-export { formatBytes, type DownloadRow } from "@/lib/downloadsShared";
+export {
+  PUBLIC_CATEGORIES,
+  categoryLabel,
+  formatBytes,
+  type DownloadRow,
+  type DownloadVisibility,
+} from "@/lib/downloadsShared";
 
 let ensured = false;
 export async function ensureDownloadsTable() {
@@ -17,6 +23,8 @@ export async function ensureDownloadsTable() {
       updated_at timestamptz NOT NULL DEFAULT now()
     )
   `;
-  await sql`CREATE INDEX IF NOT EXISTS downloads_created_at_idx ON downloads (created_at DESC)`;
+  await sql`ALTER TABLE downloads ADD COLUMN IF NOT EXISTS visibility text NOT NULL DEFAULT 'internal'`;
+  await sql`ALTER TABLE downloads ADD COLUMN IF NOT EXISTS category text`;
+  await sql`CREATE INDEX IF NOT EXISTS downloads_visibility_idx ON downloads (visibility, created_at DESC)`;
   ensured = true;
 }

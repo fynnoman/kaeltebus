@@ -1,11 +1,19 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { sql } from "@/lib/db";
-import { ensureDownloadsTable, type DownloadRow } from "@/lib/downloads";
+import {
+  ensureDownloadsTable,
+  PUBLIC_CATEGORIES,
+  type DownloadRow,
+  type DownloadVisibility,
+} from "@/lib/downloads";
+
+const PUBLIC_SLUGS = new Set(PUBLIC_CATEGORIES.map((c) => c.slug));
 
 export async function GET() {
   await ensureDownloadsTable();
   const rows = (await sql`
-    SELECT id, title, description, file_url, file_name, file_size, created_at, updated_at
+    SELECT id, title, description, visibility, category, file_url, file_name, file_size, created_at, updated_at
     FROM downloads
     ORDER BY created_at DESC
   `) as DownloadRow[];
@@ -23,6 +31,8 @@ export async function POST(req: Request) {
 
   const title = typeof body.title === "string" ? body.title.trim() : "";
   const description = typeof body.description === "string" ? body.description.trim() : "";
+  const visibility = (typeof body.visibility === "string" ? body.visibility : "internal") as DownloadVisibility;
+  const categoryRaw = typeof body.category === "string" ? body.category.trim() : "";
   const fileUrl = typeof body.file_url === "string" ? body.file_url : "";
   const fileName = typeof body.file_name === "string" ? body.file_name : "";
   const fileSize =
@@ -31,15 +41,32 @@ export async function POST(req: Request) {
       : 0;
 
   if (!title) return NextResponse.json({ error: "Titel fehlt" }, { status: 400 });
+  if (visibility !== "public" && visibility !== "internal") {
+    return NextResponse.json({ error: "Sichtbarkeit ungültig" }, { status: 400 });
+  }
+  if (visibility === "public" && !PUBLIC_SLUGS.has(categoryRaw)) {
+    return NextResponse.json(
+      { error: "Bitte Kategorie wählen (für öffentliche Downloads)" },
+      { status: 400 },
+    );
+  }
   if (!fileUrl || !fileName) {
     return NextResponse.json({ error: "Datei fehlt. Bitte zuerst hochladen." }, { status: 400 });
   }
 
+  const category = categoryRaw || null;
+
   const rows = (await sql`
-    INSERT INTO downloads (title, description, file_url, file_name, file_size)
-    VALUES (${title}, ${description || null}, ${fileUrl}, ${fileName}, ${fileSize})
+    INSERT INTO downloads (title, description, visibility, category, file_url, file_name, file_size)
+    VALUES (${title}, ${description || null}, ${visibility}, ${category}, ${fileUrl}, ${fileName}, ${fileSize})
     RETURNING id
   `) as { id: string }[];
+
+  try {
+    revalidatePath("/downloads");
+  } catch {
+    /* noop */
+  }
 
   return NextResponse.json({ id: rows[0]?.id });
 }

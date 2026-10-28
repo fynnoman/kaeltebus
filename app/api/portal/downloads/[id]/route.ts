@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { del } from "@vercel/blob";
 import { sql } from "@/lib/db";
-import { ensureDownloadsTable, type DownloadRow } from "@/lib/downloads";
+import {
+  ensureDownloadsTable,
+  PUBLIC_CATEGORIES,
+  type DownloadRow,
+  type DownloadVisibility,
+} from "@/lib/downloads";
+
+const PUBLIC_SLUGS = new Set(PUBLIC_CATEGORIES.map((c) => c.slug));
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   await ensureDownloadsTable();
@@ -20,6 +28,8 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   const title = typeof body.title === "string" ? body.title.trim() : existing.title;
   const description =
     typeof body.description === "string" ? body.description.trim() : (existing.description ?? "");
+  const visibility = (typeof body.visibility === "string" ? body.visibility : existing.visibility) as DownloadVisibility;
+  const categoryRaw = typeof body.category === "string" ? body.category.trim() : (existing.category ?? "");
 
   const fileUrl = typeof body.file_url === "string" && body.file_url ? body.file_url : existing.file_url;
   const fileName = typeof body.file_name === "string" && body.file_name ? body.file_name : existing.file_name;
@@ -29,11 +39,24 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       : existing.file_size;
 
   if (!title) return NextResponse.json({ error: "Titel fehlt" }, { status: 400 });
+  if (visibility !== "public" && visibility !== "internal") {
+    return NextResponse.json({ error: "Sichtbarkeit ungültig" }, { status: 400 });
+  }
+  if (visibility === "public" && !PUBLIC_SLUGS.has(categoryRaw)) {
+    return NextResponse.json(
+      { error: "Bitte Kategorie wählen (für öffentliche Downloads)" },
+      { status: 400 },
+    );
+  }
+
+  const category = categoryRaw || null;
 
   await sql`
     UPDATE downloads SET
       title = ${title},
       description = ${description || null},
+      visibility = ${visibility},
+      category = ${category},
       file_url = ${fileUrl},
       file_name = ${fileName},
       file_size = ${fileSize},
@@ -47,6 +70,12 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     } catch {
       /* alte Datei konnte nicht gelöscht werden – nicht kritisch */
     }
+  }
+
+  try {
+    revalidatePath("/downloads");
+  } catch {
+    /* noop */
   }
 
   return NextResponse.json({ ok: true });
@@ -66,6 +95,12 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
     await del(row.file_url, { token: process.env.BLOB_READ_WRITE_TOKEN });
   } catch {
     /* alte Datei konnte nicht gelöscht werden – nicht kritisch */
+  }
+
+  try {
+    revalidatePath("/downloads");
+  } catch {
+    /* noop */
   }
 
   return NextResponse.json({ ok: true });
