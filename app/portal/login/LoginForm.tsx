@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { PasswordInput } from "@/components/portal/PasswordInput";
 
 export function LoginForm({
   redirectTo,
@@ -47,26 +48,26 @@ export function LoginForm({
     <form onSubmit={onSubmit} className="mt-8 space-y-4">
       <label className="block">
         <span className="text-sm font-medium text-ink">Vereinsmitglieder-Passwort</span>
-        <input
-          type="password"
-          autoFocus
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
-        />
+        <div className="mt-2">
+          <PasswordInput
+            autoFocus
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
       </label>
 
       {adminMode && (
         <label className="block">
           <span className="text-sm font-medium text-ink">Admin-Passwort</span>
-          <input
-            type="password"
-            required
-            value={adminPassword}
-            onChange={(e) => setAdminPassword(e.target.value)}
-            className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
-          />
+          <div className="mt-2">
+            <PasswordInput
+              required
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+            />
+          </div>
           <span className="mt-1 block text-xs text-ink-400">
             Schaltet die Verwaltung interner Dateien frei.
           </span>

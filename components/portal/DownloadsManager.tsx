@@ -8,6 +8,7 @@ import {
   type DownloadRow,
   type DownloadVisibility,
 } from "@/lib/downloadsShared";
+import { PasswordInput } from "@/components/portal/PasswordInput";
 
 type DraftFile = {
   url: string;
@@ -224,14 +225,14 @@ export function DownloadsManager({
           <form onSubmit={unlockAdmin} className="mt-6 flex flex-wrap items-end gap-3">
             <label className="min-w-[240px] flex-1">
               <span className="text-sm font-medium text-ink">Admin-Passwort</span>
-              <input
-                type="password"
-                autoFocus
-                required
-                value={adminPassword}
-                onChange={(e) => setAdminPassword(e.target.value)}
-                className="mt-2 block w-full rounded border border-line bg-white px-3 py-2.5 text-ink outline-none focus:border-rot"
-              />
+              <div className="mt-2">
+                <PasswordInput
+                  autoFocus
+                  required
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                />
+              </div>
             </label>
             <button type="submit" disabled={adminPending} className="btn-primary disabled:opacity-60">
               {adminPending ? "Prüfe …" : "Freischalten"}
