@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { sql } from "@/lib/db";
-import { isAuthenticated } from "@/lib/auth";
+import { isAdmin, isAuthenticated } from "@/lib/auth";
 import { defaultTextsFor, getPageDef, PAGE_DEFS } from "@/lib/pageTexts";
 
 const PATHS_FOR_SLUG: Record<string, string[]> = {
@@ -21,6 +21,9 @@ const PATHS_FOR_SLUG: Record<string, string[]> = {
 export async function GET(req: Request) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Nicht angemeldet" }, { status: 401 });
+  }
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
   }
   const url = new URL(req.url);
   const page = url.searchParams.get("page") ?? "";
@@ -55,6 +58,9 @@ export async function GET(req: Request) {
 export async function PUT(req: Request) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Nicht angemeldet" }, { status: 401 });
+  }
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
   }
   let body: Record<string, unknown> = {};
   try {

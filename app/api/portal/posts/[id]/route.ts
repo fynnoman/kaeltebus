@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
 import { sql, type Post } from "@/lib/db";
+import { isAdmin } from "@/lib/auth";
 
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const { id } = await params;
   const rows = (await sql`
     SELECT id, slug, title, excerpt, cover_url, cover_alt, body_html, author, published, published_at, created_at, updated_at
@@ -22,6 +26,9 @@ export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const { id } = await params;
   let body: Record<string, unknown> = {};
   try {
@@ -77,6 +84,9 @@ export async function DELETE(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const { id } = await params;
   await sql`DELETE FROM posts WHERE id = ${id}`;
   return NextResponse.json({ ok: true });

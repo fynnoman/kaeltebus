@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { PostForm } from "@/components/portal/PostForm";
+import { isAdmin } from "@/lib/auth";
 
-export default function NewPostPage() {
+export const dynamic = "force-dynamic";
+
+export default async function NewPostPage() {
+  if (!(await isAdmin())) {
+    redirect("/portal/downloads");
+  }
   return (
     <main className="section">
       <div className="container-x">

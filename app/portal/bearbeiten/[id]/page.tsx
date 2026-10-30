@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { sql, type Post } from "@/lib/db";
 import { PostForm } from "@/components/portal/PostForm";
+import { isAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,9 @@ export default async function EditPostPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  if (!(await isAdmin())) {
+    redirect("/portal/downloads");
+  }
   const { id } = await params;
   const rows = (await sql`
     SELECT id, slug, title, excerpt, cover_url, cover_alt, body_html, author, published, published_at, created_at, updated_at

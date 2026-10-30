@@ -1,10 +1,15 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { sql } from "@/lib/db";
 import { PAGE_DEFS } from "@/lib/pageTexts";
+import { isAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function TextePortalIndex() {
+  if (!(await isAdmin())) {
+    redirect("/portal/downloads");
+  }
   const rows = (await sql`SELECT page, count(*)::int AS n FROM page_texts GROUP BY page`) as {
     page: string;
     n: number;

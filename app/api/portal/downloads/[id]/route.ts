@@ -14,6 +14,9 @@ const PUBLIC_SLUGS = new Set(PUBLIC_CATEGORIES.map((c) => c.slug));
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   await ensureDownloadsTable();
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const { id } = await params;
   let body: Record<string, unknown> = {};
   try {
@@ -94,6 +97,9 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   await ensureDownloadsTable();
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const { id } = await params;
 
   const rows = (await sql`SELECT file_url, visibility FROM downloads WHERE id = ${id}`) as {

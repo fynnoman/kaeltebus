@@ -36,7 +36,7 @@ export function LoginForm({
         setPending(false);
         return;
       }
-      router.replace(adminMode ? "/portal/downloads" : redirectTo || "/portal");
+      router.replace(adminMode ? "/portal/downloads" : redirectTo || "/portal/downloads");
       router.refresh();
     } catch {
       setError("Netzwerkfehler");

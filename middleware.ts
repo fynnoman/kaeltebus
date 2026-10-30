@@ -21,9 +21,10 @@ export async function middleware(req: NextRequest) {
   const authed = await hasValidSession(token);
 
   if (pathname === "/portal/login") {
-    if (authed) {
+    const mode = req.nextUrl.searchParams.get("mode");
+    if (authed && mode !== "admin") {
       const url = req.nextUrl.clone();
-      url.pathname = "/portal";
+      url.pathname = "/portal/downloads";
       return NextResponse.redirect(url);
     }
     return NextResponse.next();

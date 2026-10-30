@@ -31,6 +31,12 @@ export async function GET() {
 
 export async function POST(req: Request) {
   await ensureDownloadsTable();
+  if (!(await isAdmin())) {
+    return NextResponse.json(
+      { error: "Admin-Freigabe erforderlich" },
+      { status: 403 },
+    );
+  }
   let body: Record<string, unknown> = {};
   try {
     body = await req.json();

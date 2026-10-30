@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { sql } from "@/lib/db";
 import { getPageDef, defaultTextsFor } from "@/lib/pageTexts";
+import { isAdmin } from "@/lib/auth";
 import { TexteEditor } from "./TexteEditor";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,9 @@ export default async function PageTextePage({
 }: {
   params: Promise<{ page: string }>;
 }) {
+  if (!(await isAdmin())) {
+    redirect("/portal/downloads");
+  }
   const { page } = await params;
   const def = getPageDef(page);
   if (!def) notFound();

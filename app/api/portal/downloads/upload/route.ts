@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
+import { isAdmin } from "@/lib/auth";
 
 const ALLOWED = new Set([
   "application/pdf",
@@ -14,6 +15,9 @@ function safeFilename(name: string) {
 }
 
 export async function POST(req: Request) {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const form = await req.formData();
   const file = form.get("file");
   if (!(file instanceof File)) {

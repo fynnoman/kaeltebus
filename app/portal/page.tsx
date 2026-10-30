@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { sql, type Post } from "@/lib/db";
+import { isAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +15,9 @@ function formatDate(iso: string | null) {
 }
 
 export default async function PortalDashboard() {
+  if (!(await isAdmin())) {
+    redirect("/portal/downloads");
+  }
   const rows = (await sql`
     SELECT id, slug, title, excerpt, cover_url, published, published_at, updated_at
     FROM posts

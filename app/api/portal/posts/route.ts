@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { sql, type Post } from "@/lib/db";
+import { isAdmin } from "@/lib/auth";
 import { slugify } from "@/lib/slug";
 
 export async function GET() {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   const rows = (await sql`
     SELECT id, slug, title, excerpt, cover_url, cover_alt, published, published_at, created_at, updated_at
     FROM posts
@@ -22,6 +26,9 @@ async function uniqueSlug(base: string) {
 }
 
 export async function POST(req: Request) {
+  if (!(await isAdmin())) {
+    return NextResponse.json({ error: "Admin-Freigabe erforderlich" }, { status: 403 });
+  }
   let body: Record<string, unknown> = {};
   try {
     body = await req.json();
