@@ -548,6 +548,17 @@ export const PAGE_DEFS: PageDef[] = [
         "Rolle 4 · Text",
         "Aktuelle Bedarfsliste ansehen und direkt beitragen."
       ),
+      s("rolle5_title", "Rolle 5 · Titel", "Versorgungstouren begleiten"),
+      l(
+        "rolle5_body",
+        "Rolle 5 · Text",
+        "Unterwegs zu Menschen, die nicht zum Kältebus kommen. In kleinen Teams, mit warmen Getränken und einem offenen Ohr."
+      ),
+      s(
+        "rolle5_link",
+        "Rolle 5 · Link zur Unterseite",
+        "Mehr erfahren und Merkblatt ansehen"
+      ),
 
       s("haltung_kicker", "Haltung · Kicker", "Was Ehrenamt hier bedeutet"),
       s("haltung_title", "Haltung · Titel", "Zeit, die wirklich ankommt."),
@@ -620,6 +631,78 @@ export const PAGE_DEFS: PageDef[] = [
       s("alt_geld_title", "Alternative · Geld Titel", "Wärme, die ankommt."),
       s("alt_sach_kicker", "Alternative · Sach Kicker", "Sachspende"),
       s("alt_sach_title", "Alternative · Sach Titel", "Bedarfsliste ansehen."),
+    ],
+  },
+
+  {
+    slug: "helfen-versorgungstouren",
+    label: "Ehrenamt · Versorgungstouren",
+    description: "Unterseite zur Rolle Versorgungstouren mit Merkblatt-Download.",
+    fields: [
+      s("header_kicker", "Header · Kicker", "Ehrenamt"),
+      s("header_title", "Header · Titel", "Versorgungstouren begleiten."),
+      l(
+        "header_lead",
+        "Header · Lead",
+        "Nicht alle, die auf der Straße leben, kommen zum Kältebus. Auf Versorgungstouren fahren kleine Teams zu bekannten Plätzen und bringen Warmes, Trinkbares und ein Gespräch mit."
+      ),
+
+      s("intro_kicker", "Intro · Kicker", "Worum es geht"),
+      s(
+        "intro_title",
+        "Intro · Titel",
+        "Hilfe kommt dorthin, wo sie gebraucht wird."
+      ),
+      l(
+        "intro_body",
+        "Intro · Fließtext",
+        "Eine Versorgungstour ist ein ruhiger, kurzer Rundgang in kleinen Teams. Wir sprechen Menschen an, fragen, wie es ihnen geht, und reichen weiter, was gerade hilft. Alles Weitere steht im Merkblatt."
+      ),
+
+      s("bullet1_title", "Punkt 1 · Titel", "Was wir tun"),
+      l(
+        "bullet1_body",
+        "Punkt 1 · Text",
+        "Menschen aufsuchen, die nicht zum Kältebus kommen. Warme Getränke, eine Kleinigkeit zu essen, ein Gespräch, bei Bedarf Hinweise auf weitere Hilfsangebote."
+      ),
+      s("bullet2_title", "Punkt 2 · Titel", "Wie wir arbeiten"),
+      l(
+        "bullet2_body",
+        "Punkt 2 · Text",
+        "Immer zu zweit oder zu dritt. Ruhig, respektvoll, ohne Druck. Niemand muss etwas annehmen."
+      ),
+      s("bullet3_title", "Punkt 3 · Titel", "Was Sie mitbringen sollten"),
+      l(
+        "bullet3_body",
+        "Punkt 3 · Text",
+        "Offenheit, Verlässlichkeit, festes Schuhwerk und warme Kleidung. Eine besondere Ausbildung ist nicht nötig."
+      ),
+      s("bullet4_title", "Punkt 4 · Titel", "Vor dem ersten Einsatz"),
+      l(
+        "bullet4_body",
+        "Punkt 4 · Text",
+        "Wir lernen uns kurz kennen, besprechen den Ablauf und starten erst, wenn Sie sich sicher fühlen. Erfahrene Helferinnen und Helfer begleiten Sie am Anfang."
+      ),
+
+      s("merkblatt_kicker", "Merkblatt · Kicker", "Merkblatt zur Tour"),
+      s(
+        "merkblatt_title",
+        "Merkblatt · Titel",
+        "Alle Details auf einer Seite."
+      ),
+      l(
+        "merkblatt_body",
+        "Merkblatt · Fließtext",
+        "Im Merkblatt stehen Treffpunkt, Ausrüstung, Abläufe und Verhaltensregeln. Bitte vor dem ersten Einsatz einmal in Ruhe lesen."
+      ),
+      s(
+        "merkblatt_empty",
+        "Merkblatt · Hinweis wenn kein PDF hinterlegt",
+        "Das Merkblatt steht in Kürze zum Download bereit. Bei Fragen melden Sie sich gern per E-Mail."
+      ),
+
+      s("cta_primary", "Call to Action · Primär", "Per E-Mail melden"),
+      s("cta_secondary", "Call to Action · Sekundär", "Zur Ehrenamt-Übersicht"),
     ],
   },
 

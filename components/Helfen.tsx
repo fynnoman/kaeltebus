@@ -31,6 +31,18 @@ export function Helfen({ texts }: { texts?: PageTexts }) {
       title: t(texts, "rolle4_title", "Materiell unterstützen"),
       body: t(texts, "rolle4_body", "Aktuelle Bedarfsliste ansehen und direkt beitragen."),
     },
+    {
+      title: t(texts, "rolle5_title", "Versorgungstouren begleiten"),
+      body: t(
+        texts,
+        "rolle5_body",
+        "Unterwegs zu Menschen, die nicht zum Kältebus kommen. In kleinen Teams, mit warmen Getränken und einem offenen Ohr.",
+      ),
+      link: {
+        href: "/helfen/versorgungstouren",
+        label: t(texts, "rolle5_link", "Mehr erfahren und Merkblatt ansehen"),
+      },
+    },
   ];
 
   return (
