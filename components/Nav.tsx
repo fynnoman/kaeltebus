@@ -17,6 +17,7 @@ export function Nav({ texts }: { texts?: PageTexts }) {
     { href: "/bedarf", label: t(texts, "nav_bedarf", "Bedarfsliste") },
     { href: "/helfen", label: t(texts, "nav_helfen", "Ehrenamt") },
     { href: "/aktuelles", label: t(texts, "nav_aktuelles", "Aktuelles") },
+    { href: "/downloads", label: t(texts, "nav_downloads", "Downloads") },
     { href: "/kontakt", label: t(texts, "nav_kontakt", "Kontakt") },
   ];
 

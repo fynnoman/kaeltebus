@@ -56,7 +56,11 @@ export default async function DownloadsPage() {
               const items = grouped.get(cat.slug) ?? [];
               if (items.length === 0) return null;
               return (
-                <section key={cat.slug} className="rounded-md border border-line bg-white">
+                <section
+                  key={cat.slug}
+                  id={cat.slug}
+                  className="scroll-mt-28 rounded-md border border-line bg-white md:scroll-mt-40"
+                >
                   <header className="border-b border-line px-6 py-4">
                     <div className="text-[11.5px] font-semibold uppercase tracking-kicker text-rot">
                       Thema

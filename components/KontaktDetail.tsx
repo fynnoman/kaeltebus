@@ -6,7 +6,13 @@ import { Reveal } from "@/components/Reveal";
 import { t, type PageTexts } from "@/lib/texts";
 
 export function KontaktDetail({ texts }: { texts?: PageTexts }) {
-  const kanaele = [
+  const kanaele: Array<{
+    kicker: string;
+    title: string;
+    body: string;
+    action: { label: string; href: string };
+    secondary?: { label: string; href: string };
+  }> = [
     {
       kicker: t(texts, "kanal1_kicker", "Alles rund um den Verein"),
       title: t(texts, "kanal1_title", "Allgemeines."),
@@ -36,6 +42,10 @@ export function KontaktDetail({ texts }: { texts?: PageTexts }) {
         "Mithilfe in der Küche, warme Mahlzeiten und alle Themen rund um Lebensmittel am Kältebus.",
       ),
       action: { label: SITE.contact.emailKochen, href: `mailto:${SITE.contact.emailKochen}` },
+      secondary: {
+        label: t(texts, "kanal3_secondary_cta", "Merkblatt Kochen ansehen"),
+        href: "/downloads#kochen",
+      },
     },
     {
       kicker: t(texts, "kanal4_kicker", "Sachspende"),
@@ -160,6 +170,14 @@ export function KontaktDetail({ texts }: { texts?: PageTexts }) {
                     >
                       {k.action.label} →
                     </a>
+                  )}
+                  {k.secondary && (
+                    <Link
+                      href={k.secondary.href}
+                      className="relative z-10 mt-2 inline-flex w-fit items-center gap-1.5 text-[13px] text-ink-500 hover:text-rot"
+                    >
+                      {k.secondary.label} →
+                    </Link>
                   )}
                 </article>
               </Reveal>

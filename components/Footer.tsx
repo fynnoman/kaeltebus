@@ -73,6 +73,11 @@ export function Footer({ texts }: { texts?: PageTexts }) {
                   {t(texts, "nav_helfen", "Ehrenamt")}
                 </Link>
               </li>
+              <li>
+                <Link href="/downloads" className="hover:text-white">
+                  {t(texts, "nav_downloads", "Downloads")}
+                </Link>
+              </li>
             </ul>
           </div>
 

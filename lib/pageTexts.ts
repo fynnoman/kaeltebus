@@ -535,6 +535,7 @@ export const PAGE_DEFS: PageDef[] = [
         "Rolle 2 · Text",
         "Freiwillige kochen für eine Nacht am Kältebus."
       ),
+      s("rolle2_link", "Rolle 2 · Link zum Merkblatt", "Merkblatt Kochen ansehen"),
       s("rolle3_title", "Rolle 3 · Titel", "Aufbau und Abbau"),
       l(
         "rolle3_body",
@@ -682,6 +683,7 @@ export const PAGE_DEFS: PageDef[] = [
         "Kanal 3 · Text",
         "Mithilfe in der Küche, warme Mahlzeiten und alle Themen rund um Lebensmittel am Kältebus."
       ),
+      s("kanal3_secondary_cta", "Kanal 3 · Zweitlink zum Merkblatt", "Merkblatt Kochen ansehen"),
 
       s("kanal4_kicker", "Kanal 4 · Kicker", "Sachspende"),
       s("kanal4_title", "Kanal 4 · Titel", "Sachspenden."),
@@ -944,6 +946,7 @@ export const PAGE_DEFS: PageDef[] = [
       s("nav_bedarf", "Nav · Bedarfsliste", "Bedarfsliste"),
       s("nav_helfen", "Nav · Ehrenamt", "Ehrenamt"),
       s("nav_aktuelles", "Nav · Aktuelles", "Aktuelles"),
+      s("nav_downloads", "Nav · Downloads", "Downloads"),
       s("nav_kontakt", "Nav · Kontakt", "Kontakt"),
       s("nav_cta", "Nav · Spenden-Button", "Spenden"),
       s("nav_mobile_cta_primary", "Nav Mobile · Hauptbutton", "Jetzt spenden"),

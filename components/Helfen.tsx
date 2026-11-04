@@ -1,11 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { IMAGES, SITE } from "@/lib/data";
 import { Reveal } from "@/components/Reveal";
 import { t, type PageTexts } from "@/lib/texts";
 
 export function Helfen({ texts }: { texts?: PageTexts }) {
-  const rollen = [
+  const rollen: Array<{
+    title: string;
+    body: string;
+    link?: { href: string; label: string };
+  }> = [
     {
       title: t(texts, "rolle1_title", "Am Kältebus mitarbeiten"),
       body: t(texts, "rolle1_body", "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen."),
@@ -13,6 +18,10 @@ export function Helfen({ texts }: { texts?: PageTexts }) {
     {
       title: t(texts, "rolle2_title", "In der Küche unterstützen"),
       body: t(texts, "rolle2_body", "Freiwillige kochen für eine Nacht am Kältebus."),
+      link: {
+        href: "/downloads#kochen",
+        label: t(texts, "rolle2_link", "Merkblatt Kochen ansehen"),
+      },
     },
     {
       title: t(texts, "rolle3_title", "Aufbau und Abbau"),
@@ -86,6 +95,14 @@ export function Helfen({ texts }: { texts?: PageTexts }) {
                   <p className="mt-3 text-[14px] leading-relaxed text-ink-500 sm:text-[14.5px]">
                     {r.body}
                   </p>
+                  {r.link && (
+                    <Link
+                      href={r.link.href}
+                      className="mt-4 inline-flex w-fit items-center gap-1.5 text-[13.5px] font-semibold text-rot hover:underline"
+                    >
+                      {r.link.label} →
+                    </Link>
+                  )}
                 </div>
               </Reveal>
             ))}
