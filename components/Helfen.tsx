@@ -12,8 +12,16 @@ export function Helfen({ texts }: { texts?: PageTexts }) {
     link?: { href: string; label: string };
   }> = [
     {
-      title: t(texts, "rolle1_title", "Am Kältebus mitarbeiten"),
-      body: t(texts, "rolle1_body", "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen."),
+      title: t(texts, "rolle1_title", "Helfen im Zelt"),
+      body: t(
+        texts,
+        "rolle1_body",
+        "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen.",
+      ),
+      link: {
+        href: "/downloads#helfen-im-zelt",
+        label: t(texts, "rolle1_link", "Merkblatt Helfen im Zelt ansehen"),
+      },
     },
     {
       title: t(texts, "rolle2_title", "In der Küche unterstützen"),

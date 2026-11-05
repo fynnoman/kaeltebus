@@ -95,6 +95,13 @@ export function Spenden({ texts }: { texts?: PageTexts }) {
               >
                 {t(texts, "geld_cta", "Online spenden über betterplace")}
               </a>
+
+              <Link
+                href="/downloads#geldspenden"
+                className="mt-4 inline-flex w-fit items-center gap-1.5 text-[13.5px] font-semibold text-rot hover:underline"
+              >
+                {t(texts, "geld_link", "Merkblatt Geldspenden ansehen")} →
+              </Link>
             </article>
           </Reveal>
 

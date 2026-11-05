@@ -4,6 +4,7 @@ export const PUBLIC_CATEGORIES = [
   { slug: "sachspenden", label: "Sachspenden" },
   { slug: "helfen-im-zelt", label: "Helfen im Zelt" },
   { slug: "versorgungstouren", label: "Versorgungstouren" },
+  { slug: "geldspenden", label: "Geldspenden" },
 ];
 
 export type DownloadVisibility = "public" | "internal";

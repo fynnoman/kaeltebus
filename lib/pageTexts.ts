@@ -322,6 +322,7 @@ export const PAGE_DEFS: PageDef[] = [
         "Der zuverlässigste Weg. Jede Spende hilft im laufenden Betrieb am Kältebus."
       ),
       s("geld_cta", "Geldspende · Button", "Online spenden über betterplace"),
+      s("geld_link", "Geldspende · Link zum Merkblatt", "Merkblatt Geldspenden ansehen"),
 
       s("sach_kicker", "Sachspende · Kicker", "02 · Sachspende"),
       s("sach_title", "Sachspende · Titel", "Sachen spenden."),
@@ -523,12 +524,13 @@ export const PAGE_DEFS: PageDef[] = [
         "Der Verein arbeitet ausschließlich ehrenamtlich. Wer sich einbringen möchte, meldet sich per E-Mail und bekommt alle Informationen zum Ablauf."
       ),
       s("mitmachen_cta", "Mitmachen · Button", "Per E-Mail melden"),
-      s("rolle1_title", "Rolle 1 · Titel", "Am Kältebus mitarbeiten"),
+      s("rolle1_title", "Rolle 1 · Titel", "Helfen im Zelt"),
       l(
         "rolle1_body",
         "Rolle 1 · Text",
         "Empfang, Ausgabe, ansprechbar sein für die Menschen, die kommen."
       ),
+      s("rolle1_link", "Rolle 1 · Link zum Merkblatt", "Merkblatt Helfen im Zelt ansehen"),
       s("rolle2_title", "Rolle 2 · Titel", "In der Küche unterstützen"),
       l(
         "rolle2_body",
