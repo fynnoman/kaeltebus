@@ -274,6 +274,10 @@ export default async function Page() {
               </Link>
             </div>
           </Reveal>
+
+          <p className="mt-10 text-center text-[11px] leading-snug text-ink-500 sm:mt-14 sm:text-[11.5px]">
+            Alle Rechte vorbehalten.
+          </p>
         </div>
       </section>
     </main>
