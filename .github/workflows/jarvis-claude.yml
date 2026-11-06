@@ -26,6 +26,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - id: claude
         uses: anthropics/claude-code-action@v1
@@ -41,6 +43,7 @@ jobs:
         if: ${{ success() && steps.claude.outputs.conclusion == 'success' && steps.claude.outputs.branch_name != '' }}
         env:
           CLAUDE_BRANCH: ${{ steps.claude.outputs.branch_name }}
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
@@ -64,7 +67,12 @@ jobs:
           git checkout -B jarvis-auto-merge origin/main
 
           git merge --no-edit "origin/$CLAUDE_BRANCH"
-          git push origin HEAD:main
 
-          # Delete only the Claude work branch after a successful push.
-          git push origin --delete "$CLAUDE_BRANCH"
+          # Claude's GitHub App token is no longer suitable for this push.
+          # Use the workflow's write-scoped GITHUB_TOKEN instead.
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          auth_header="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          git -c "http.https://github.com/.extraheader=$auth_header" push origin HEAD:main
+
+          # Delete the work branch only after the push succeeds.
+          git -c "http.https://github.com/.extraheader=$auth_header" push origin --delete "$CLAUDE_BRANCH"
