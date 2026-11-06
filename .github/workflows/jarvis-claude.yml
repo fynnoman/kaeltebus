@@ -27,9 +27,44 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: anthropics/claude-code-action@v1
+      - id: claude
+        uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           branch_prefix: claude/
           claude_args: |
             --max-turns 20
+
+      # Claude creates a separate branch for issues by design. Merge it after
+      # the action finishes successfully. Never force-push to main.
+      - name: Automatisch nach main übernehmen
+        if: ${{ success() && steps.claude.outputs.conclusion == 'success' && steps.claude.outputs.branch_name != '' }}
+        env:
+          CLAUDE_BRANCH: ${{ steps.claude.outputs.branch_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "$CLAUDE_BRANCH" != claude/* ]] || ! git check-ref-format --branch "$CLAUDE_BRANCH"; then
+            echo "Ungültiger Claude-Branch: $CLAUDE_BRANCH"
+            exit 1
+          fi
+
+          git fetch origin \
+            '+refs/heads/main:refs/remotes/origin/main' \
+            "+refs/heads/$CLAUDE_BRANCH:refs/remotes/origin/$CLAUDE_BRANCH"
+
+          if git merge-base --is-ancestor "origin/$CLAUDE_BRANCH" origin/main; then
+            echo "Keine neuen Änderungen für main."
+            exit 0
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B jarvis-auto-merge origin/main
+
+          git merge --no-edit "origin/$CLAUDE_BRANCH"
+          git push origin HEAD:main
+
+          # Delete only the Claude work branch after a successful push.
+          git push origin --delete "$CLAUDE_BRANCH"
