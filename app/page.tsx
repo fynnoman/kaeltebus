@@ -13,6 +13,7 @@ import {
 } from "@/lib/schema";
 import { loadPageTexts } from "@/lib/texts";
 
+// Kleine, rein interne Workflow-Teständerung ohne Einfluss auf die Darstellung.
 const homeCrumbs = [{ name: "Start" }];
 
 export default async function Page() {
