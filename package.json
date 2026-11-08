@@ -13,6 +13,8 @@
     "@neon/env": "^1.6.5",
     "@neondatabase/serverless": "^1.2.0",
     "@tiptap/extension-link": "^3.32.0",
+    "@tiptap/extension-text-align": "^3.32.0",
+    "@tiptap/extension-text-style": "^3.32.0",
     "@tiptap/pm": "^3.32.0",
     "@tiptap/react": "^3.32.0",
     "@tiptap/starter-kit": "^3.32.0",
