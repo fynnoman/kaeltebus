@@ -836,7 +836,16 @@ export const PAGE_DEFS: PageDef[] = [
         "Header · Lead",
         "Was gerade läuft, worum wir bitten und was wir im Dienst erleben. Kurz, nüchtern, aus erster Hand."
       ),
-      s("empty_text", "Leer-Zustand", "Es sind noch keine Beiträge veröffentlicht."),
+      l(
+        "empty_text",
+        "Intro-Text (wird immer über der Beitragsliste angezeigt)",
+        ""
+      ),
+      s(
+        "empty_fallback",
+        "Hinweis, wenn noch keine Beiträge veröffentlicht sind",
+        "Es sind noch keine Beiträge veröffentlicht."
+      ),
       s("read_more", "Karte · Weiterlesen", "Beitrag lesen"),
     ],
   },

@@ -31,6 +31,8 @@ export default async function AktuellesPage() {
     ORDER BY published_at DESC NULLS LAST, created_at DESC
   `) as Pick<Post, "id" | "slug" | "title" | "excerpt" | "cover_url" | "cover_alt" | "published_at">[];
 
+  const introText = t(texts, "empty_text", "");
+
   return (
     <>
       <PageHeader
@@ -43,11 +45,31 @@ export default async function AktuellesPage() {
         )}
         crumbs={[{ label: "Start", href: "/" }, { label: "Aktuelles" }]}
       />
+      <section className="section pb-0">
+        <div className="container-x">
+          <figure className="overflow-hidden rounded-md border border-line">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/zelt-gaeste.jpg"
+              alt="Blick in das Zelt am Kältebus am Römerkastell"
+              className="h-auto w-full object-cover"
+            />
+            <figcaption className="bg-paper-100 px-5 py-3 text-[13.5px] text-ink-500 md:px-6 md:py-4">
+              Viel Platz für unsere Gäste
+            </figcaption>
+          </figure>
+        </div>
+      </section>
       <section className="section">
         <div className="container-x">
+          {introText && (
+            <div className="mb-10 max-w-3xl whitespace-pre-line text-[15px] leading-relaxed text-ink-500 md:text-[16px]">
+              {introText}
+            </div>
+          )}
           {rows.length === 0 ? (
             <p className="text-ink-500">
-              {t(texts, "empty_text", "Es sind noch keine Beiträge veröffentlicht.")}
+              {t(texts, "empty_fallback", "Es sind noch keine Beiträge veröffentlicht.")}
             </p>
           ) : (
             <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

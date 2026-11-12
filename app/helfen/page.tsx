@@ -57,6 +57,21 @@ export default async function Page() {
         crumbs={[{ label: "Start", href: "/" }, { label: "Ehrenamt" }]}
       />
       <Helfen texts={texts} />
+      <section className="section bg-paper-100 pt-0">
+        <div className="container-x">
+          <figure className="overflow-hidden rounded-md border border-line bg-white">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/helferfest.jpg"
+              alt="Gruppenfoto der Helferinnen und Helfer beim alljährlichen Helferfest"
+              className="h-auto w-full object-cover"
+            />
+            <figcaption className="px-5 py-3 text-[13.5px] text-ink-500 md:px-6 md:py-4">
+              Unser Dank an viele liebe Menschen · das alljährliche Helferfest
+            </figcaption>
+          </figure>
+        </div>
+      </section>
       <HelfenDetail texts={texts} />
     </main>
   );
