@@ -105,8 +105,8 @@ export function Hero({ texts }: { texts?: PageTexts }) {
         </div>
 
         <Reveal variant="left" duration={900} distance={40}>
-          <div className="frame-offset pb-8 md:pb-0 md:pr-8">
-            <div className="frame-inner overflow-hidden rounded-md border border-line bg-white shadow-card">
+          <div>
+            <div className="overflow-hidden rounded-md border border-line bg-white shadow-card">
               <img
                 src={IMAGES.hero}
                 alt="Am Kältebus am Römerkastell in Saarbrücken"
